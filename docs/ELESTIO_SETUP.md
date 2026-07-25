@@ -3,7 +3,8 @@
 ## Information to collect from Elestio
 
 - EspoCRM URL: `https://crm.jobfynder.com`.
-- EspoCRM version: `10.0.3`.
+- EspoCRM core version: `10.0.3`, confirmed inside the running container with
+  `docker compose exec -T espocrm php bin/command app-info --core-version`.
 - Elestio service: `espocrm-wsnus`.
 - SSH host: `espocrm-wsnus-u14612.vm.elestio.app`.
 - SSH port: `22`.
@@ -21,11 +22,10 @@
 - Staging service is available; its connection details are pending.
 - File ownership requirements for synchronized customizations.
 
-The running containers currently report the image tag `espocrm/espocrm:latest`,
-despite the application UI reporting version `10.0.3`. Confirm the core version
-with `docker compose exec -T espocrm php bin/command app-info --core-version`.
-Pinning an exact tested image version should be evaluated through Elestio's
-supported upgrade controls before changing production.
+The running containers report the image tag `espocrm/espocrm:latest`, while the
+confirmed core version is `10.0.3`. Pinning an exact tested image version should
+be evaluated through Elestio's supported upgrade controls before changing
+production.
 
 ## GitHub repository settings
 
