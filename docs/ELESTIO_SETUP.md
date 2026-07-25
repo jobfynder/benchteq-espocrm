@@ -8,20 +8,24 @@
 - SSH host: `espocrm-wsnus-u14612.vm.elestio.app`.
 - SSH port: `22`.
 - SSH user: `root`.
-- Docker Compose stack path: pending read-only SSH discovery.
-- EspoCRM service/container: `espocrm`.
-- Database service/container: `mysql`.
-- Background service/container: `espocrm-daemon`.
-- WebSocket service/container: `espocrm-websocket`.
+- Docker Compose stack path: `/opt/app`.
+- EspoCRM Compose service: `espocrm`; running container: `app-espocrm-1`.
+- Database Compose service: `mysql`; running container: `app-mysql-1`.
+- Background Compose service: `espocrm-daemon`; running container: `app-espocrm-daemon-1`.
+- WebSocket Compose service: `espocrm-websocket`; running container: `app-espocrm-websocket-1`.
 - Host customization paths:
-  - `<stack>/espocrm/custom`
-  - `<stack>/espocrm/client-custom`
-  - `<stack>/espocrm/data` (runtime data; never store in Git)
+  - `/opt/app/espocrm/custom` → `/var/www/html/custom`
+  - `/opt/app/espocrm/client-custom` → `/var/www/html/client/custom`
+  - `/opt/app/espocrm/data` → `/var/www/html/data` (runtime data; never store in Git)
 - Elestio backup/snapshot procedure and retention.
 - Staging service is available; its connection details are pending.
 - File ownership requirements for synchronized customizations.
 
-Do not guess the application path. Confirm it over SSH with read-only commands before enabling deployment.
+The running containers currently report the image tag `espocrm/espocrm:latest`,
+despite the application UI reporting version `10.0.3`. Confirm the core version
+with `docker compose exec -T espocrm php bin/command app-info --core-version`.
+Pinning an exact tested image version should be evaluated through Elestio's
+supported upgrade controls before changing production.
 
 ## GitHub repository settings
 
