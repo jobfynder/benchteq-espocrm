@@ -1,0 +1,53 @@
+name: Validate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  repository:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reject sensitive and generated files
+        shell: bash
+        run: |
+          set -euo pipefail
+          forbidden="$(find . -type f \
+            \( -name '.env' \
+            -o -name 'config.php' \
+            -o -name 'config-internal.php' \
+            -o -name '*.sql' \
+            -o -name '*.pem' \
+            -o -name '*.key' \) \
+            -not -path './.git/*' -print)"
+          if [ -n "$forbidden" ]; then
+            echo "Forbidden files found:"
+            echo "$forbidden"
+            exit 1
+          fi
+
+      - name: Validate PHP syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find custom client/custom -type f -name '*.php' -print)
+          for file in "${files[@]}"; do
+            php -l "$file"
+          done
+
+      - name: Validate JSON
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t files < <(find custom client/custom -type f -name '*.json' -print)
+          for file in "${files[@]}"; do
+            python -m json.tool "$file" >/dev/null
+          done
+

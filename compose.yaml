@@ -1,0 +1,113 @@
+name: ${COMPOSE_PROJECT_NAME:-benchteq-crm}
+
+x-espocrm-image: &espocrm-image
+  image: ${ESPOCRM_IMAGE:-espocrm/espocrm:10}
+
+x-espocrm-volumes: &espocrm-volumes
+  - espocrm-data:/var/www/html/data
+  - espocrm-custom:/var/www/html/custom
+  - espocrm-custom-client:/var/www/html/client/custom
+
+services:
+  database:
+    image: ${MARIADB_IMAGE:-mariadb:11.8}
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${ESPOCRM_DATABASE_NAME:-espocrm}
+      MARIADB_USER: ${ESPOCRM_DATABASE_USER:-espocrm}
+      MARIADB_PASSWORD: ${ESPOCRM_DATABASE_PASSWORD:?Set ESPOCRM_DATABASE_PASSWORD in .env}
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:?Set MARIADB_ROOT_PASSWORD in .env}
+    volumes:
+      - database-data:/var/lib/mysql
+    networks:
+      - backend
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 20s
+      start_period: 20s
+      timeout: 10s
+      retries: 5
+
+  espocrm:
+    <<: *espocrm-image
+    restart: unless-stopped
+    environment:
+      ESPOCRM_DATABASE_HOST: database
+      ESPOCRM_DATABASE_NAME: ${ESPOCRM_DATABASE_NAME:-espocrm}
+      ESPOCRM_DATABASE_USER: ${ESPOCRM_DATABASE_USER:-espocrm}
+      ESPOCRM_DATABASE_PASSWORD: ${ESPOCRM_DATABASE_PASSWORD:?Set ESPOCRM_DATABASE_PASSWORD in .env}
+      ESPOCRM_ADMIN_USERNAME: ${ESPOCRM_ADMIN_USERNAME:-benchteq-admin}
+      ESPOCRM_ADMIN_PASSWORD: ${ESPOCRM_ADMIN_PASSWORD:?Set ESPOCRM_ADMIN_PASSWORD in .env}
+      ESPOCRM_SITE_URL: ${ESPOCRM_SITE_URL:-http://localhost:8080}
+      ESPOCRM_LANGUAGE: ${ESPOCRM_LANGUAGE:-en_US}
+      ESPOCRM_TIME_ZONE: ${ESPOCRM_TIME_ZONE:-America/New_York}
+      ESPOCRM_DEFAULT_CURRENCY: ${ESPOCRM_DEFAULT_CURRENCY:-USD}
+      ESPOCRM_CONFIG_USE_WEB_SOCKET: "true"
+      ESPOCRM_CONFIG_WEB_SOCKET_URL: ${ESPOCRM_WEBSOCKET_URL:-ws://localhost:8081}
+      ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBMISSION_DSN: tcp://websocket:7777
+      ESPOCRM_CONFIG_LOGGER__LEVEL: WARNING
+    volumes: *espocrm-volumes
+    networks:
+      - backend
+    ports:
+      - "${ESPOCRM_PORT:-8080}:80"
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "bin/command", "app-check"]
+      start_period: 30s
+      interval: 60s
+      timeout: 20s
+      retries: 5
+
+  daemon:
+    <<: *espocrm-image
+    restart: unless-stopped
+    entrypoint: docker-daemon.sh
+    volumes: *espocrm-volumes
+    networks:
+      - backend
+    depends_on:
+      espocrm:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "bin/command", "app-check"]
+      start_period: 30s
+      interval: 180s
+      timeout: 20s
+      retries: 3
+
+  websocket:
+    <<: *espocrm-image
+    restart: unless-stopped
+    entrypoint: docker-websocket.sh
+    environment:
+      ESPOCRM_CONFIG_USE_WEB_SOCKET: "true"
+      ESPOCRM_CONFIG_WEB_SOCKET_URL: ${ESPOCRM_WEBSOCKET_URL:-ws://localhost:8081}
+      ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBSCRIBER_DSN: tcp://*:7777
+      ESPOCRM_CONFIG_WEB_SOCKET_ZERO_M_Q_SUBMISSION_DSN: tcp://websocket:7777
+    volumes: *espocrm-volumes
+    networks:
+      - backend
+    ports:
+      - "${ESPOCRM_WEBSOCKET_PORT:-8081}:8080"
+    depends_on:
+      espocrm:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "bin/command", "app-check"]
+      start_period: 30s
+      interval: 180s
+      timeout: 20s
+      retries: 3
+
+networks:
+  backend:
+
+volumes:
+  database-data:
+  espocrm-data:
+  espocrm-custom:
+  espocrm-custom-client:
+

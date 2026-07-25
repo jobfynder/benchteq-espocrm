@@ -1,0 +1,85 @@
+# Benchteq EspoCRM
+
+Version-controlled customizations and operations for Benchteq's existing Elestio-hosted EspoCRM instance.
+
+The repository is not a copy of production data and must never contain credentials, customer records, database exports, uploaded files, or EspoCRM's generated `data/config*.php` files.
+
+## Repository layout
+
+- `custom/` — server-side EspoCRM customizations deployed to `custom/`.
+- `client/custom/` — browser-side customizations deployed to `client/custom/`.
+- `.github/workflows/validate.yml` — checks every change.
+- `.github/workflows/deploy-elestio.yml` — manually triggered Elestio deployment.
+- `compose.yaml` — optional isolated local/test environment, not Elestio production.
+- `BENCHTEQ_BLUEPRINT.md` — business process and integration design.
+
+## Elestio connection
+
+Configure these GitHub Actions repository secrets:
+
+- `ELESTIO_HOST` — SSH hostname supplied by Elestio.
+- `ELESTIO_SSH_USER` — SSH user supplied by Elestio.
+- `ELESTIO_SSH_PRIVATE_KEY` — dedicated deployment private key.
+- `ELESTIO_APP_PATH` — absolute EspoCRM application path on the Elestio host.
+- `ELESTIO_SSH_PORT` — optional; defaults to `22`.
+
+Use a dedicated deployment key and restrict it to this service where Elestio permits. Do not reuse a personal SSH key.
+
+Deployments are intentionally manual. From GitHub, open **Actions → Deploy to Elestio → Run workflow**, enter the expected production hostname, and approve the production environment. The job uploads only `custom/` and `client/custom/`, runs EspoCRM rebuild, and checks the application.
+
+Before enabling deployment:
+
+1. Confirm the exact Elestio SSH host, user, port and application path.
+2. Take an Elestio backup or snapshot.
+3. Configure a protected GitHub environment named `production` with required reviewers.
+4. Test the workflow against a staging clone when possible.
+
+## Optional local test instance
+
+Docker Desktop is required only for isolated local testing. Run:
+
+```powershell
+.\scripts\initialize.ps1
+```
+
+The script creates an ignored `.env` with random passwords, validates Compose, downloads images and starts a disposable test stack at `http://localhost:8080`.
+
+Verify the deployment:
+
+```powershell
+.\scripts\healthcheck.ps1
+```
+
+Create a backup:
+
+```powershell
+.\scripts\backup.ps1
+```
+
+## Customization workflow
+
+1. Create a branch from `main`.
+2. Add only supported EspoCRM extension files under `custom/` or `client/custom/`.
+3. Open a pull request and pass validation.
+4. Review generated metadata carefully; avoid editing core application files.
+5. Merge after approval, back up Elestio, and manually deploy.
+6. Perform a rebuild and business smoke tests.
+
+## Routine operations
+
+```powershell
+docker compose ps
+docker compose logs --tail 200 espocrm daemon websocket
+docker compose restart
+docker compose down
+```
+
+`docker compose down` preserves data. Do not use `--volumes` unless intentionally deleting all CRM and database data.
+
+## EspoCRM upgrade workflow
+
+1. Read the EspoCRM release notes and verify extension compatibility.
+2. Create and verify an Elestio backup/snapshot.
+3. Test the target version and this repository's customizations in staging.
+4. Use Elestio's supported upgrade process.
+5. Run EspoCRM rebuild, health checks, integration tests, and business smoke tests.

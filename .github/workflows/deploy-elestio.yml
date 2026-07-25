@@ -1,0 +1,77 @@
+name: Deploy to Elestio
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_hostname:
+        description: Confirm the production EspoCRM hostname
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: elestio-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify deployment target
+        env:
+          EXPECTED_HOSTNAME: ${{ vars.ESPOCRM_PRODUCTION_HOSTNAME }}
+          CONFIRMED_HOSTNAME: ${{ inputs.expected_hostname }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$EXPECTED_HOSTNAME"
+          test "$CONFIRMED_HOSTNAME" = "$EXPECTED_HOSTNAME"
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ELESTIO_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/elestio
+          chmod 600 ~/.ssh/elestio
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Upload supported customization directories
+        env:
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+          APP_PATH: ${{ secrets.ELESTIO_APP_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$APP_PATH"
+          ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "test -f '$APP_PATH/.benchteq-managed'"
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
+            custom/ "$SSH_USER@$SSH_HOST:$APP_PATH/custom/"
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
+            client/custom/ "$SSH_USER@$SSH_HOST:$APP_PATH/client/custom/"
+
+      - name: Rebuild and verify EspoCRM
+        env:
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+          APP_PATH: ${{ secrets.ELESTIO_APP_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "cd '$APP_PATH' && php command.php rebuild && php bin/command app-check"
