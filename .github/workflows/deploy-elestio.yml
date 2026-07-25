@@ -78,10 +78,10 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$STACK_PATH"
-          rsync -azn --delete --itemize-changes \
+          rsync -azn --delete --itemize-changes --exclude='.gitkeep' \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
             custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/custom/"
-          rsync -azn --delete --itemize-changes \
+          rsync -azn --delete --itemize-changes --exclude='.gitkeep' \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
             client/custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/client-custom/"
 
@@ -97,10 +97,10 @@ jobs:
           set -euo pipefail
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
             "test -f '$STACK_PATH/.benchteq-managed'"
-          rsync -az --delete \
+          rsync -az --delete --exclude='.gitkeep' \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
             custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/custom/"
-          rsync -az --delete \
+          rsync -az --delete --exclude='.gitkeep' \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
             client/custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/client-custom/"
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
