@@ -13,7 +13,7 @@ jobs:
   repository:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Reject sensitive and generated files
         shell: bash
@@ -50,4 +50,3 @@ jobs:
           for file in "${files[@]}"; do
             python -m json.tool "$file" >/dev/null
           done
-
