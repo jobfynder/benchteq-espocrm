@@ -18,6 +18,15 @@
   - `/opt/app/espocrm/custom` → `/var/www/html/custom`
   - `/opt/app/espocrm/client-custom` → `/var/www/html/client/custom`
   - `/opt/app/espocrm/data` → `/var/www/html/data` (runtime data; never store in Git)
+- Initial production inventory:
+  - `custom`: zero files
+  - `client-custom`: zero files
+  - both directories: `www-data:www-data`, mode `755`
+- Production application check:
+  - migrations: OK
+  - database: OK
+  - maintenance mode: off
+  - cron: enabled
 - Elestio backup/snapshot procedure and retention.
 - Staging service is available; its connection details are pending.
 - File ownership requirements for synchronized customizations.

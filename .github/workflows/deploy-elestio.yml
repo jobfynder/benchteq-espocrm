@@ -63,6 +63,8 @@ jobs:
           rsync -az --delete \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
             client/custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/client-custom/"
+          ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "chown -R www-data:www-data '$STACK_PATH/espocrm/custom' '$STACK_PATH/espocrm/client-custom'"
 
       - name: Rebuild and verify EspoCRM
         env:
