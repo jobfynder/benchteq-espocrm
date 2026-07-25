@@ -3,9 +3,25 @@ name: Deploy to Elestio
 on:
   workflow_dispatch:
     inputs:
+      mode:
+        description: Plan shows changes only; apply performs the deployment
+        required: true
+        default: plan
+        type: choice
+        options:
+          - plan
+          - apply
       expected_hostname:
         description: Confirm the production EspoCRM hostname
         required: true
+        type: string
+      backup_snapshot_reference:
+        description: Elestio snapshot/backup identifier created immediately before deployment
+        required: false
+        type: string
+      production_confirmation:
+        description: Enter BACKUP-CONFIRMED for apply mode
+        required: false
         type: string
 
 permissions:
@@ -26,11 +42,18 @@ jobs:
         env:
           EXPECTED_HOSTNAME: ${{ vars.ESPOCRM_PRODUCTION_HOSTNAME }}
           CONFIRMED_HOSTNAME: ${{ inputs.expected_hostname }}
+          DEPLOYMENT_MODE: ${{ inputs.mode }}
+          BACKUP_REFERENCE: ${{ inputs.backup_snapshot_reference }}
+          PRODUCTION_CONFIRMATION: ${{ inputs.production_confirmation }}
         shell: bash
         run: |
           set -euo pipefail
           test -n "$EXPECTED_HOSTNAME"
           test "$CONFIRMED_HOSTNAME" = "$EXPECTED_HOSTNAME"
+          if [ "$DEPLOYMENT_MODE" = "apply" ]; then
+            test -n "$BACKUP_REFERENCE"
+            test "$PRODUCTION_CONFIRMATION" = "BACKUP-CONFIRMED"
+          fi
 
       - name: Configure SSH
         env:
@@ -45,7 +68,7 @@ jobs:
           chmod 600 ~/.ssh/elestio
           ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
-      - name: Upload supported customization directories
+      - name: Preview customization changes
         env:
           SSH_HOST: ${{ secrets.ELESTIO_HOST }}
           SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
@@ -55,6 +78,23 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$STACK_PATH"
+          rsync -azn --delete --itemize-changes \
+            -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
+            custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/custom/"
+          rsync -azn --delete --itemize-changes \
+            -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
+            client/custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/client-custom/"
+
+      - name: Apply customization changes
+        if: ${{ inputs.mode == 'apply' }}
+        env:
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+          STACK_PATH: ${{ secrets.ELESTIO_STACK_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
             "test -f '$STACK_PATH/.benchteq-managed'"
           rsync -az --delete \
@@ -66,7 +106,8 @@ jobs:
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
             "chown -R www-data:www-data '$STACK_PATH/espocrm/custom' '$STACK_PATH/espocrm/client-custom'"
 
-      - name: Rebuild and verify EspoCRM
+      - name: Rebuild EspoCRM
+        if: ${{ inputs.mode == 'apply' }}
         env:
           SSH_HOST: ${{ secrets.ELESTIO_HOST }}
           SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
@@ -76,4 +117,16 @@ jobs:
         run: |
           set -euo pipefail
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "cd '$STACK_PATH' && docker compose exec -T espocrm php command.php rebuild && docker compose exec -T espocrm php bin/command app-check"
+            "cd '$STACK_PATH' && docker compose exec -T espocrm php command.php rebuild"
+
+      - name: Verify EspoCRM health
+        env:
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+          STACK_PATH: ${{ secrets.ELESTIO_STACK_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "cd '$STACK_PATH' && docker compose exec -T espocrm php bin/command app-check"

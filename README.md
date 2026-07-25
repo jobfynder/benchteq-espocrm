@@ -25,14 +25,22 @@ Configure these GitHub Actions repository secrets:
 
 Use a dedicated deployment key and restrict it to this service where Elestio permits. Do not reuse a personal SSH key.
 
-Deployments are intentionally manual. From GitHub, open **Actions → Deploy to Elestio → Run workflow**, enter the expected production hostname, and approve the production environment. The job uploads only `custom/` and `client/custom/`, runs EspoCRM rebuild, and checks the application.
+Deployments are intentionally manual and default to `plan`, which uses rsync
+dry-run mode and changes nothing. From GitHub, open **Actions → Deploy to
+Elestio → Run workflow**, supply the expected production hostname and a fresh
+Elestio snapshot reference, then approve the production environment. `apply`
+mode additionally requires the exact confirmation `BACKUP-CONFIRMED` and the
+server-side `.benchteq-managed` marker. The job uploads only `custom/` and
+`client/custom/`, preserves `www-data` ownership, rebuilds EspoCRM, and checks
+the application.
 
 Before enabling deployment:
 
 1. Confirm the exact Elestio SSH host, user, port and Compose stack path.
 2. Take an Elestio backup or snapshot.
 3. Configure a protected GitHub environment named `production` with required reviewers.
-4. Test the workflow against a staging clone when possible.
+4. Run the workflow in `plan` mode and review every proposed change.
+5. Use `apply` only after the plan is correct and the snapshot is recoverable.
 
 ## Optional local test instance
 

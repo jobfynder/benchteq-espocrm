@@ -49,13 +49,17 @@ production.
 
 ## First deployment checklist
 
-1. Export or snapshot the current Elestio service.
+1. Create a fresh Elestio snapshot and record its identifier.
 2. Inventory existing `custom/` and `client/custom/` files.
 3. Import those files into this repository before deploying with `--delete`.
 4. Confirm no credentials or customer data are present.
 5. Test rebuild and application check commands manually.
-6. After importing and reviewing the live customizations, create an empty
+6. Run the GitHub workflow in `plan` mode with the snapshot identifier and
+   review every itemized rsync change.
+7. After importing and reviewing the live customizations, create an empty
    `.benchteq-managed` marker in the confirmed application root. The deployment
    workflow refuses to run without it.
-7. Run the workflow against staging.
-8. Approve production deployment and complete smoke tests.
+8. Run `apply` with the same snapshot identifier and enter
+   `BACKUP-CONFIRMED`.
+9. Complete login, record access, background job, email, and WebSocket smoke
+   tests immediately after deployment.
