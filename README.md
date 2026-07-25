@@ -20,7 +20,7 @@ Configure these GitHub Actions repository secrets:
 - `ELESTIO_HOST` — SSH hostname supplied by Elestio.
 - `ELESTIO_SSH_USER` — SSH user supplied by Elestio.
 - `ELESTIO_SSH_PRIVATE_KEY` — dedicated deployment private key.
-- `ELESTIO_APP_PATH` — absolute EspoCRM application path on the Elestio host.
+- `ELESTIO_STACK_PATH` — absolute directory containing Elestio's Compose file.
 - `ELESTIO_SSH_PORT` — optional; defaults to `22`.
 
 Use a dedicated deployment key and restrict it to this service where Elestio permits. Do not reuse a personal SSH key.
@@ -29,7 +29,7 @@ Deployments are intentionally manual. From GitHub, open **Actions → Deploy to 
 
 Before enabling deployment:
 
-1. Confirm the exact Elestio SSH host, user, port and application path.
+1. Confirm the exact Elestio SSH host, user, port and Compose stack path.
 2. Take an Elestio backup or snapshot.
 3. Configure a protected GitHub environment named `production` with required reviewers.
 4. Test the workflow against a staging clone when possible.

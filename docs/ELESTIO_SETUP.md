@@ -2,12 +2,24 @@
 
 ## Information to collect from Elestio
 
-- EspoCRM public URL and version.
-- SSH host, port, username and application directory.
-- Whether EspoCRM runs directly on the host or inside a container.
+- EspoCRM URL: `https://crm.jobfynder.com`.
+- EspoCRM version: `10.0.3`.
+- Elestio service: `espocrm-wsnus`.
+- SSH host: `espocrm-wsnus-u14612.vm.elestio.app`.
+- SSH port: `22`.
+- SSH user: `root`.
+- Docker Compose stack path: pending read-only SSH discovery.
+- EspoCRM service/container: `espocrm`.
+- Database service/container: `mysql`.
+- Background service/container: `espocrm-daemon`.
+- WebSocket service/container: `espocrm-websocket`.
+- Host customization paths:
+  - `<stack>/espocrm/custom`
+  - `<stack>/espocrm/client-custom`
+  - `<stack>/espocrm/data` (runtime data; never store in Git)
 - Elestio backup/snapshot procedure and retention.
-- Staging service availability.
-- PHP command/path and ownership requirements for deployed files.
+- Staging service is available; its connection details are pending.
+- File ownership requirements for synchronized customizations.
 
 Do not guess the application path. Confirm it over SSH with read-only commands before enabling deployment.
 

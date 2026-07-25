@@ -50,28 +50,28 @@ jobs:
           SSH_HOST: ${{ secrets.ELESTIO_HOST }}
           SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
           SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
-          APP_PATH: ${{ secrets.ELESTIO_APP_PATH }}
+          STACK_PATH: ${{ secrets.ELESTIO_STACK_PATH }}
         shell: bash
         run: |
           set -euo pipefail
-          test -n "$APP_PATH"
+          test -n "$STACK_PATH"
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "test -f '$APP_PATH/.benchteq-managed'"
+            "test -f '$STACK_PATH/.benchteq-managed'"
           rsync -az --delete \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
-            custom/ "$SSH_USER@$SSH_HOST:$APP_PATH/custom/"
+            custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/custom/"
           rsync -az --delete \
             -e "ssh -i ~/.ssh/elestio -p $SSH_PORT" \
-            client/custom/ "$SSH_USER@$SSH_HOST:$APP_PATH/client/custom/"
+            client/custom/ "$SSH_USER@$SSH_HOST:$STACK_PATH/espocrm/client-custom/"
 
       - name: Rebuild and verify EspoCRM
         env:
           SSH_HOST: ${{ secrets.ELESTIO_HOST }}
           SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
           SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
-          APP_PATH: ${{ secrets.ELESTIO_APP_PATH }}
+          STACK_PATH: ${{ secrets.ELESTIO_STACK_PATH }}
         shell: bash
         run: |
           set -euo pipefail
           ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
-            "cd '$APP_PATH' && php command.php rebuild && php bin/command app-check"
+            "cd '$STACK_PATH' && docker compose exec -T espocrm php command.php rebuild && docker compose exec -T espocrm php bin/command app-check"
