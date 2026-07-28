@@ -3,7 +3,7 @@
         "roleType": "Role Type",
         "sourcedVia": "Sourced Via",
         "skillSpecialty": "Skill Specialty",
-        "rate": "Rate",
+        "rate": "Payout Rate (INR)",
         "rateCurrency": "Rate (Currency)",
         "rateConverted": "Rate (Converted)",
         "status": "Status",
@@ -23,10 +23,9 @@
     },
     "options": {
         "roleType": {
-            "Tequie": "Tequie",
+            "Interview Supporter": "Interview Supporter",
             "Freelancer": "Freelancer",
-            "Trainer": "Trainer",
-            "Resume Builder": "Resume Builder"
+            "Trainer": "Trainer"
         },
         "sourcedVia": {
             "Direct": "Direct",
@@ -34,8 +33,8 @@
         },
         "status": {
             "Active": "Active",
-            "In-Active": "In-Active",
-            "Hold": "Hold"
+            "Inactive": "Inactive",
+            "On Leave": "On Leave"
         }
     }
 }

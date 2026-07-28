@@ -127,7 +127,8 @@
             "type": "link"
         },
         "fulfillingProvider": {
-            "type": "link"
+            "type": "link",
+            "view": "custom:views/c-service-package/fields/fulfilling-provider"
         },
         "opportunity": {
             "type": "link"

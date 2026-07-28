@@ -5,6 +5,9 @@
         "phone": "Phone",
         "email": "Email",
         "commissionTerms": "Commission Terms",
+        "standardFlatFee": "Standard Sourcing Fee (INR)",
+        "bgcFeeUS": "BGC US Fee (INR)",
+        "bgcFeeIndia": "BGC India Fee (INR)",
         "deliveryResources": "Delivery Resources",
         "referrer": "Referrer"
     },
@@ -23,9 +26,13 @@
         "servicesSupplied": {
             "Trainer": "Trainer",
             "Freelancer": "Freelancer",
-            "BGC": "BGC",
-            "Tequie": "Tequie",
-            "Resume Builder": "Resume Builder"
+            "Interview Supporter": "Interview Supporter",
+            "BGC Verification": "BGC Verification"
         }
+    },
+    "filters": {
+        "interviewSupport": "Interview Support Providers",
+        "jobSupport": "Job Support Providers",
+        "bgc": "BGC Providers"
     }
 }

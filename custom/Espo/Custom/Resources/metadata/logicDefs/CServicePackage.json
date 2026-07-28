@@ -1,0 +1,57 @@
+{
+    "fields": {
+        "fulfillingProvider": {
+            "required": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "bgcVerificationType": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            },
+            "required": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "primaryDeliveryResource": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "notEquals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "payoutFrequency": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "Job Support"
+                    }
+                ]
+            }
+        }
+    }
+}
