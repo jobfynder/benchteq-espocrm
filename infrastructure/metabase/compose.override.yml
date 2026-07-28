@@ -1,0 +1,24 @@
+services:
+  metabase:
+    image: metabase/metabase:v0.63.1.8
+    restart: always
+    environment:
+      MB_DB_TYPE: mysql
+      MB_DB_HOST: mysql
+      MB_DB_PORT: "3306"
+      MB_DB_DBNAME: metabase_app
+      MB_DB_USER: metabase_app
+      MB_DB_PASS: ${METABASE_DB_PASSWORD:?Set METABASE_DB_PASSWORD in the Elestio .env file}
+      MB_SITE_URL: https://reports.jobfynder.com
+      MB_ENABLE_PUBLIC_SHARING: "false"
+      MB_ENABLE_EMBEDDING: "false"
+      JAVA_OPTS: -Xms256m -Xmx768m
+    ports:
+      - 172.17.0.1:8787:3000
+    depends_on:
+      - mysql
+    deploy:
+      resources:
+        limits:
+          memory: 1280M
+
