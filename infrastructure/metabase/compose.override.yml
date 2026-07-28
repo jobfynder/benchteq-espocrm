@@ -12,6 +12,9 @@ services:
       MB_SITE_URL: https://reports.jobfynder.com
       MB_ENABLE_PUBLIC_SHARING: "false"
       MB_ENABLE_EMBEDDING: "false"
+      MB_AI_FEATURES_ENABLED: "false"
+      MB_ANON_TRACKING_ENABLED: "false"
+      MB_ENCRYPTION_SECRET_KEY: ${METABASE_ENCRYPTION_SECRET_KEY:?Set METABASE_ENCRYPTION_SECRET_KEY in the Elestio .env file}
       JAVA_OPTS: -Xms256m -Xmx768m
     ports:
       - 172.17.0.1:8787:3000
@@ -20,5 +23,5 @@ services:
     deploy:
       resources:
         limits:
-          memory: 1280M
+          memory: 1536M
 
