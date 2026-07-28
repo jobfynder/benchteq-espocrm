@@ -102,6 +102,7 @@
             "type": "enum",
             "options": ["US", "India", "Both"],
             "maxLength": 100,
+            "inlineEditDisabled": true,
             "isCustom": true
         },
         "payoutFrequency": {
@@ -128,6 +129,7 @@
         },
         "fulfillingProvider": {
             "type": "link",
+            "inlineEditDisabled": true,
             "view": "custom:views/c-service-package/fields/fulfilling-provider"
         },
         "opportunity": {
