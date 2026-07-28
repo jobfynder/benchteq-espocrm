@@ -5,6 +5,7 @@ namespace Espo\Custom\Hooks\CSessionLog;
 use Espo\Core\Hook\Hook\AfterSave;
 use Espo\ORM\Entity;
 use Espo\ORM\EntityManager;
+use Espo\ORM\Repository\Option\SaveOptions;
 
 class UpdateSessionsRemaining implements AfterSave
 {
@@ -14,10 +15,7 @@ class UpdateSessionsRemaining implements AfterSave
         private EntityManager $entityManager
     ) {}
 
-    /**
-     * @param array<string, mixed> $options
-     */
-    public function afterSave(Entity $entity, array $options): void
+    public function afterSave(Entity $entity, SaveOptions $options): void
     {
         if (!$entity->isAttributeChanged('status')) {
             return;
