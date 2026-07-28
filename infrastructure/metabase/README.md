@@ -37,6 +37,8 @@ the DNS provider's proxy if desired and verify end-to-end TLS again.
 3. Create the `metabase_app` schema and both database accounts.
 4. Add `METABASE_DB_PASSWORD` and `METABASE_REPORTING_PASSWORD` to
    `/opt/app/.env`; never commit them.
+   Generate and store `METABASE_ENCRYPTION_SECRET_KEY` before adding database
+   credentials through Metabase.
 5. Merge `compose.override.yml` into `/opt/app/docker-compose.override.yml`.
 6. Validate with `docker compose config --quiet`.
 7. Start only Metabase with `docker compose up -d metabase`.
@@ -50,6 +52,7 @@ the DNS provider's proxy if desired and verify end-to-end TLS again.
     - user: `metabase_readonly`
     - password: the reporting password from the server secret store
 12. Disable public sharing, embedding, actions, uploads, and model persistence.
+    AI features and anonymous telemetry are disabled by the Compose environment.
 
 ## Rollback
 
