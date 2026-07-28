@@ -1,0 +1,29 @@
+{
+    "controller": "controllers/record",
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "iconClass": "fas fa-user-gear",
+    "relationshipPanels": {
+        "referrer": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "servicePackagesPrimary": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "account": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "contact": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "sessionLogs": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        }
+    }
+}

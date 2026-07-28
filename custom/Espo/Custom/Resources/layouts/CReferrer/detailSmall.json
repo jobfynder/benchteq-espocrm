@@ -1,0 +1,37 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "mobile"
+                },
+                {
+                    "name": "whatsApp"
+                }
+            ],
+            [
+                {
+                    "name": "referrerType"
+                },
+                {
+                    "name": "referralFee"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

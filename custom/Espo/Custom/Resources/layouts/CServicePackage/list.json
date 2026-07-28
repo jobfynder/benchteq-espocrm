@@ -1,0 +1,26 @@
+[
+    {
+        "name": "serviceType",
+        "width": 16
+    },
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "primaryDeliveryResource",
+        "width": 16
+    },
+    {
+        "name": "packagePrice",
+        "width": 16
+    },
+    {
+        "name": "createdBy",
+        "width": 16
+    },
+    {
+        "name": "status",
+        "width": 16
+    }
+]

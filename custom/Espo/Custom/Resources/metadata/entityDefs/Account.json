@@ -1,0 +1,19 @@
+{
+    "links": {
+        "cReferrers": {
+            "type": "hasMany",
+            "relationName": "cReferrerAccount",
+            "foreign": "accounts",
+            "entity": "CReferrer",
+            "audited": false,
+            "isCustom": true
+        },
+        "cServicePackages": {
+            "type": "hasMany",
+            "foreign": "account",
+            "entity": "CServicePackage",
+            "audited": false,
+            "isCustom": true
+        }
+    }
+}

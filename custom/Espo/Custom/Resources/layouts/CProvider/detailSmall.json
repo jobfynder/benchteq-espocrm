@@ -1,0 +1,43 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                }
+            ],
+            [
+                {
+                    "name": "servicesSupplied"
+                },
+                {
+                    "name": "phone"
+                }
+            ],
+            [
+                {
+                    "name": "providerType"
+                },
+                {
+                    "name": "referrer"
+                }
+            ],
+            [
+                {
+                    "name": "commissionTerms"
+                },
+                {
+                    "name": "email"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

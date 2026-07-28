@@ -1,0 +1,41 @@
+{
+    "fields": {
+        "roleType": "Role Type",
+        "sourcedVia": "Sourced Via",
+        "skillSpecialty": "Skill Specialty",
+        "rate": "Rate",
+        "rateCurrency": "Rate (Currency)",
+        "rateConverted": "Rate (Converted)",
+        "status": "Status",
+        "provider": "Provider",
+        "referrer": "Referrer",
+        "sessionLog": "Session Log",
+        "primaryDeliveryResource": "Service Packages"
+    },
+    "links": {
+        "provider": "Provider",
+        "referrer": "Referrer",
+        "sessionLog": "Session Log",
+        "primaryDeliveryResource": "Service Packages"
+    },
+    "labels": {
+        "Create CDeliveryResource": "Create Delivery Resource"
+    },
+    "options": {
+        "roleType": {
+            "Tequie": "Tequie",
+            "Freelancer": "Freelancer",
+            "Trainer": "Trainer",
+            "Resume Builder": "Resume Builder"
+        },
+        "sourcedVia": {
+            "Direct": "Direct",
+            "Via Provider": "Via Provider"
+        },
+        "status": {
+            "Active": "Active",
+            "In-Active": "In-Active",
+            "Hold": "Hold"
+        }
+    }
+}

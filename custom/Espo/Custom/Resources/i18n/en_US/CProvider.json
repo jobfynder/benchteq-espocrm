@@ -1,0 +1,31 @@
+{
+    "fields": {
+        "providerType": "Provider Type",
+        "servicesSupplied": "Services Supplied",
+        "phone": "Phone",
+        "email": "Email",
+        "commissionTerms": "Commission Terms",
+        "deliveryResources": "Delivery Resources",
+        "referrer": "Referrer"
+    },
+    "links": {
+        "deliveryResources": "Delivery Resources",
+        "referrer": "Referrer"
+    },
+    "labels": {
+        "Create CProvider": "Create Provider"
+    },
+    "options": {
+        "providerType": {
+            "Individual": "Individual",
+            "Company": "Company"
+        },
+        "servicesSupplied": {
+            "Trainer": "Trainer",
+            "Freelancer": "Freelancer",
+            "BGC": "BGC",
+            "Tequie": "Tequie",
+            "Resume Builder": "Resume Builder"
+        }
+    }
+}

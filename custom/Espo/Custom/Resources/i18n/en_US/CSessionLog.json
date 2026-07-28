@@ -1,0 +1,17 @@
+{
+    "fields": {
+        "sessionDate": "Session Date",
+        "notes": "Notes",
+        "servicePackage": "Service Package",
+        "deliveryResource": "Delivery Resource",
+        "status": "Status",
+        "sessionDuration": "Session Duration",
+        "payouts": "Payouts"
+    },
+    "links": {
+        "servicePackage": "Service Package",
+        "deliveryResource": "Delivery Resource",
+        "payouts": "Payouts"
+    },
+    "labels": {"Create CSessionLog": "Create Session Log"}
+}

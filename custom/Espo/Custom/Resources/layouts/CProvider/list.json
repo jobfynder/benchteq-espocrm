@@ -1,0 +1,27 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "providerType",
+        "width": 16
+    },
+    {
+        "name": "servicesSupplied",
+        "width": 16,
+        "notSortable": true
+    },
+    {
+        "name": "referrer",
+        "width": 16
+    },
+    {
+        "name": "phone",
+        "width": 16
+    },
+    {
+        "name": "commissionTerms",
+        "width": 16
+    }
+]

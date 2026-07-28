@@ -1,0 +1,29 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "serviceType"
+    },
+    {
+        "name": "account"
+    },
+    {
+        "name": "amount",
+        "align": "right",
+        "isLarge": true
+    },
+    {
+        "name": "stage"
+    },
+    {
+        "name": "closeDate",
+        "align": "right",
+        "isMuted": true
+    },
+    {
+        "name": "assignedUser",
+        "hidden": true
+    }
+]

@@ -1,0 +1,53 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "roleType"
+                }
+            ],
+            [
+                {
+                    "name": "sourcedVia"
+                },
+                {
+                    "name": "provider"
+                }
+            ],
+            [
+                {
+                    "name": "skillSpecialty"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "referrer"
+                },
+                {
+                    "name": "rateConverted"
+                }
+            ],
+            [
+                {
+                    "name": "rate"
+                },
+                {
+                    "name": "streamUpdatedAt"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

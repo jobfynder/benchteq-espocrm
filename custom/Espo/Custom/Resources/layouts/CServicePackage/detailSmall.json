@@ -1,0 +1,56 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                }
+            ],
+            [
+                {
+                    "name": "serviceType"
+                },
+                {
+                    "name": "packagePrice"
+                }
+            ],
+            [
+                {
+                    "name": "account"
+                },
+                {
+                    "name": "contact"
+                }
+            ],
+            [
+                {
+                    "name": "primaryDeliveryResource"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "sessionsTotal"
+                },
+                {
+                    "name": "referrer"
+                }
+            ],
+            [
+                {
+                    "name": "startDate"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

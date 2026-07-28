@@ -1,0 +1,12 @@
+[
+    {
+        "label": "Overview",
+        "rows": [
+            [{"name": "name"}, {"name": "sessionDate"}],
+            [{"name": "status"}, {"name": "sessionDuration"}],
+            [{"name": "servicePackage"}, {"name": "deliveryResource"}],
+            [{"name": "notes", "fullWidth": true}],
+            [{"name": "description", "fullWidth": true}]
+        ]
+    }
+]

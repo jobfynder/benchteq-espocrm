@@ -1,0 +1,17 @@
+{
+    "controller": "controllers/record",
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "iconClass": "fas fa-network-wired",
+    "relationshipPanels": {
+        "deliveryResources": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "referrer": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        }
+    }
+}

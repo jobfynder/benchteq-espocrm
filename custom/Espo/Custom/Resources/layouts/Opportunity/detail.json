@@ -1,0 +1,65 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "account"
+                },
+                {
+                    "name": "contacts"
+                }
+            ],
+            [
+                {
+                    "name": "serviceType"
+                },
+                {
+                    "name": "amount"
+                }
+            ],
+            [
+                {
+                    "name": "leadSource"
+                },
+                {
+                    "name": "stage"
+                }
+            ],
+            [
+                {
+                    "name": "probability"
+                },
+                {
+                    "name": "closeDate"
+                }
+            ],
+            [
+                {
+                    "name": "referrer"
+                },
+                {
+                    "name": "referralPayoutStatus"
+                }
+            ],
+            [
+                {
+                    "name": "referralPayoutDate"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

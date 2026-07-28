@@ -1,0 +1,57 @@
+{
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc",
+        "textFilterFields": [
+            "name"
+        ],
+        "fullTextSearch": false,
+        "countDisabled": false
+    },
+    "optimisticConcurrencyControl": true,
+    "transactionalSave": false,
+    "fields": {
+        "closeDate": {
+            "required": false
+        },
+        "serviceType": {
+            "type": "enum",
+            "options": [
+                "Interview Support",
+                "Job Support",
+                "BGC"
+            ],
+            "style": {},
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "referralPayoutStatus": {
+            "type": "enum",
+            "options": ["Not Due", "Due", "Paid"],
+            "default": "Not Due",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "referralPayoutDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "referrer": {
+            "type": "link"
+        }
+    },
+    "links": {
+        "referrer": {
+            "type": "belongsTo",
+            "foreign": "opportunities",
+            "entity": "CReferrer",
+            "isCustom": true
+        },
+        "servicePackages": {
+            "type": "hasMany",
+            "foreign": "opportunity",
+            "entity": "CServicePackage",
+            "isCustom": true
+        }
+    }
+}

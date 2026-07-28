@@ -1,0 +1,37 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "account",
+        "width": 25
+    },
+    {
+        "name": "emailAddress",
+        "width": 20,
+        "notSortable": true
+    },
+    {
+        "name": "phoneNumber",
+        "width": 18,
+        "notSortable": true
+    },
+    {
+        "name": "assignedUser",
+        "width": 18,
+        "hidden": true
+    },
+    {
+        "name": "cServicePackage",
+        "width": 16
+    },
+    {
+        "name": "description",
+        "width": 16
+    },
+    {
+        "name": "createdBy",
+        "width": 16
+    }
+]

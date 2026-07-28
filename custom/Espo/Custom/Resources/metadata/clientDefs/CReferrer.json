@@ -1,0 +1,29 @@
+{
+    "controller": "controllers/record",
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "iconClass": "fas fa-users-viewfinder",
+    "relationshipPanels": {
+        "accounts": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "deliveryResources": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "providers": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "servicePackages": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "contacts": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        }
+    }
+}

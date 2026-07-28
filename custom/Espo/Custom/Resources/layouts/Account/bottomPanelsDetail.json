@@ -1,0 +1,50 @@
+{
+    "activities": {
+        "disabled": true
+    },
+    "history": {
+        "disabled": true
+    },
+    "_delimiter_": {
+        "disabled": true
+    },
+    "_tabBreak_0": {
+        "index": 0,
+        "tabBreak": true,
+        "tabLabel": "$Stream"
+    },
+    "stream": {
+        "sticked": false,
+        "index": 1
+    },
+    "_tabBreak_1": {
+        "index": 2,
+        "tabBreak": true,
+        "tabLabel": "$Contacts"
+    },
+    "contacts": {
+        "index": 3
+    },
+    "_tabBreak_3": {
+        "index": 4,
+        "tabBreak": true,
+        "tabLabel": "$Deals"
+    },
+    "opportunities": {
+        "index": 5
+    },
+    "_tabBreak_2": {
+        "index": 6,
+        "tabBreak": true,
+        "tabLabel": "$Services"
+    },
+    "cServicePackages": {
+        "index": 7
+    },
+    "cReferrers": {
+        "index": 8
+    },
+    "documents": {
+        "index": 9
+    }
+}
