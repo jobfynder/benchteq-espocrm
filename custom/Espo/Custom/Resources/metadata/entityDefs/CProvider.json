@@ -73,15 +73,27 @@
         },
         "standardFlatFee": {
             "type": "currency",
+            "conversionDisabled": true,
             "isCustom": true
+        },
+        "standardFlatFeeCurrency": {
+            "default": "INR"
         },
         "bgcFeeUS": {
             "type": "currency",
+            "conversionDisabled": true,
             "isCustom": true
+        },
+        "bgcFeeUSCurrency": {
+            "default": "INR"
         },
         "bgcFeeIndia": {
             "type": "currency",
+            "conversionDisabled": true,
             "isCustom": true
+        },
+        "bgcFeeIndiaCurrency": {
+            "default": "INR"
         },
         "referrer": {
             "type": "link"

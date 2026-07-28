@@ -1,0 +1,7 @@
+{
+    "primaryFilterClassNameMap": {
+        "interviewSupport": "Espo\\Custom\\Classes\\Select\\CProvider\\PrimaryFilters\\InterviewSupport",
+        "jobSupport": "Espo\\Custom\\Classes\\Select\\CProvider\\PrimaryFilters\\JobSupport",
+        "bgc": "Espo\\Custom\\Classes\\Select\\CProvider\\PrimaryFilters\\Bgc"
+    }
+}

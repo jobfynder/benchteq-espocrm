@@ -69,7 +69,11 @@
         },
         "rate": {
             "type": "currency",
+            "conversionDisabled": true,
             "isCustom": true
+        },
+        "rateCurrency": {
+            "default": "INR"
         },
         "status": {
             "type": "enum",

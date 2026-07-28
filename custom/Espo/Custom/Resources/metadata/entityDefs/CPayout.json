@@ -12,7 +12,14 @@
             "maxLength": 100,
             "isCustom": true
         },
-        "amount": {"type": "currency", "isCustom": true},
+        "amount": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "isCustom": true
+        },
+        "amountCurrency": {
+            "default": "INR"
+        },
         "payoutType": {
             "type": "enum",
             "options": [

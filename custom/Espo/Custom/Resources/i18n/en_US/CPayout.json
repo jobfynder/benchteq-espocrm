@@ -1,7 +1,7 @@
 {
     "fields": {
         "payeeType": "Payee Type",
-        "amount": "Amount",
+        "amount": "Amount (INR)",
         "payoutType": "Payout Type",
         "status": "Status",
         "payoutDate": "Payout Date",
