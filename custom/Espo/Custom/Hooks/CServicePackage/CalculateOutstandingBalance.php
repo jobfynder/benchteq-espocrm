@@ -4,15 +4,13 @@ namespace Espo\Custom\Hooks\CServicePackage;
 
 use Espo\Core\Hook\Hook\BeforeSave;
 use Espo\ORM\Entity;
+use Espo\ORM\Repository\Option\SaveOptions;
 
 class CalculateOutstandingBalance implements BeforeSave
 {
     public static int $order = 5;
 
-    /**
-     * @param array<string, mixed> $options
-     */
-    public function beforeSave(Entity $entity, array $options): void
+    public function beforeSave(Entity $entity, SaveOptions $options): void
     {
         $packagePrice = max(0.0, (float) ($entity->get('packagePrice') ?? 0));
         $amountPaid = max(0.0, (float) ($entity->get('amountPaid') ?? 0));
