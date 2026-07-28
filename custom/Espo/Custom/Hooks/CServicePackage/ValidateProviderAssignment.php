@@ -13,9 +13,9 @@ class ValidateProviderAssignment implements BeforeSave
     public static int $order = 10;
 
     private const SERVICE_MAP = [
-        'Interview Support' => 'Interview Supporter',
-        'Job Support' => 'Freelancer',
-        'BGC' => 'BGC Verification',
+        'Interview Support' => ['Interview Supporter', 'Tequie'],
+        'Job Support' => ['Freelancer'],
+        'BGC' => ['BGC Verification', 'BGC'],
     ];
 
     public function __construct(
@@ -85,16 +85,18 @@ class ValidateProviderAssignment implements BeforeSave
             throw new BadRequest('The selected Provider does not exist.');
         }
 
-        $requiredService = self::SERVICE_MAP[$serviceType] ?? null;
+        $acceptedServices = self::SERVICE_MAP[$serviceType] ?? [];
         $services = $provider->get('servicesSupplied');
 
         if (
-            $requiredService &&
+            $acceptedServices &&
             (
                 !is_array($services) ||
-                !in_array($requiredService, $services, true)
+                !array_intersect($acceptedServices, $services)
             )
         ) {
+            $requiredService = $acceptedServices[0];
+
             throw new BadRequest(
                 "The selected Provider does not supply {$requiredService}."
             );

@@ -11,9 +11,15 @@ class Bgc implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where(
-            Cond::like(
-                Cond::column('servicesSupplied'),
-                '%"BGC Verification"%'
+            Cond::or(
+                Cond::like(
+                    Cond::column('servicesSupplied'),
+                    '%"BGC Verification"%'
+                ),
+                Cond::like(
+                    Cond::column('servicesSupplied'),
+                    '%"BGC"%'
+                )
             )
         );
     }
