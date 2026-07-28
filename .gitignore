@@ -10,5 +10,7 @@ secrets/*
 *.key
 data/
 uploads/
+infrastructure/metabase/*.env
+infrastructure/metabase/*secret*
 .DS_Store
 Thumbs.db
