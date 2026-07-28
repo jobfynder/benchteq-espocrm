@@ -1,0 +1,20 @@
+{
+    "scopeNames": {
+        "CDeliveryResource": "Delivery Resource",
+        "CProvider": "Provider",
+        "CReferrer": "Referrer",
+        "CServicePackage": "Service Package",
+        "CSessionLog": "Session Log",
+        "CPayout": "Payout",
+        "Opportunity": "Deal"
+    },
+    "scopeNamesPlural": {
+        "CDeliveryResource": "Delivery Resources",
+        "CProvider": "Providers",
+        "CReferrer": "Referrers",
+        "CServicePackage": "Service Packages",
+        "CSessionLog": "Session Logs",
+        "CPayout": "Payouts",
+        "Opportunity": "Deals"
+    }
+}

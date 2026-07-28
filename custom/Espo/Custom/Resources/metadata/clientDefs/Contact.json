@@ -1,0 +1,20 @@
+{
+    "relationshipPanels": {
+        "referrers": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "servicePackage": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "cReferrers": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "servicePackages": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        }
+    }
+}

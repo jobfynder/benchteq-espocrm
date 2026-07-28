@@ -1,0 +1,10 @@
+[
+    "status",
+    "payeeType",
+    "payoutType",
+    "payoutDate",
+    "deliveryResource",
+    "provider",
+    "servicePackage",
+    "assignedUser"
+]

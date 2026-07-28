@@ -1,0 +1,46 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "assignedUser",
+        "width": 16
+    },
+    {
+        "name": "createdBy",
+        "width": 16
+    },
+    {
+        "name": "provider",
+        "width": 16
+    },
+    {
+        "name": "rate",
+        "width": 16
+    },
+    {
+        "name": "roleType",
+        "width": 16
+    },
+    {
+        "name": "skillSpecialty",
+        "width": 16
+    },
+    {
+        "name": "sourcedVia",
+        "width": 16
+    },
+    {
+        "name": "status",
+        "width": 16
+    },
+    {
+        "name": "referrer",
+        "width": 16
+    },
+    {
+        "name": "description",
+        "width": 16
+    }
+]

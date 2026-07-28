@@ -1,0 +1,30 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "servicePackage",
+        "width": 16
+    },
+    {
+        "name": "status",
+        "width": 16
+    },
+    {
+        "name": "sessionDate",
+        "width": 16
+    },
+    {
+        "name": "assignedUser",
+        "width": 16
+    },
+    {
+        "name": "description",
+        "width": 16
+    },
+    {
+        "name": "notes",
+        "width": 16
+    }
+]

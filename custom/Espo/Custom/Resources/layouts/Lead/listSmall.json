@@ -1,0 +1,19 @@
+﻿[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "serviceType",
+        "width": 20
+    },
+    {
+        "name": "status",
+        "width": 22
+    },
+    {
+        "name": "emailAddress",
+        "width": 30,
+        "notSortable": true
+    }
+]

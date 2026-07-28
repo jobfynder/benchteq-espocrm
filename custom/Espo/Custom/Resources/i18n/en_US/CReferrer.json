@@ -1,0 +1,39 @@
+{
+    "fields": {
+        "referrerType": "Referrer Type",
+        "referralFee": "Referral Fee",
+        "referralFeeCurrency": "Referral Fee (Currency)",
+        "referralFeeConverted": "Referral Fee (Converted)",
+        "status": "Status",
+        "accounts": "Accounts",
+        "deliveryResources": "Delivery Resources",
+        "providers": "Providers",
+        "servicePackages": "Service Packages",
+        "contacts": "Contacts",
+        "mobile": "Mobile",
+        "whatsApp": "WhatsApp"
+    },
+    "links": {
+        "accounts": "Accounts",
+        "deliveryResources": "Delivery Resources",
+        "providers": "Providers",
+        "servicePackages": "Service Packages",
+        "contacts": "Contacts"
+    },
+    "labels": {
+        "Create CReferrer": "Create Referrer"
+    },
+    "options": {
+        "referrerType": {
+            "Existing Consultant": "Existing Consultant",
+            "Employer": "Employer",
+            "Trainer": "Trainer",
+            "Provider": "Provider",
+            "External Contact": "External Contact"
+        },
+        "status": {
+            "Active": "Active",
+            "In-Active": "In-Active"
+        }
+    }
+}

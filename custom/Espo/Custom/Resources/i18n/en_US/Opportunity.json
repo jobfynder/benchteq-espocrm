@@ -1,0 +1,18 @@
+{
+    "labels": {
+        "Create Opportunity": "Create Deal"
+    },
+    "fields": {
+        "cServicetype": "Service Type"
+    },
+    "options": {
+        "cServicetype": {
+            "Training": "Training",
+            "Interview Support": "Interview Support",
+            "Job Support": "Job Support",
+            "BGC": "BGC",
+            "Resume Building": "Resume Building",
+            "Profile Marketing": "Profile Marketing"
+        }
+    }
+}

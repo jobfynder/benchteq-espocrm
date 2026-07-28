@@ -1,0 +1,169 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "pattern": "$noBadCharacters"
+        },
+        "description": {
+            "type": "text"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true,
+            "view": "views/fields/user"
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true,
+            "view": "views/fields/user"
+        },
+        "assignedUser": {
+            "type": "link",
+            "required": false,
+            "view": "views/fields/assigned-user"
+        },
+        "teams": {
+            "type": "linkMultiple",
+            "view": "views/fields/teams"
+        },
+        "providerType": {
+            "type": "enum",
+            "options": [
+                "Individual",
+                "Company"
+            ],
+            "style": [],
+            "default": "Individual",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "servicesSupplied": {
+            "type": "multiEnum",
+            "storeArrayValues": true,
+            "default": [],
+            "options": [
+                "Trainer",
+                "Freelancer",
+                "Interview Supporter",
+                "BGC Verification"
+            ],
+            "style": [],
+            "isCustom": true
+        },
+        "phone": {
+            "type": "phone",
+            "isCustom": true
+        },
+        "email": {
+            "type": "email",
+            "isCustom": true
+        },
+        "commissionTerms": {
+            "type": "text",
+            "isCustom": true
+        },
+        "standardFlatFee": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "bgcFeeUS": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "bgcFeeIndia": {
+            "type": "currency",
+            "isCustom": true
+        },
+        "referrer": {
+            "type": "link"
+        },
+        "payouts": {
+            "type": "linkMultiple"
+        }
+    },
+    "links": {
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        },
+        "deliveryResources": {
+            "type": "hasMany",
+            "foreign": "provider",
+            "entity": "CDeliveryResource",
+            "audited": false,
+            "isCustom": true
+        },
+        "referrer": {
+            "type": "belongsTo",
+            "foreign": "providers",
+            "entity": "CReferrer",
+            "audited": false,
+            "isCustom": true
+        },
+        "servicePackages": {
+            "type": "hasMany",
+            "foreign": "fulfillingProvider",
+            "entity": "CServicePackage",
+            "isCustom": true
+        },
+        "payouts": {
+            "type": "hasMany",
+            "foreign": "provider",
+            "entity": "CPayout",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc"
+    },
+    "indexes": {
+        "name": {
+            "columns": [
+                "name",
+                "deleted"
+            ]
+        },
+        "assignedUser": {
+            "columns": [
+                "assignedUserId",
+                "deleted"
+            ]
+        },
+        "createdAt": {
+            "columns": [
+                "createdAt"
+            ]
+        },
+        "createdAtId": {
+            "unique": true,
+            "columns": [
+                "createdAt",
+                "id"
+            ]
+        }
+    }
+}

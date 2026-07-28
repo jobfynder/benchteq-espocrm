@@ -1,0 +1,18 @@
+[
+    {
+        "label": "Overview",
+        "rows": [
+            [{"name": "name"}, {"name": "serviceType"}],
+            [{"name": "account"}, {"name": "contact"}],
+            [{"name": "opportunity"}, {"name": "referrer"}],
+            [{"name": "primaryDeliveryResource"}, {"name": "fulfillingProvider"}],
+            [{"name": "status"}, {"name": "startDate"}],
+            [{"name": "sessionsTotal"}, {"name": "sessionsRemaining"}],
+            [{"name": "packagePrice"}, {"name": "amountPaid"}],
+            [{"name": "outstandingBalance"}, {"name": "paymentStatus"}],
+            [{"name": "bgcVerificationType"}, {"name": "payoutFrequency"}],
+            [{"name": "renewalDueDate"}, false],
+            [{"name": "description", "fullWidth": true}]
+        ]
+    }
+]

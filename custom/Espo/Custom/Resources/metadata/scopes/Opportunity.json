@@ -1,0 +1,13 @@
+{
+    "stream": true,
+    "disabled": false,
+    "kanbanStatusIgnoreList": [
+        "Closed Lost"
+    ],
+    "stars": false,
+    "preserveAuditLog": false,
+    "collaborators": false,
+    "assignedUsers": false,
+    "pipelines": false,
+    "lockable": false
+}

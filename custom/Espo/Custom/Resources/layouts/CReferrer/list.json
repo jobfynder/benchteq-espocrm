@@ -1,0 +1,26 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "referralFee",
+        "width": 16
+    },
+    {
+        "name": "whatsApp",
+        "width": 16
+    },
+    {
+        "name": "referrerType",
+        "width": 16
+    },
+    {
+        "name": "description",
+        "width": 16
+    },
+    {
+        "name": "status",
+        "width": 16
+    }
+]

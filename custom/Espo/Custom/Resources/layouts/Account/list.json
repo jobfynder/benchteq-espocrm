@@ -1,0 +1,23 @@
+[
+    {
+        "name": "type",
+        "width": 16
+    },
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "website",
+        "width": 25,
+        "notSortable": true
+    },
+    {
+        "name": "phoneNumber",
+        "width": 16
+    },
+    {
+        "name": "createdBy",
+        "width": 16
+    }
+]

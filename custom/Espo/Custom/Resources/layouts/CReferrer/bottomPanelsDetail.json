@@ -1,0 +1,38 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "_tabBreak_3": {
+        "index": 0,
+        "tabBreak": true,
+        "tabLabel": "$Stream"
+    },
+    "stream": {
+        "sticked": false,
+        "index": 1
+    },
+    "_tabBreak_0": {
+        "index": 2,
+        "tabBreak": true,
+        "tabLabel": "$Services"
+    },
+    "servicePackages": {
+        "index": 3
+    },
+    "_tabBreak_1": {
+        "index": 4,
+        "tabBreak": true
+    },
+    "contacts": {
+        "index": 5
+    },
+    "accounts": {
+        "index": 6
+    },
+    "providers": {
+        "index": 7
+    },
+    "deliveryResources": {
+        "index": 8
+    }
+}

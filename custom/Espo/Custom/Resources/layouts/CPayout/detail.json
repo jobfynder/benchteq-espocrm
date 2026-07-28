@@ -1,0 +1,14 @@
+[
+    {
+        "label": "Overview",
+        "rows": [
+            [{"name": "name"}, {"name": "status"}],
+            [{"name": "payeeType"}, {"name": "payoutType"}],
+            [{"name": "amount"}, {"name": "payoutDate"}],
+            [{"name": "periodStart"}, {"name": "periodEnd"}],
+            [{"name": "deliveryResource"}, {"name": "provider"}],
+            [{"name": "servicePackage"}, {"name": "sessionLogs"}],
+            [{"name": "description", "fullWidth": true}]
+        ]
+    }
+]

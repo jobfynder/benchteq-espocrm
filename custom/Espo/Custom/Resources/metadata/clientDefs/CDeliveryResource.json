@@ -1,0 +1,25 @@
+{
+    "controller": "controllers/record",
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "iconClass": "fas fa-user-graduate",
+    "relationshipPanels": {
+        "provider": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "referrer": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "sessionLog": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        },
+        "primaryDeliveryResource": {
+            "layout": null,
+            "selectPrimaryFilterName": null
+        }
+    }
+}

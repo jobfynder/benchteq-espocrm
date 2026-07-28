@@ -1,0 +1,31 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                }
+            ],
+            [
+                {
+                    "name": "servicePackage"
+                },
+                {
+                    "name": "sessionDate"
+                }
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ],
+            [
+                {
+                    "name": "notes"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

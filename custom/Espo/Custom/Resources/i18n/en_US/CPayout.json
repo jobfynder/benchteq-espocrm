@@ -1,0 +1,22 @@
+{
+    "fields": {
+        "payeeType": "Payee Type",
+        "amount": "Amount",
+        "payoutType": "Payout Type",
+        "status": "Status",
+        "payoutDate": "Payout Date",
+        "periodStart": "Period Start",
+        "periodEnd": "Period End",
+        "deliveryResource": "Delivery Resource",
+        "provider": "Provider",
+        "servicePackage": "Service Package",
+        "sessionLogs": "Session Logs"
+    },
+    "links": {
+        "deliveryResource": "Delivery Resource",
+        "provider": "Provider",
+        "servicePackage": "Service Package",
+        "sessionLogs": "Session Logs"
+    },
+    "labels": {"Create CPayout": "Create Payout"}
+}

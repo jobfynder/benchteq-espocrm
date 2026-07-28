@@ -1,0 +1,48 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "name"
+                }
+            ],
+            [
+                {
+                    "name": "roleType"
+                },
+                {
+                    "name": "referrer"
+                }
+            ],
+            [
+                {
+                    "name": "sourcedVia"
+                },
+                {
+                    "name": "provider"
+                }
+            ],
+            [
+                {
+                    "name": "skillSpecialty"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "rate"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "description"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

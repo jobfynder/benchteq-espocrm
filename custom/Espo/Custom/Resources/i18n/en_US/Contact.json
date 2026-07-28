@@ -1,0 +1,10 @@
+{
+    "fields": {
+        "cReferrers": "Referrers",
+        "cServicePackages": "Service Packages"
+    },
+    "links": {
+        "cReferrers": "Referrers",
+        "cServicePackages": "Service Packages"
+    }
+}

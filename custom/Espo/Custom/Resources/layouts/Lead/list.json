@@ -1,0 +1,39 @@
+﻿[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "serviceType",
+        "width": 16
+    },
+    {
+        "name": "status",
+        "width": 15
+    },
+    {
+        "name": "emailAddress",
+        "width": 20,
+        "notSortable": true
+    },
+    {
+        "name": "phoneNumber",
+        "width": 20,
+        "notSortable": true,
+        "hidden": true
+    },
+    {
+        "name": "source",
+        "width": 15,
+        "notSortable": true,
+        "hidden": true
+    },
+    {
+        "name": "assignedUser",
+        "width": 18
+    },
+    {
+        "name": "createdAt",
+        "width": 13
+    }
+]

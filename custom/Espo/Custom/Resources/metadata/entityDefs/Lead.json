@@ -1,0 +1,15 @@
+{
+    "fields": {
+        "serviceType": {
+            "type": "enum",
+            "options": [
+                "Interview Support",
+                "Job Support",
+                "BGC"
+            ],
+            "style": {},
+            "maxLength": 100,
+            "isCustom": true
+        }
+    }
+}

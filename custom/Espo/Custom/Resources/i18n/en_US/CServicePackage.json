@@ -1,0 +1,35 @@
+{
+    "fields": {
+        "serviceType": "Service Type",
+        "sessionsTotal": "Sessions Total",
+        "sessionsRemaining": "Sessions Remaining",
+        "startDate": "Start Date",
+        "status": "Status",
+        "packagePrice": "Package Price",
+        "amountPaid": "Amount Paid",
+        "outstandingBalance": "Outstanding Balance",
+        "paymentStatus": "Payment Status",
+        "bgcVerificationType": "BGC Verification Type",
+        "payoutFrequency": "Payout Frequency",
+        "renewalDueDate": "Renewal Due Date",
+        "referrer": "Referrer",
+        "primaryDeliveryResource": "Primary Delivery Resource",
+        "fulfillingProvider": "Fulfilling Provider",
+        "opportunity": "Opportunity",
+        "account": "Account",
+        "contact": "Contact",
+        "sessionLogs": "Session Logs",
+        "payouts": "Payouts"
+    },
+    "links": {
+        "referrer": "Referrer",
+        "primaryDeliveryResource": "Primary Delivery Resource",
+        "fulfillingProvider": "Fulfilling Provider",
+        "opportunity": "Opportunity",
+        "account": "Account",
+        "contact": "Contact",
+        "sessionLogs": "Session Logs",
+        "payouts": "Payouts"
+    },
+    "labels": {"Create CServicePackage": "Create Service Package"}
+}

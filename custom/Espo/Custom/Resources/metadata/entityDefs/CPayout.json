@@ -1,0 +1,94 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "pattern": "$noBadCharacters"
+        },
+        "description": {"type": "text"},
+        "payeeType": {
+            "type": "enum",
+            "options": ["Delivery Resource", "Provider"],
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "amount": {"type": "currency", "isCustom": true},
+        "payoutType": {
+            "type": "enum",
+            "options": [
+                "Per Interview",
+                "Per Session",
+                "Weekly",
+                "Bi-Weekly",
+                "Monthly",
+                "Provider Flat Fee",
+                "BGC Verification Fee"
+            ],
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "status": {
+            "type": "enum",
+            "options": ["Due", "Paid"],
+            "default": "Due",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "payoutDate": {"type": "date", "isCustom": true},
+        "periodStart": {"type": "date", "isCustom": true},
+        "periodEnd": {"type": "date", "isCustom": true},
+        "deliveryResource": {"type": "link"},
+        "provider": {"type": "link"},
+        "servicePackage": {"type": "link"},
+        "sessionLogs": {"type": "linkMultiple"},
+        "createdAt": {"type": "datetime", "readOnly": true},
+        "modifiedAt": {"type": "datetime", "readOnly": true},
+        "createdBy": {"type": "link", "readOnly": true, "view": "views/fields/user"},
+        "modifiedBy": {"type": "link", "readOnly": true, "view": "views/fields/user"},
+        "assignedUser": {"type": "link", "view": "views/fields/assigned-user"},
+        "teams": {"type": "linkMultiple", "view": "views/fields/teams"}
+    },
+    "links": {
+        "deliveryResource": {
+            "type": "belongsTo",
+            "foreign": "payouts",
+            "entity": "CDeliveryResource",
+            "isCustom": true
+        },
+        "provider": {
+            "type": "belongsTo",
+            "foreign": "payouts",
+            "entity": "CProvider",
+            "isCustom": true
+        },
+        "servicePackage": {
+            "type": "belongsTo",
+            "foreign": "payouts",
+            "entity": "CServicePackage",
+            "isCustom": true
+        },
+        "sessionLogs": {
+            "type": "hasMany",
+            "relationName": "cPayoutCSessionLog",
+            "foreign": "payouts",
+            "entity": "CSessionLog",
+            "isCustom": true
+        },
+        "createdBy": {"type": "belongsTo", "entity": "User"},
+        "modifiedBy": {"type": "belongsTo", "entity": "User"},
+        "assignedUser": {"type": "belongsTo", "entity": "User"},
+        "teams": {
+            "type": "hasMany",
+            "entity": "Team",
+            "relationName": "entityTeam",
+            "layoutRelationshipsDisabled": true
+        }
+    },
+    "collection": {"orderBy": "createdAt", "order": "desc"},
+    "indexes": {
+        "name": {"columns": ["name", "deleted"]},
+        "assignedUser": {"columns": ["assignedUserId", "deleted"]},
+        "createdAt": {"columns": ["createdAt"]},
+        "createdAtId": {"unique": true, "columns": ["createdAt", "id"]}
+    }
+}

@@ -1,0 +1,14 @@
+[
+    "name",
+    "roleType",
+    "assignedUser",
+    "rate",
+    "referrer",
+    "skillSpecialty",
+    "createdBy",
+    "sourcedVia",
+    "provider",
+    "status",
+    "sessionLog",
+    "description"
+]
