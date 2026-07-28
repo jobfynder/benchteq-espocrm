@@ -11,9 +11,15 @@ class InterviewSupport implements Filter
     public function apply(SelectBuilder $queryBuilder): void
     {
         $queryBuilder->where(
-            Cond::like(
-                Cond::column('servicesSupplied'),
-                '%"Interview Supporter"%'
+            Cond::or(
+                Cond::like(
+                    Cond::column('servicesSupplied'),
+                    '%"Interview Supporter"%'
+                ),
+                Cond::like(
+                    Cond::column('servicesSupplied'),
+                    '%"Tequie"%'
+                )
             )
         );
     }
