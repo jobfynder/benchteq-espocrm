@@ -15,6 +15,12 @@
             ],
             [
                 {
+                    "name": "interviewType",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
                     "name": "status",
                     "fullWidth": true
                 }

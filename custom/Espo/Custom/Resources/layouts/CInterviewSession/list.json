@@ -8,6 +8,10 @@
         "width": 16
     },
     {
+        "name": "interviewType",
+        "width": 10
+    },
+    {
         "name": "status",
         "width": 10
     },

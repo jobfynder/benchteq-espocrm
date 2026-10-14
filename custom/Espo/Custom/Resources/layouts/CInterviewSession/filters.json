@@ -1,6 +1,7 @@
 [
     "contact",
     "freelancer",
+    "interviewType",
     "status",
     "paymentStatus",
     "dateStart",

@@ -13,11 +13,13 @@
     "viewSetupHandlers": {
         "record/detail": [
             "__APPEND__",
-            "crm:handlers/event/reminders-handler"
+            "crm:handlers/event/reminders-handler",
+            "custom:handlers/interview-session/type-duration"
         ],
         "record/edit": [
             "__APPEND__",
-            "crm:handlers/event/reminders-handler"
+            "crm:handlers/event/reminders-handler",
+            "custom:handlers/interview-session/type-duration"
         ]
     },
     "bottomPanels": {

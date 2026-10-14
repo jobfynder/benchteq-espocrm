@@ -11,10 +11,10 @@
             ],
             [
                 {
-                    "name": "status"
+                    "name": "interviewType"
                 },
                 {
-                    "name": "paymentStatus"
+                    "name": "status"
                 }
             ],
             [
@@ -30,6 +30,14 @@
                     "name": "duration"
                 },
                 {
+                    "name": "payout"
+                }
+            ],
+            [
+                {
+                    "name": "paymentStatus"
+                },
+                {
                     "name": "paidDate"
                 }
             ],
@@ -40,12 +48,6 @@
                 {
                     "name": "supporterFee"
                 }
-            ],
-            [
-                {
-                    "name": "payout"
-                },
-                false
             ],
             [
                 {

@@ -7,7 +7,11 @@
         "assignedUser": "Coordinator",
         "description": "Notes",
         "dateStart": "Start",
-        "dateEnd": "End"
+        "dateEnd": "End",
+        "status": "Status",
+        "duration": "Duration",
+        "reminders": "Reminders",
+        "isAllDay": "All-Day"
     },
     "links": {
         "paymentBlock": "Payment Block",

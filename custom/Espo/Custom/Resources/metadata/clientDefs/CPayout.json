@@ -13,10 +13,12 @@
         "project": {},
         "lead": {},
         "timesheets": {
-            "layout": "listSmall"
+            "layout": "listSmall",
+            "selectPrimaryFilterName": "unpaid"
         },
         "interviewSessions": {
-            "layout": "listSmall"
+            "layout": "listSmall",
+            "selectPrimaryFilterName": "unpaid"
         }
     },
     "filterList": [

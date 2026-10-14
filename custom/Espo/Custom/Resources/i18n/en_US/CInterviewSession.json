@@ -11,9 +11,14 @@
         "payout": "Payout",
         "feedback": "Feedback",
         "assignedUser": "Coordinator",
-        "description": "Interview Details",
+        "description": "Details",
         "dateStart": "Start",
-        "dateEnd": "End"
+        "dateEnd": "End",
+        "interviewType": "Type",
+        "status": "Status",
+        "duration": "Duration",
+        "reminders": "Reminders",
+        "isAllDay": "All-Day"
     },
     "links": {
         "contact": "Customer",
@@ -30,6 +35,10 @@
         "paymentStatus": {
             "Pending": "Pending",
             "Paid": "Paid"
+        },
+        "interviewType": {
+            "Interview": "Interview",
+            "Assessment": "Assessment"
         }
     },
     "labels": {
@@ -41,6 +50,7 @@
     },
     "tooltips": {
         "paymentStatus": "A session can only be set to Held or No-Show once it is Paid.",
-        "description": "Company, role and notes."
+        "description": "Company, role and notes.",
+        "interviewType": "Assessment sessions start at 90 minutes. Pick any slot: 30, 45, 60, 90 or 180 minutes."
     }
 }

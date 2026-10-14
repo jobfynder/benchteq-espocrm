@@ -1,3 +1,3 @@
 {
-    "beforeSaveCustomScript": "ifThen(dateStart, name = string\\concatenate(\n    'Interview - ',\n    string\\trim(string\\concatenate(\n        record\\attribute('Contact', contactId, 'firstName'), ' ',\n        record\\attribute('Contact', contactId, 'lastName')\n    )),\n    ' - ', datetime\\format(dateStart, 'Asia/Kolkata', 'DD MMM')\n));\nifThen(paymentStatus == 'Paid' && !paidDate, paidDate = datetime\\today());\n"
+    "beforeSaveCustomScript": "ifThen(dateStart, name = string\\concatenate(\n    interviewType, ' - ',\n    string\\trim(string\\concatenate(\n        record\\attribute('Contact', contactId, 'firstName'), ' ',\n        record\\attribute('Contact', contactId, 'lastName')\n    )),\n    ' - ', datetime\\format(dateStart, 'Asia/Kolkata', 'DD MMM')\n));\nifThen(paymentStatus == 'Paid' && !paidDate, paidDate = datetime\\today());\n"
 }

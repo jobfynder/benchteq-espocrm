@@ -52,9 +52,11 @@
             "options": [
                 1800,
                 2700,
-                3600
+                3600,
+                5400,
+                10800
             ],
-            "default": 3600,
+            "default": 1800,
             "notStorable": true,
             "select": {
                 "select": "TIMESTAMPDIFF_SECOND:(dateStart, dateEnd)"
@@ -110,6 +112,18 @@
         "teams": {
             "type": "linkMultiple",
             "view": "views/fields/teams"
+        },
+        "interviewType": {
+            "type": "enum",
+            "options": [
+                "Interview",
+                "Assessment"
+            ],
+            "default": "Interview",
+            "required": true,
+            "audited": true,
+            "maxLength": 100,
+            "isCustom": true
         },
         "contact": {
             "type": "link",
