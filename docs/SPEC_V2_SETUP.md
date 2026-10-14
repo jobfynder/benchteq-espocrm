@@ -34,6 +34,12 @@ snapshot, run the workflow in `plan` mode, then `apply`, then Administration, Re
 
 ### 2. Roles, menu, dashboard (one script, safe to rerun)
 
+Easiest: GitHub, Actions, **Setup CRM**, Run workflow. Leave Dry run on the first time and read
+the output, then run it again with Dry run off. Fill `assign` like
+`priya=Coordinator,rahul=Finance,amit=Interview Manager`. It needs three repository (or
+`production` environment) secrets: `ESPO_URL` (`https://crm.jobfynder.com`), `ESPO_USER`
+and `ESPO_PASSWORD` for a CRM admin. Or run the script by hand:
+
     export ESPO_URL=https://your-crm  ESPO_USER=admin  ESPO_PASSWORD=...
     python3 scripts/setup-roles-dashboards.py --dry-run
     python3 scripts/setup-roles-dashboards.py \
