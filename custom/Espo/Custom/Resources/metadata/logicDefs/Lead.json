@@ -1,0 +1,92 @@
+{
+    "fields": {
+        "bgcType": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            },
+            "required": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "bgcFee": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "bgcAmountReceived": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "bgcProvider": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "bgcProviderCost": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        },
+        "bgcStatus": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        }
+    },
+    "panels": {
+        "bgc": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "serviceType",
+                        "value": "BGC"
+                    }
+                ]
+            }
+        }
+    }
+}

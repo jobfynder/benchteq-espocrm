@@ -1,0 +1,12 @@
+{
+    "filterList": [
+        "__APPEND__",
+        {
+            "name": "bgcInVerification",
+            "style": "warning"
+        },
+        {
+            "name": "referralDue"
+        }
+    ]
+}

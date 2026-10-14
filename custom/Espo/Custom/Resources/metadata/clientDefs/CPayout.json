@@ -1,11 +1,28 @@
 {
     "controller": "controllers/record",
-    "boolFilterList": ["onlyMy"],
+    "boolFilterList": [
+        "onlyMy"
+    ],
     "iconClass": "fas fa-money-check-alt",
     "relationshipPanels": {
         "deliveryResource": {},
         "provider": {},
         "servicePackage": {},
-        "sessionLogs": {}
-    }
+        "sessionLogs": {},
+        "referrer": {},
+        "project": {},
+        "lead": {},
+        "timesheets": {
+            "layout": "listSmall"
+        },
+        "interviewSessions": {
+            "layout": "listSmall"
+        }
+    },
+    "filterList": [
+        {
+            "name": "due",
+            "style": "warning"
+        }
+    ]
 }

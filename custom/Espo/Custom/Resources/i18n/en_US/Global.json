@@ -1,20 +1,28 @@
 {
     "scopeNames": {
-        "CDeliveryResource": "Delivery Resource",
+        "CDeliveryResource": "Freelancer",
         "CProvider": "Provider",
         "CReferrer": "Referrer",
         "CServicePackage": "Service Package",
         "CSessionLog": "Session Log",
         "CPayout": "Payout",
-        "Opportunity": "Deal"
+        "Opportunity": "Deal",
+        "CProject": "Project",
+        "CPaymentBlock": "Payment Block",
+        "CTimesheet": "Timesheet",
+        "CInterviewSession": "Interview Session"
     },
     "scopeNamesPlural": {
-        "CDeliveryResource": "Delivery Resources",
+        "CDeliveryResource": "Freelancers",
         "CProvider": "Providers",
         "CReferrer": "Referrers",
         "CServicePackage": "Service Packages",
         "CSessionLog": "Session Logs",
         "CPayout": "Payouts",
-        "Opportunity": "Deals"
+        "Opportunity": "Deals",
+        "CProject": "Projects",
+        "CPaymentBlock": "Payment Blocks",
+        "CTimesheet": "Timesheets",
+        "CInterviewSession": "Interview Sessions"
     }
 }

@@ -1,9 +1,26 @@
 [
-    {"name": "name", "link": true},
-    {"name": "payeeType"},
-    {"name": "payoutType"},
-    {"name": "amount"},
-    {"name": "status"},
-    {"name": "payoutDate"},
-    {"name": "servicePackage"}
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "payeeType",
+        "width": 12
+    },
+    {
+        "name": "payoutType",
+        "width": 14
+    },
+    {
+        "name": "amount",
+        "width": 12
+    },
+    {
+        "name": "status",
+        "width": 9
+    },
+    {
+        "name": "payoutDate",
+        "width": 12
+    }
 ]

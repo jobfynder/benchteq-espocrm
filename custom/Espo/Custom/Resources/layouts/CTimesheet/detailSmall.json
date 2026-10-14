@@ -1,0 +1,50 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "paymentBlock",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "freelancer",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "status",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "dateStart",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "duration",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "dateEnd",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

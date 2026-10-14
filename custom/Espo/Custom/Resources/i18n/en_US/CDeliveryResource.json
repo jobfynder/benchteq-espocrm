@@ -10,16 +10,31 @@
         "provider": "Provider",
         "referrer": "Referrer",
         "sessionLog": "Session Log",
-        "primaryDeliveryResource": "Service Packages"
+        "primaryDeliveryResource": "Service Packages",
+        "technologies": "Technologies",
+        "screeningResult": "Screening Result",
+        "rating": "Rating (1-5)",
+        "screeningNotes": "Screening Notes",
+        "workStatus": "Work Status",
+        "email": "Email",
+        "phone": "Phone",
+        "projects": "Projects",
+        "timesheets": "Timesheets",
+        "interviewSessions": "Interview Sessions",
+        "payouts": "Payouts"
     },
     "links": {
         "provider": "Provider",
         "referrer": "Referrer",
         "sessionLog": "Session Log",
-        "primaryDeliveryResource": "Service Packages"
+        "primaryDeliveryResource": "Service Packages",
+        "projects": "Projects",
+        "timesheets": "Timesheets",
+        "interviewSessions": "Interview Sessions",
+        "payouts": "Payouts"
     },
     "labels": {
-        "Create CDeliveryResource": "Create Delivery Resource"
+        "Create CDeliveryResource": "Create Freelancer"
     },
     "options": {
         "roleType": {
@@ -35,6 +50,41 @@
             "Active": "Active",
             "Inactive": "Inactive",
             "On Leave": "On Leave"
+        },
+        "screeningResult": {
+            "Pending": "Pending",
+            "Passed": "Passed",
+            "Failed": "Failed"
+        },
+        "workStatus": {
+            "Available": "Available",
+            "On Project": "On Project",
+            "Inactive": "Inactive"
+        },
+        "technologies": {
+            "Java": "Java",
+            ".NET": ".NET",
+            "Python": "Python",
+            "JavaScript": "JavaScript",
+            "React": "React",
+            "Angular": "Angular",
+            "Node.js": "Node.js",
+            "SQL": "SQL",
+            "AWS": "AWS",
+            "Azure": "Azure",
+            "DevOps": "DevOps",
+            "Data Engineering": "Data Engineering",
+            "Salesforce": "Salesforce",
+            "SAP": "SAP",
+            "QA Testing": "QA Testing",
+            "Other": "Other"
         }
+    },
+    "presetFilters": {
+        "shortlist": "Shortlist"
+    },
+    "tooltips": {
+        "screeningResult": "Only Passed freelancers appear in the Shortlist and in project lookups.",
+        "provider": "Leave empty when the freelancer was sourced directly."
     }
 }

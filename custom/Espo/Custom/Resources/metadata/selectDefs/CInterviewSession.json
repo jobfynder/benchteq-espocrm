@@ -1,0 +1,18 @@
+{
+    "selectAttributesDependencyMap": {
+        "duration": [
+            "dateStart",
+            "dateEnd"
+        ],
+        "dateStart": [
+            "dateEnd"
+        ]
+    },
+    "primaryFilterClassNameMap": {
+        "planned": "Espo\\Classes\\Select\\Event\\PrimaryFilters\\Planned",
+        "held": "Espo\\Classes\\Select\\Event\\PrimaryFilters\\Held",
+        "todays": "Espo\\Classes\\Select\\Event\\PrimaryFilters\\Todays",
+        "unpaid": "Espo\\Custom\\Classes\\Select\\CInterviewSession\\PrimaryFilters\\Unpaid",
+        "awaitingPayment": "Espo\\Custom\\Classes\\Select\\CInterviewSession\\PrimaryFilters\\AwaitingPayment"
+    }
+}

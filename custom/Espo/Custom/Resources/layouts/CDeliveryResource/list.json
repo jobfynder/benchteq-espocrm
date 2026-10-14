@@ -4,43 +4,33 @@
         "link": true
     },
     {
-        "name": "assignedUser",
-        "width": 16
+        "name": "roleType",
+        "width": 13
     },
     {
-        "name": "createdBy",
-        "width": 16
+        "name": "technologies",
+        "width": 20,
+        "notSortable": true
+    },
+    {
+        "name": "phone",
+        "width": 14,
+        "notSortable": true
+    },
+    {
+        "name": "screeningResult",
+        "width": 11
+    },
+    {
+        "name": "rating",
+        "width": 8
+    },
+    {
+        "name": "workStatus",
+        "width": 11
     },
     {
         "name": "provider",
-        "width": 16
-    },
-    {
-        "name": "rate",
-        "width": 16
-    },
-    {
-        "name": "roleType",
-        "width": 16
-    },
-    {
-        "name": "skillSpecialty",
-        "width": 16
-    },
-    {
-        "name": "sourcedVia",
-        "width": 16
-    },
-    {
-        "name": "status",
-        "width": 16
-    },
-    {
-        "name": "referrer",
-        "width": 16
-    },
-    {
-        "name": "description",
-        "width": 16
+        "width": 14
     }
 ]

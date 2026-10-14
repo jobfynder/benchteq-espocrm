@@ -5,6 +5,7 @@
     "payoutDate",
     "deliveryResource",
     "provider",
-    "servicePackage",
-    "assignedUser"
+    "referrer",
+    "project",
+    "lead"
 ]

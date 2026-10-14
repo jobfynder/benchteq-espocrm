@@ -2,21 +2,20 @@
     "_delimiter_": {
         "disabled": true
     },
-    "_tabBreak_0": {
-        "index": 0,
-        "tabBreak": true,
-        "tabLabel": "$Stream"
+    "projects": {
+        "index": 0
     },
-    "stream": {
-        "sticked": false,
+    "timesheets": {
         "index": 1
     },
-    "_tabBreak_1": {
-        "index": 2,
-        "tabBreak": true,
-        "tabLabel": "$Services"
+    "interviewSessions": {
+        "index": 2
     },
-    "primaryDeliveryResource": {
+    "payouts": {
         "index": 3
+    },
+    "stream": {
+        "index": 4,
+        "sticked": false
     }
 }

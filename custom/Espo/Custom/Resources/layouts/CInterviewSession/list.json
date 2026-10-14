@@ -1,0 +1,40 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "dateStart",
+        "width": 16
+    },
+    {
+        "name": "status",
+        "width": 10
+    },
+    {
+        "name": "paymentStatus",
+        "width": 10
+    },
+    {
+        "name": "freelancer",
+        "width": 18
+    },
+    {
+        "name": "customerFee",
+        "width": 10
+    },
+    {
+        "name": "supporterFee",
+        "width": 10,
+        "hidden": true
+    },
+    {
+        "name": "payout",
+        "width": 12,
+        "hidden": true
+    },
+    {
+        "name": "assignedUser",
+        "width": 14
+    }
+]

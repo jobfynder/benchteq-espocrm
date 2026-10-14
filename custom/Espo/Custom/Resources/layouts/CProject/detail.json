@@ -1,0 +1,52 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "consultant"
+                },
+                {
+                    "name": "account"
+                }
+            ],
+            [
+                {
+                    "name": "technology"
+                },
+                {
+                    "name": "freelancer"
+                }
+            ],
+            [
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "startDate"
+                }
+            ],
+            [
+                {
+                    "name": "customerRate"
+                },
+                {
+                    "name": "freelancerPayType"
+                }
+            ],
+            [
+                {
+                    "name": "freelancerRate"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "scheduleNotes",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

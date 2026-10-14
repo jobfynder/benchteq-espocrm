@@ -1,0 +1,15 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "timesheets": {
+        "index": 0
+    },
+    "interviewSessions": {
+        "index": 1
+    },
+    "stream": {
+        "index": 2,
+        "sticked": false
+    }
+}

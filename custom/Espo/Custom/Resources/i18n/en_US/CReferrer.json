@@ -11,14 +11,19 @@
         "servicePackages": "Service Packages",
         "contacts": "Contacts",
         "mobile": "Mobile",
-        "whatsApp": "WhatsApp"
+        "whatsApp": "WhatsApp",
+        "leads": "Leads",
+        "payouts": "Payouts",
+        "phone": "Phone"
     },
     "links": {
         "accounts": "Accounts",
-        "deliveryResources": "Delivery Resources",
+        "deliveryResources": "Freelancers",
         "providers": "Providers",
         "servicePackages": "Service Packages",
-        "contacts": "Contacts"
+        "contacts": "Contacts",
+        "leads": "Leads",
+        "payouts": "Payouts"
     },
     "labels": {
         "Create CReferrer": "Create Referrer"

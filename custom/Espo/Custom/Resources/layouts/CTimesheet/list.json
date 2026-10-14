@@ -1,0 +1,35 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "dateStart",
+        "width": 16
+    },
+    {
+        "name": "hours",
+        "width": 8
+    },
+    {
+        "name": "status",
+        "width": 10
+    },
+    {
+        "name": "freelancer",
+        "width": 18
+    },
+    {
+        "name": "paymentBlock",
+        "width": 22
+    },
+    {
+        "name": "payout",
+        "width": 12,
+        "hidden": true
+    },
+    {
+        "name": "assignedUser",
+        "width": 14
+    }
+]

@@ -1,0 +1,18 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "deliveryResources": {
+        "index": 0
+    },
+    "bgcLeads": {
+        "index": 1
+    },
+    "payouts": {
+        "index": 2
+    },
+    "stream": {
+        "index": 3,
+        "sticked": false
+    }
+}

@@ -12,6 +12,11 @@
         "width": 15
     },
     {
+        "name": "referrer",
+        "width": 16,
+        "hidden": true
+    },
+    {
         "name": "emailAddress",
         "width": 20,
         "notSortable": true
@@ -19,8 +24,7 @@
     {
         "name": "phoneNumber",
         "width": 20,
-        "notSortable": true,
-        "hidden": true
+        "notSortable": true
     },
     {
         "name": "source",

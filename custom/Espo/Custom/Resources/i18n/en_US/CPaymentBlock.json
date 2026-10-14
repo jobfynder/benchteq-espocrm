@@ -1,0 +1,41 @@
+{
+    "fields": {
+        "project": "Project",
+        "assignedUser": "Coordinator",
+        "startDate": "Start Date",
+        "amount": "Amount Paid (INR)",
+        "amountCurrency": "Amount (Currency)",
+        "paymentStatus": "Payment Status",
+        "paidDate": "Paid Date",
+        "totalHrs": "Total Hrs",
+        "connectedHrs": "Connected Hrs",
+        "remainingHrs": "Remaining Hrs",
+        "status": "Status",
+        "timesheets": "Timesheets"
+    },
+    "links": {
+        "project": "Project",
+        "timesheets": "Timesheets"
+    },
+    "options": {
+        "paymentStatus": {
+            "Pending": "Pending",
+            "Paid": "Paid"
+        },
+        "status": {
+            "Active": "Active",
+            "Completed": "Completed"
+        }
+    },
+    "labels": {
+        "Create CPaymentBlock": "Create Payment Block"
+    },
+    "presetFilters": {
+        "lowHours": "5 or fewer hours left",
+        "pendingPayment": "Payment pending"
+    },
+    "tooltips": {
+        "connectedHrs": "Hours of Held and No-Show timesheets. Updated automatically.",
+        "remainingHrs": "Total Hrs minus Connected Hrs. Updated automatically."
+    }
+}

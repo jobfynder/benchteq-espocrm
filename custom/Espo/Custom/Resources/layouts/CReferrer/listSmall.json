@@ -4,12 +4,8 @@
         "link": true
     },
     {
-        "name": "referrerType",
-        "width": 20
-    },
-    {
-        "name": "whatsApp",
-        "width": 20
+        "name": "phone",
+        "width": 25
     },
     {
         "name": "referralFee",

@@ -1,0 +1,18 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "totalHrs",
+        "width": 15
+    },
+    {
+        "name": "remainingHrs",
+        "width": 15
+    },
+    {
+        "name": "paymentStatus",
+        "width": 15
+    }
+]

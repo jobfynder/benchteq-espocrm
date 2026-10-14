@@ -1,0 +1,3 @@
+{
+    "beforeSaveCustomScript": "ifThen(dateStart, name = string\\concatenate('Support - ', datetime\\format(dateStart, 'Asia/Kolkata', 'DD MMM')));\n"
+}

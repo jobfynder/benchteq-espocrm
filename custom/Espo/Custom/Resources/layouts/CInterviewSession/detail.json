@@ -1,0 +1,66 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "contact"
+                },
+                {
+                    "name": "freelancer"
+                }
+            ],
+            [
+                {
+                    "name": "status"
+                },
+                {
+                    "name": "paymentStatus"
+                }
+            ],
+            [
+                {
+                    "name": "dateStart"
+                },
+                {
+                    "name": "dateEnd"
+                }
+            ],
+            [
+                {
+                    "name": "duration"
+                },
+                {
+                    "name": "paidDate"
+                }
+            ],
+            [
+                {
+                    "name": "customerFee"
+                },
+                {
+                    "name": "supporterFee"
+                }
+            ],
+            [
+                {
+                    "name": "payout"
+                },
+                false
+            ],
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "feedback",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

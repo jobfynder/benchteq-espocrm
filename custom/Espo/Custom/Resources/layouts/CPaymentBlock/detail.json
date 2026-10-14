@@ -1,0 +1,46 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "project"
+                },
+                {
+                    "name": "startDate"
+                }
+            ],
+            [
+                {
+                    "name": "totalHrs"
+                },
+                {
+                    "name": "amount"
+                }
+            ],
+            [
+                {
+                    "name": "connectedHrs"
+                },
+                {
+                    "name": "remainingHrs"
+                }
+            ],
+            [
+                {
+                    "name": "paymentStatus"
+                },
+                {
+                    "name": "paidDate"
+                }
+            ],
+            [
+                {
+                    "name": "status"
+                },
+                false
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

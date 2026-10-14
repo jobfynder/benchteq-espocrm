@@ -11,7 +11,15 @@
             ],
             [
                 {
-                    "name": "sourcedVia"
+                    "name": "phone"
+                },
+                {
+                    "name": "email"
+                }
+            ],
+            [
+                {
+                    "name": "technologies"
                 },
                 {
                     "name": "provider"
@@ -19,31 +27,22 @@
             ],
             [
                 {
-                    "name": "skillSpecialty"
+                    "name": "screeningResult"
                 },
                 {
-                    "name": "status"
+                    "name": "workStatus"
                 }
             ],
             [
                 {
-                    "name": "referrer"
+                    "name": "rating"
                 },
-                {
-                    "name": "rateConverted"
-                }
+                false
             ],
             [
                 {
-                    "name": "rate"
-                },
-                {
-                    "name": "streamUpdatedAt"
-                }
-            ],
-            [
-                {
-                    "name": "description"
+                    "name": "screeningNotes",
+                    "fullWidth": true
                 }
             ]
         ],

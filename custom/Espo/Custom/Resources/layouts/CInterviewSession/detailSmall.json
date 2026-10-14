@@ -1,0 +1,56 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "contact",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "freelancer",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "status",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "paymentStatus",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "dateStart",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "duration",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "dateEnd",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

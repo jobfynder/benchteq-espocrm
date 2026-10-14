@@ -2,13 +2,19 @@
     "fields": {
         "name": {
             "type": "varchar",
-            "required": true,
+            "required": false,
             "pattern": "$noBadCharacters"
         },
-        "description": {"type": "text"},
+        "description": {
+            "type": "text"
+        },
         "payeeType": {
             "type": "enum",
-            "options": ["Delivery Resource", "Provider"],
+            "options": [
+                "Delivery Resource",
+                "Provider",
+                "Referrer"
+            ],
             "maxLength": 100,
             "isCustom": true
         },
@@ -23,37 +29,96 @@
         "payoutType": {
             "type": "enum",
             "options": [
+                "Hourly",
                 "Per Interview",
                 "Per Session",
                 "Weekly",
                 "Bi-Weekly",
                 "Monthly",
                 "Provider Flat Fee",
-                "BGC Verification Fee"
+                "BGC Verification Fee",
+                "Referral Fee"
             ],
             "maxLength": 100,
             "isCustom": true
         },
         "status": {
             "type": "enum",
-            "options": ["Due", "Paid"],
+            "options": [
+                "Due",
+                "Paid"
+            ],
             "default": "Due",
             "maxLength": 100,
             "isCustom": true
         },
-        "payoutDate": {"type": "date", "isCustom": true},
-        "periodStart": {"type": "date", "isCustom": true},
-        "periodEnd": {"type": "date", "isCustom": true},
-        "deliveryResource": {"type": "link"},
-        "provider": {"type": "link"},
-        "servicePackage": {"type": "link"},
-        "sessionLogs": {"type": "linkMultiple"},
-        "createdAt": {"type": "datetime", "readOnly": true},
-        "modifiedAt": {"type": "datetime", "readOnly": true},
-        "createdBy": {"type": "link", "readOnly": true, "view": "views/fields/user"},
-        "modifiedBy": {"type": "link", "readOnly": true, "view": "views/fields/user"},
-        "assignedUser": {"type": "link", "view": "views/fields/assigned-user"},
-        "teams": {"type": "linkMultiple", "view": "views/fields/teams"}
+        "payoutDate": {
+            "type": "date",
+            "isCustom": true
+        },
+        "periodStart": {
+            "type": "date",
+            "isCustom": true
+        },
+        "periodEnd": {
+            "type": "date",
+            "isCustom": true
+        },
+        "deliveryResource": {
+            "type": "link"
+        },
+        "provider": {
+            "type": "link"
+        },
+        "servicePackage": {
+            "type": "link"
+        },
+        "sessionLogs": {
+            "type": "linkMultiple"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true,
+            "view": "views/fields/user"
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true,
+            "view": "views/fields/user"
+        },
+        "assignedUser": {
+            "type": "link",
+            "view": "views/fields/assigned-user"
+        },
+        "teams": {
+            "type": "linkMultiple",
+            "view": "views/fields/teams"
+        },
+        "referrer": {
+            "type": "link"
+        },
+        "project": {
+            "type": "link"
+        },
+        "lead": {
+            "type": "link"
+        },
+        "timesheets": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        },
+        "interviewSessions": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        }
     },
     "links": {
         "deliveryResource": {
@@ -81,21 +146,83 @@
             "entity": "CSessionLog",
             "isCustom": true
         },
-        "createdBy": {"type": "belongsTo", "entity": "User"},
-        "modifiedBy": {"type": "belongsTo", "entity": "User"},
-        "assignedUser": {"type": "belongsTo", "entity": "User"},
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "assignedUser": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
         "teams": {
             "type": "hasMany",
             "entity": "Team",
             "relationName": "entityTeam",
             "layoutRelationshipsDisabled": true
+        },
+        "referrer": {
+            "type": "belongsTo",
+            "foreign": "payouts",
+            "entity": "CReferrer",
+            "isCustom": true
+        },
+        "project": {
+            "type": "belongsTo",
+            "foreign": "payouts",
+            "entity": "CProject",
+            "isCustom": true
+        },
+        "lead": {
+            "type": "belongsTo",
+            "foreign": "cPayouts",
+            "entity": "Lead",
+            "isCustom": true
+        },
+        "timesheets": {
+            "type": "hasMany",
+            "foreign": "payout",
+            "entity": "CTimesheet",
+            "isCustom": true
+        },
+        "interviewSessions": {
+            "type": "hasMany",
+            "foreign": "payout",
+            "entity": "CInterviewSession",
+            "isCustom": true
         }
     },
-    "collection": {"orderBy": "createdAt", "order": "desc"},
+    "collection": {
+        "orderBy": "createdAt",
+        "order": "desc"
+    },
     "indexes": {
-        "name": {"columns": ["name", "deleted"]},
-        "assignedUser": {"columns": ["assignedUserId", "deleted"]},
-        "createdAt": {"columns": ["createdAt"]},
-        "createdAtId": {"unique": true, "columns": ["createdAt", "id"]}
+        "name": {
+            "columns": [
+                "name",
+                "deleted"
+            ]
+        },
+        "assignedUser": {
+            "columns": [
+                "assignedUserId",
+                "deleted"
+            ]
+        },
+        "createdAt": {
+            "columns": [
+                "createdAt"
+            ]
+        },
+        "createdAtId": {
+            "unique": true,
+            "columns": [
+                "createdAt",
+                "id"
+            ]
+        }
     }
 }

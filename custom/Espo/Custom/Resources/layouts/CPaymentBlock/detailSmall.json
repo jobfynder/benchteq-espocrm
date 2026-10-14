@@ -1,0 +1,32 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "project"
+                },
+                {
+                    "name": "startDate"
+                }
+            ],
+            [
+                {
+                    "name": "totalHrs"
+                },
+                {
+                    "name": "amount"
+                }
+            ],
+            [
+                {
+                    "name": "paymentStatus"
+                },
+                {
+                    "name": "paidDate"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

@@ -1,0 +1,21 @@
+{
+    "controller": "controllers/record",
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "iconClass": "fas fa-receipt",
+    "filterList": [
+        {
+            "name": "lowHours",
+            "style": "warning"
+        },
+        {
+            "name": "pendingPayment"
+        }
+    ],
+    "relationshipPanels": {
+        "timesheets": {
+            "layout": "listSmall"
+        }
+    }
+}

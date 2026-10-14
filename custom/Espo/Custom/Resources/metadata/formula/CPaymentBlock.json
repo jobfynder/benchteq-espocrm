@@ -1,0 +1,3 @@
+{
+    "beforeSaveCustomScript": "ifThen(!connectedHrs, connectedHrs = 0);\nremainingHrs = totalHrs - connectedHrs;\nifThen(!assignedUserId && projectId, assignedUserId = record\\attribute('CProject', projectId, 'assignedUserId'));\nifThen(paymentStatus == 'Paid' && !paidDate, paidDate = datetime\\today());\n$d = ifThenElse(startDate, startDate, datetime\\today());\nname = string\\concatenate(record\\attribute('CProject', projectId, 'name'), ' - ', datetime\\format($d, 'Asia/Kolkata', 'DD MMM YYYY'));\n"
+}

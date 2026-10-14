@@ -4,19 +4,22 @@
             [
                 {
                     "name": "name"
-                }
-            ],
-            [
-                {
-                    "name": "roleType"
                 },
                 {
-                    "name": "referrer"
+                    "name": "roleType"
                 }
             ],
             [
                 {
-                    "name": "sourcedVia"
+                    "name": "phone"
+                },
+                {
+                    "name": "email"
+                }
+            ],
+            [
+                {
+                    "name": "technologies"
                 },
                 {
                     "name": "provider"
@@ -24,21 +27,16 @@
             ],
             [
                 {
-                    "name": "skillSpecialty"
+                    "name": "screeningResult"
                 },
                 {
-                    "name": "status"
+                    "name": "rating"
                 }
             ],
             [
                 {
-                    "name": "rate"
-                },
-                false
-            ],
-            [
-                {
-                    "name": "description"
+                    "name": "screeningNotes",
+                    "fullWidth": true
                 }
             ]
         ],

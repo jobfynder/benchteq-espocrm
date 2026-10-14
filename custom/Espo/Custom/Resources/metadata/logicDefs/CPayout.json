@@ -1,0 +1,100 @@
+{
+    "fields": {
+        "deliveryResource": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payeeType",
+                        "value": [
+                            "Delivery Resource"
+                        ]
+                    }
+                ]
+            }
+        },
+        "provider": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payeeType",
+                        "value": [
+                            "Provider"
+                        ]
+                    }
+                ]
+            }
+        },
+        "referrer": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payeeType",
+                        "value": [
+                            "Referrer"
+                        ]
+                    }
+                ]
+            }
+        },
+        "project": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payeeType",
+                        "value": [
+                            "Delivery Resource"
+                        ]
+                    }
+                ]
+            }
+        },
+        "lead": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payeeType",
+                        "value": [
+                            "Provider",
+                            "Referrer"
+                        ]
+                    }
+                ]
+            }
+        },
+        "periodStart": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payoutType",
+                        "value": [
+                            "Weekly",
+                            "Bi-Weekly",
+                            "Monthly"
+                        ]
+                    }
+                ]
+            }
+        },
+        "periodEnd": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "in",
+                        "attribute": "payoutType",
+                        "value": [
+                            "Weekly",
+                            "Bi-Weekly",
+                            "Monthly"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

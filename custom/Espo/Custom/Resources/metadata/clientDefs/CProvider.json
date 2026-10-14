@@ -12,6 +12,9 @@
         "referrer": {
             "layout": null,
             "selectPrimaryFilterName": null
+        },
+        "bgcLeads": {
+            "layout": "listSmall"
         }
     }
 }

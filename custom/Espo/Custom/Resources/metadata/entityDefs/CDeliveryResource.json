@@ -95,6 +95,13 @@
         },
         "phone": {
             "type": "phone",
+            "typeList": [
+                "Mobile",
+                "WhatsApp",
+                "Office",
+                "Other"
+            ],
+            "defaultType": "Mobile",
             "isCustom": true
         },
         "sessionLogs": {
@@ -102,6 +109,83 @@
         },
         "payouts": {
             "type": "link"
+        },
+        "technologies": {
+            "type": "multiEnum",
+            "options": [
+                "Java",
+                ".NET",
+                "Python",
+                "JavaScript",
+                "React",
+                "Angular",
+                "Node.js",
+                "SQL",
+                "AWS",
+                "Azure",
+                "DevOps",
+                "Data Engineering",
+                "Salesforce",
+                "SAP",
+                "QA Testing",
+                "Other"
+            ],
+            "storeArrayValues": true,
+            "default": [],
+            "isCustom": true
+        },
+        "screeningResult": {
+            "type": "enum",
+            "options": [
+                "Pending",
+                "Passed",
+                "Failed"
+            ],
+            "default": "Pending",
+            "style": {
+                "Passed": "success",
+                "Failed": "danger"
+            },
+            "audited": true,
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "rating": {
+            "type": "int",
+            "min": 1,
+            "max": 5,
+            "isCustom": true
+        },
+        "screeningNotes": {
+            "type": "text",
+            "isCustom": true
+        },
+        "workStatus": {
+            "type": "enum",
+            "options": [
+                "Available",
+                "On Project",
+                "Inactive"
+            ],
+            "default": "Available",
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "email": {
+            "type": "email",
+            "isCustom": true
+        },
+        "projects": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        },
+        "timesheets": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        },
+        "interviewSessions": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -155,6 +239,24 @@
             "type": "hasMany",
             "foreign": "deliveryResource",
             "entity": "CPayout",
+            "isCustom": true
+        },
+        "projects": {
+            "type": "hasMany",
+            "entity": "CProject",
+            "foreign": "freelancer",
+            "isCustom": true
+        },
+        "timesheets": {
+            "type": "hasMany",
+            "entity": "CTimesheet",
+            "foreign": "freelancer",
+            "isCustom": true
+        },
+        "interviewSessions": {
+            "type": "hasMany",
+            "entity": "CInterviewSession",
+            "foreign": "freelancer",
             "isCustom": true
         }
     },

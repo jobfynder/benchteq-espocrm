@@ -4,11 +4,7 @@
         "link": true
     },
     {
-        "name": "referralFee",
-        "width": 16
-    },
-    {
-        "name": "whatsApp",
+        "name": "phone",
         "width": 16
     },
     {
@@ -16,11 +12,11 @@
         "width": 16
     },
     {
-        "name": "description",
-        "width": 16
+        "name": "referralFee",
+        "width": 14
     },
     {
         "name": "status",
-        "width": 16
+        "width": 12
     }
 ]

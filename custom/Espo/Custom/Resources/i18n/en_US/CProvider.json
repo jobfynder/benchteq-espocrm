@@ -9,11 +9,15 @@
         "bgcFeeUS": "BGC US Fee (INR)",
         "bgcFeeIndia": "BGC India Fee (INR)",
         "deliveryResources": "Delivery Resources",
-        "referrer": "Referrer"
+        "referrer": "Referrer",
+        "bgcLeads": "BGC Leads",
+        "payouts": "Payouts"
     },
     "links": {
-        "deliveryResources": "Delivery Resources",
-        "referrer": "Referrer"
+        "deliveryResources": "Freelancers",
+        "referrer": "Referrer",
+        "bgcLeads": "BGC Leads",
+        "payouts": "Payouts"
     },
     "labels": {
         "Create CProvider": "Create Provider"

@@ -1,0 +1,30 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "consultant",
+        "width": 18
+    },
+    {
+        "name": "technology",
+        "width": 12
+    },
+    {
+        "name": "freelancer",
+        "width": 18
+    },
+    {
+        "name": "status",
+        "width": 10
+    },
+    {
+        "name": "startDate",
+        "width": 11
+    },
+    {
+        "name": "assignedUser",
+        "width": 14
+    }
+]

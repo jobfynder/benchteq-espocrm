@@ -1,0 +1,3 @@
+{
+    "beforeSaveCustomScript": "name = string\\trim(string\\concatenate(\n    technology, ' - ',\n    record\\attribute('Contact', consultantId, 'firstName'), ' ',\n    record\\attribute('Contact', consultantId, 'lastName')\n));\n"
+}

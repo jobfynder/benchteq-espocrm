@@ -1,0 +1,5 @@
+{
+    "primaryFilterClassNameMap": {
+        "shortlist": "Espo\\Custom\\Classes\\Select\\CDeliveryResource\\PrimaryFilters\\Shortlist"
+    }
+}

@@ -5,34 +5,15 @@
     },
     {
         "name": "roleType",
-        "width": 20
+        "width": 22
     },
     {
-        "name": "skillSpecialty",
-        "width": 20
+        "name": "technologies",
+        "width": 28,
+        "notSortable": true
     },
     {
-        "name": "rate",
-        "width": 20
-    },
-    {
-        "name": "provider",
-        "width": 20
-    },
-    {
-        "name": "sourcedVia",
-        "width": 20
-    },
-    {
-        "name": "status",
-        "width": 20
-    },
-    {
-        "name": "createdBy",
-        "width": 20
-    },
-    {
-        "name": "referrer",
-        "width": 20
+        "name": "screeningResult",
+        "width": 18
     }
 ]

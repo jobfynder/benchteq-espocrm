@@ -14,6 +14,18 @@
             "entity": "CServicePackage",
             "audited": false,
             "isCustom": true
+        },
+        "cProjects": {
+            "type": "hasMany",
+            "entity": "CProject",
+            "foreign": "consultant",
+            "isCustom": true
+        },
+        "cInterviewSessions": {
+            "type": "hasMany",
+            "entity": "CInterviewSession",
+            "foreign": "contact",
+            "isCustom": true
         }
     }
 }

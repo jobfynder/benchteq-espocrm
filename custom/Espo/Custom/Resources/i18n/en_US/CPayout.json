@@ -7,16 +7,57 @@
         "payoutDate": "Payout Date",
         "periodStart": "Period Start",
         "periodEnd": "Period End",
-        "deliveryResource": "Delivery Resource",
+        "deliveryResource": "Freelancer",
         "provider": "Provider",
         "servicePackage": "Service Package",
-        "sessionLogs": "Session Logs"
+        "sessionLogs": "Session Logs",
+        "referrer": "Referrer",
+        "project": "Project",
+        "lead": "Lead",
+        "timesheets": "Timesheets",
+        "interviewSessions": "Interview Sessions",
+        "description": "Notes"
     },
     "links": {
-        "deliveryResource": "Delivery Resource",
+        "deliveryResource": "Freelancer",
         "provider": "Provider",
         "servicePackage": "Service Package",
-        "sessionLogs": "Session Logs"
+        "sessionLogs": "Session Logs",
+        "referrer": "Referrer",
+        "project": "Project",
+        "lead": "Lead",
+        "timesheets": "Timesheets",
+        "interviewSessions": "Interview Sessions"
     },
-    "labels": {"Create CPayout": "Create Payout"}
+    "labels": {
+        "Create CPayout": "Create Payout"
+    },
+    "options": {
+        "payeeType": {
+            "Delivery Resource": "Freelancer",
+            "Provider": "Provider",
+            "Referrer": "Referrer"
+        },
+        "payoutType": {
+            "Hourly": "Hourly (Job Support hours)",
+            "Per Interview": "Per Interview",
+            "Per Session": "Per Session",
+            "Weekly": "Weekly",
+            "Bi-Weekly": "Bi-Weekly",
+            "Monthly": "Monthly",
+            "Provider Flat Fee": "Provider Sourcing Fee",
+            "BGC Verification Fee": "BGC Verification Fee",
+            "Referral Fee": "Referral Fee"
+        },
+        "status": {
+            "Due": "Due",
+            "Paid": "Paid"
+        }
+    },
+    "presetFilters": {
+        "due": "Due"
+    },
+    "tooltips": {
+        "timesheets": "To pay a freelancer, set this Payout on the Held timesheets."
+    }
 }

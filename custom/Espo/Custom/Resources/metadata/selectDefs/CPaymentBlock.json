@@ -1,0 +1,6 @@
+{
+    "primaryFilterClassNameMap": {
+        "lowHours": "Espo\\Custom\\Classes\\Select\\CPaymentBlock\\PrimaryFilters\\LowHours",
+        "pendingPayment": "Espo\\Custom\\Classes\\Select\\CPaymentBlock\\PrimaryFilters\\PendingPayment"
+    }
+}
