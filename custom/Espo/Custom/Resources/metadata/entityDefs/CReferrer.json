@@ -66,7 +66,22 @@
         },
         "phone": {
             "type": "phone",
+            "typeList": [
+                "Mobile",
+                "WhatsApp",
+                "Office",
+                "Other"
+            ],
+            "defaultType": "Mobile",
             "isCustom": true
+        },
+        "leads": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        },
+        "payouts": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -129,6 +144,18 @@
             "type": "hasMany",
             "foreign": "referrer",
             "entity": "Opportunity",
+            "isCustom": true
+        },
+        "leads": {
+            "type": "hasMany",
+            "entity": "Lead",
+            "foreign": "referrer",
+            "isCustom": true
+        },
+        "payouts": {
+            "type": "hasMany",
+            "entity": "CPayout",
+            "foreign": "referrer",
             "isCustom": true
         }
     },

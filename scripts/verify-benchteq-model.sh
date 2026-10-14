@@ -18,14 +18,20 @@ docker compose exec -T -e MYSQL_PWD="$reporting_password" mysql \
 SELECT table_name
 FROM information_schema.tables
 WHERE table_schema = DATABASE()
-  AND table_name IN ('c_payout', 'c_payout_c_session_log')
+  AND table_name IN (
+    'c_payout', 'c_payout_c_session_log',
+    'c_project', 'c_payment_block', 'c_timesheet', 'c_interview_session'
+  )
 ORDER BY table_name;
 
 SELECT table_name, column_name
 FROM information_schema.columns
 WHERE table_schema = DATABASE()
   AND (
-    (table_name = 'lead' AND column_name = 'service_type')
+    (table_name = 'lead' AND column_name IN (
+      'service_type', 'referrer_id', 'referral_paid', 'bgc_type', 'bgc_fee',
+      'bgc_amount_received', 'bgc_provider_id', 'bgc_provider_cost', 'bgc_status'
+    ))
     OR (
       table_name = 'opportunity'
       AND column_name IN (

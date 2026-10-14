@@ -15,6 +15,12 @@
         "servicePackages": {
             "layout": null,
             "selectPrimaryFilterName": null
+        },
+        "cProjects": {
+            "layout": "listSmall"
+        },
+        "cInterviewSessions": {
+            "layout": "listSmall"
         }
     }
 }

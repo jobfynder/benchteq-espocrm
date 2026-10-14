@@ -1,0 +1,15 @@
+{
+    "fields": {
+        "workStatus": {
+            "visible": {
+                "conditionGroup": [
+                    {
+                        "type": "equals",
+                        "attribute": "screeningResult",
+                        "value": "Passed"
+                    }
+                ]
+            }
+        }
+    }
+}

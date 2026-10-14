@@ -1,0 +1,3 @@
+{
+    "beforeSaveCustomScript": "ifThen(serviceType == 'BGC' && bgcType && (entity\\isNew() || entity\\isAttributeChanged('bgcType')) && !entity\\isAttributeChanged('bgcFee'), bgcFee = ifThenElse(bgcType == 'India', 18000, 55000));\nifThen(bgcFee && !bgcFeeCurrency, bgcFeeCurrency = 'INR');\n"
+}

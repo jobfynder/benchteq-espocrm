@@ -1,0 +1,12 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "timesheets": {
+        "index": 0
+    },
+    "stream": {
+        "index": 1,
+        "sticked": false
+    }
+}

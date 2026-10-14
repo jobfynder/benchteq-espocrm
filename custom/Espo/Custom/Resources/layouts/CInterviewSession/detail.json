@@ -1,0 +1,68 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "contact"
+                },
+                {
+                    "name": "freelancer"
+                }
+            ],
+            [
+                {
+                    "name": "interviewType"
+                },
+                {
+                    "name": "status"
+                }
+            ],
+            [
+                {
+                    "name": "dateStart"
+                },
+                {
+                    "name": "dateEnd"
+                }
+            ],
+            [
+                {
+                    "name": "duration"
+                },
+                {
+                    "name": "payout"
+                }
+            ],
+            [
+                {
+                    "name": "paymentStatus"
+                },
+                {
+                    "name": "paidDate"
+                }
+            ],
+            [
+                {
+                    "name": "customerFee"
+                },
+                {
+                    "name": "supporterFee"
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
+                    "name": "feedback",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

@@ -1,0 +1,39 @@
+{
+    "fields": {
+        "paymentBlock": "Payment Block",
+        "freelancer": "Freelancer",
+        "hours": "Hours",
+        "payout": "Payout",
+        "assignedUser": "Coordinator",
+        "description": "Notes",
+        "dateStart": "Start",
+        "dateEnd": "End",
+        "status": "Status",
+        "duration": "Duration",
+        "reminders": "Reminders",
+        "isAllDay": "All-Day"
+    },
+    "links": {
+        "paymentBlock": "Payment Block",
+        "freelancer": "Freelancer",
+        "payout": "Payout"
+    },
+    "options": {
+        "status": {
+            "Planned": "Planned",
+            "Held": "Held",
+            "No-Show": "No-Show",
+            "Cancelled": "Cancelled"
+        }
+    },
+    "labels": {
+        "Create CTimesheet": "Create Timesheet"
+    },
+    "presetFilters": {
+        "unpaid": "Held, not yet paid out"
+    },
+    "tooltips": {
+        "status": "Held and No-Show use up hours. Planned and Cancelled do not.",
+        "payout": "Set by Finance when the freelancer is paid. Empty means not paid yet."
+    }
+}

@@ -8,8 +8,11 @@
     "_delimiter_": {
         "disabled": true
     },
-    "stream": {
-        "sticked": false,
+    "cPayouts": {
         "index": 0
+    },
+    "stream": {
+        "index": 1,
+        "sticked": false
     }
 }

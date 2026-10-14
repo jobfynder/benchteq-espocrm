@@ -1,6 +1,19 @@
 {
     "fields": {
-        "cServicetype": "Service Type"
+        "cServicetype": "Service Type",
+        "serviceType": "Service",
+        "referrer": "Referrer",
+        "referralPaid": "Referral Fee Paid",
+        "bgcType": "BGC Type",
+        "bgcFee": "BGC Fee (INR)",
+        "bgcFeeCurrency": "BGC Fee (Currency)",
+        "bgcAmountReceived": "Amount Received (INR)",
+        "bgcAmountReceivedCurrency": "Amount Received (Currency)",
+        "bgcProvider": "Provider",
+        "bgcProviderCost": "Provider Cost (INR)",
+        "bgcProviderCostCurrency": "Provider Cost (Currency)",
+        "bgcStatus": "BGC Status",
+        "cPayouts": "Payouts"
     },
     "options": {
         "cServicetype": {
@@ -10,6 +23,38 @@
             "BGC": "BGC",
             "Resume Building": "Resume Building",
             "Profile Marketing": "Profile Marketing"
+        },
+        "serviceType": {
+            "Interview Support": "Interview Support",
+            "Job Support": "Job Support",
+            "BGC": "BGC"
+        },
+        "bgcType": {
+            "US": "US",
+            "India": "India",
+            "Both": "US + India"
+        },
+        "bgcStatus": {
+            "Not Started": "Not Started",
+            "In Verification": "In Verification",
+            "Cleared": "Cleared",
+            "Failed": "Failed"
         }
+    },
+    "links": {
+        "referrer": "Referrer",
+        "bgcProvider": "Provider",
+        "cPayouts": "Payouts"
+    },
+    "presetFilters": {
+        "bgcInVerification": "BGC in verification",
+        "referralDue": "Referred, converted, fee not paid"
+    },
+    "tooltips": {
+        "bgcFee": "Fills in from BGC Type when empty: US 55,000, India 18,000, Both 55,000. You can edit it.",
+        "referralPaid": "Ticks itself when a Referrer Payout linked to this lead is marked Paid."
+    },
+    "panels": {
+        "bgc": "BGC"
     }
 }

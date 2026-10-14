@@ -14,6 +14,12 @@
             "entity": "CServicePackage",
             "audited": false,
             "isCustom": true
+        },
+        "cProjects": {
+            "type": "hasMany",
+            "entity": "CProject",
+            "foreign": "account",
+            "isCustom": true
         }
     }
 }

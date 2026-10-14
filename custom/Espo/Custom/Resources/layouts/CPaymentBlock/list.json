@@ -1,0 +1,30 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "totalHrs",
+        "width": 10
+    },
+    {
+        "name": "connectedHrs",
+        "width": 10
+    },
+    {
+        "name": "remainingHrs",
+        "width": 10
+    },
+    {
+        "name": "paymentStatus",
+        "width": 11
+    },
+    {
+        "name": "status",
+        "width": 10
+    },
+    {
+        "name": "assignedUser",
+        "width": 14
+    }
+]

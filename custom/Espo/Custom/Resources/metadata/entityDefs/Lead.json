@@ -10,6 +10,96 @@
             "style": {},
             "maxLength": 100,
             "isCustom": true
+        },
+        "referrer": {
+            "type": "link"
+        },
+        "referralPaid": {
+            "type": "bool",
+            "readOnly": true,
+            "isCustom": true
+        },
+        "bgcType": {
+            "type": "enum",
+            "options": [
+                "US",
+                "India",
+                "Both"
+            ],
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "bgcFee": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "isCustom": true
+        },
+        "bgcFeeCurrency": {
+            "default": "INR"
+        },
+        "bgcAmountReceived": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "isCustom": true
+        },
+        "bgcAmountReceivedCurrency": {
+            "default": "INR"
+        },
+        "bgcProvider": {
+            "type": "link"
+        },
+        "bgcProviderCost": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "isCustom": true
+        },
+        "bgcProviderCostCurrency": {
+            "default": "INR"
+        },
+        "bgcStatus": {
+            "type": "enum",
+            "options": [
+                "Not Started",
+                "In Verification",
+                "Cleared",
+                "Failed"
+            ],
+            "style": {
+                "Cleared": "success",
+                "Failed": "danger",
+                "In Verification": "warning"
+            },
+            "audited": true,
+            "maxLength": 100,
+            "isCustom": true
+        },
+        "cPayouts": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
-    }
+    },
+    "links": {
+        "referrer": {
+            "type": "belongsTo",
+            "entity": "CReferrer",
+            "foreign": "leads",
+            "isCustom": true
+        },
+        "bgcProvider": {
+            "type": "belongsTo",
+            "entity": "CProvider",
+            "foreign": "bgcLeads",
+            "isCustom": true
+        },
+        "cPayouts": {
+            "type": "hasMany",
+            "entity": "CPayout",
+            "foreign": "lead",
+            "isCustom": true
+        }
+    },
+    "convertEntityList": [
+        "Account",
+        "Contact"
+    ]
 }

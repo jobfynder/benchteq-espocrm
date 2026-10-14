@@ -5,6 +5,8 @@
     },
     "links": {
         "cReferrers": "Referrers",
-        "cServicePackages": "Service Packages"
+        "cServicePackages": "Service Packages",
+        "cProjects": "Projects",
+        "cInterviewSessions": "Interview Sessions"
     }
 }

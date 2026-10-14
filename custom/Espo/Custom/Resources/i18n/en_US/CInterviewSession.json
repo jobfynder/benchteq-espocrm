@@ -1,0 +1,56 @@
+{
+    "fields": {
+        "contact": "Customer",
+        "freelancer": "Interview Supporter",
+        "customerFee": "Customer Fee (INR)",
+        "customerFeeCurrency": "Customer Fee (Currency)",
+        "paymentStatus": "Payment Status",
+        "paidDate": "Paid Date",
+        "supporterFee": "Supporter Fee (INR)",
+        "supporterFeeCurrency": "Supporter Fee (Currency)",
+        "payout": "Payout",
+        "feedback": "Feedback",
+        "assignedUser": "Coordinator",
+        "description": "Details",
+        "dateStart": "Start",
+        "dateEnd": "End",
+        "interviewType": "Type",
+        "status": "Status",
+        "duration": "Duration",
+        "reminders": "Reminders",
+        "isAllDay": "All-Day"
+    },
+    "links": {
+        "contact": "Customer",
+        "freelancer": "Interview Supporter",
+        "payout": "Payout"
+    },
+    "options": {
+        "status": {
+            "Planned": "Planned",
+            "Held": "Held",
+            "No-Show": "No-Show",
+            "Cancelled": "Cancelled"
+        },
+        "paymentStatus": {
+            "Pending": "Pending",
+            "Paid": "Paid"
+        },
+        "interviewType": {
+            "Interview": "Interview",
+            "Assessment": "Assessment"
+        }
+    },
+    "labels": {
+        "Create CInterviewSession": "Create Interview Session"
+    },
+    "presetFilters": {
+        "unpaid": "Held, supporter not yet paid out",
+        "awaitingPayment": "Planned, customer payment pending"
+    },
+    "tooltips": {
+        "paymentStatus": "A session can only be set to Held or No-Show once it is Paid.",
+        "description": "Company, role and notes.",
+        "interviewType": "Assessment sessions start at 90 minutes. Pick any slot: 30, 45, 60, 90 or 180 minutes."
+    }
+}

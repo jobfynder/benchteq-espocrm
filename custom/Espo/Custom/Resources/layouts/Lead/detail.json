@@ -14,28 +14,24 @@
                     "name": "serviceType"
                 },
                 {
-                    "name": "title"
+                    "name": "referrer"
                 }
             ],
             [
-                {
-                    "name": "emailAddress"
-                },
                 {
                     "name": "phoneNumber"
+                },
+                {
+                    "name": "emailAddress"
                 }
             ],
             [
                 {
-                    "name": "website"
+                    "name": "status"
                 },
-                false
-            ],
-            [
                 {
-                    "name": "address"
-                },
-                false
+                    "name": "source"
+                }
             ]
         ],
         "style": "default",
@@ -45,15 +41,46 @@
         "rows": [
             [
                 {
-                    "name": "status"
+                    "name": "bgcType"
                 },
                 {
-                    "name": "source"
+                    "name": "bgcStatus"
                 }
             ],
             [
                 {
-                    "name": "opportunityAmount"
+                    "name": "bgcFee"
+                },
+                {
+                    "name": "bgcAmountReceived"
+                }
+            ],
+            [
+                {
+                    "name": "bgcProvider"
+                },
+                {
+                    "name": "bgcProviderCost"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": "BGC",
+        "name": "bgc"
+    },
+    {
+        "rows": [
+            [
+                {
+                    "name": "title"
+                },
+                {
+                    "name": "industry"
+                }
+            ],
+            [
+                {
+                    "name": "website"
                 },
                 {
                     "name": "campaign"
@@ -61,17 +88,20 @@
             ],
             [
                 {
-                    "name": "industry"
+                    "name": "address"
                 },
                 false
             ],
             [
                 {
-                    "name": "description"
+                    "name": "description",
+                    "fullWidth": true
                 }
             ]
         ],
         "style": "default",
-        "label": "Details"
+        "label": "Details",
+        "tabBreak": false,
+        "name": "details"
     }
 ]

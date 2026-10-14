@@ -26,31 +26,16 @@
             ],
             [
                 {
-                    "name": "title"
+                    "name": "referrer"
                 },
-                {
-                    "name": "website"
-                }
-            ],
-            [
-                {
-                    "name": "addressCity"
-                },
-                {
-                    "name": "addressCountry"
-                }
-            ],
-            [
                 {
                     "name": "status"
-                },
-                {
-                    "name": "source"
                 }
             ],
             [
                 {
-                    "name": "description"
+                    "name": "description",
+                    "fullWidth": true
                 }
             ]
         ],

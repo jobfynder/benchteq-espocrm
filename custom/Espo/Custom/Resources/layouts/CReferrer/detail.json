@@ -11,11 +11,9 @@
             ],
             [
                 {
-                    "name": "mobile"
+                    "name": "phone"
                 },
-                {
-                    "name": "whatsApp"
-                }
+                false
             ],
             [
                 {
@@ -27,7 +25,8 @@
             ],
             [
                 {
-                    "name": "description"
+                    "name": "description",
+                    "fullWidth": true
                 }
             ]
         ],

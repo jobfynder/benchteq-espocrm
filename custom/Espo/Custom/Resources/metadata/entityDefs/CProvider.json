@@ -61,6 +61,13 @@
         },
         "phone": {
             "type": "phone",
+            "typeList": [
+                "Mobile",
+                "WhatsApp",
+                "Office",
+                "Other"
+            ],
+            "defaultType": "Mobile",
             "isCustom": true
         },
         "email": {
@@ -100,6 +107,10 @@
         },
         "payouts": {
             "type": "linkMultiple"
+        },
+        "bgcLeads": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -145,6 +156,12 @@
             "type": "hasMany",
             "foreign": "provider",
             "entity": "CPayout",
+            "isCustom": true
+        },
+        "bgcLeads": {
+            "type": "hasMany",
+            "entity": "Lead",
+            "foreign": "bgcProvider",
             "isCustom": true
         }
     },

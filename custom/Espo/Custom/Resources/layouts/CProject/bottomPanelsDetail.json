@@ -1,0 +1,15 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "paymentBlocks": {
+        "index": 0
+    },
+    "payouts": {
+        "index": 1
+    },
+    "stream": {
+        "index": 2,
+        "sticked": false
+    }
+}

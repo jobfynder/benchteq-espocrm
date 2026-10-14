@@ -1,11 +1,30 @@
 {
     "controller": "controllers/record",
-    "boolFilterList": ["onlyMy"],
+    "boolFilterList": [
+        "onlyMy"
+    ],
     "iconClass": "fas fa-money-check-alt",
     "relationshipPanels": {
         "deliveryResource": {},
         "provider": {},
         "servicePackage": {},
-        "sessionLogs": {}
-    }
+        "sessionLogs": {},
+        "referrer": {},
+        "project": {},
+        "lead": {},
+        "timesheets": {
+            "layout": "listSmall",
+            "selectPrimaryFilterName": "unpaid"
+        },
+        "interviewSessions": {
+            "layout": "listSmall",
+            "selectPrimaryFilterName": "unpaid"
+        }
+    },
+    "filterList": [
+        {
+            "name": "due",
+            "style": "warning"
+        }
+    ]
 }

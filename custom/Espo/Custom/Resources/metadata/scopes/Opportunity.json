@@ -9,5 +9,6 @@
     "collaborators": false,
     "assignedUsers": false,
     "pipelines": false,
-    "lockable": false
+    "lockable": false,
+    "tab": false
 }

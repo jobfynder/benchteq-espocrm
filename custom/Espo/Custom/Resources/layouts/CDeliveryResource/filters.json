@@ -1,14 +1,10 @@
 [
     "name",
     "roleType",
-    "assignedUser",
-    "rate",
-    "referrer",
-    "skillSpecialty",
-    "createdBy",
-    "sourcedVia",
+    "technologies",
+    "screeningResult",
+    "rating",
+    "workStatus",
     "provider",
-    "status",
-    "sessionLog",
-    "description"
+    "assignedUser"
 ]

@@ -17,13 +17,15 @@
             "layout": null,
             "selectPrimaryFilterName": null
         },
-        "servicePackages": {
-            "layout": null,
-            "selectPrimaryFilterName": null
-        },
         "contacts": {
             "layout": null,
             "selectPrimaryFilterName": null
+        },
+        "leads": {
+            "layout": "listSmall"
+        },
+        "payouts": {
+            "layout": "listSmall"
         }
     }
 }

@@ -1,0 +1,48 @@
+{
+    "fields": {
+        "technology": "Technology",
+        "consultant": "Consultant",
+        "account": "Account",
+        "freelancer": "Freelancer",
+        "assignedUser": "Coordinator",
+        "customerRate": "Customer Rate (INR/hr)",
+        "customerRateCurrency": "Customer Rate (Currency)",
+        "freelancerPayType": "Freelancer Pay Type",
+        "freelancerRate": "Freelancer Rate (INR)",
+        "freelancerRateCurrency": "Freelancer Rate (Currency)",
+        "startDate": "Start Date",
+        "scheduleNotes": "Agreed Time Slots",
+        "status": "Status",
+        "paymentBlocks": "Payment Blocks",
+        "payouts": "Payouts"
+    },
+    "links": {
+        "consultant": "Consultant",
+        "account": "Account",
+        "freelancer": "Freelancer",
+        "paymentBlocks": "Payment Blocks",
+        "payouts": "Payouts"
+    },
+    "options": {
+        "freelancerPayType": {
+            "Hourly": "Hourly",
+            "Bi-Weekly": "Bi-Weekly",
+            "Monthly": "Monthly"
+        },
+        "status": {
+            "Active": "Active",
+            "On Hold": "On Hold",
+            "Completed": "Completed"
+        }
+    },
+    "labels": {
+        "Create CProject": "Create Project"
+    },
+    "presetFilters": {
+        "active": "Active"
+    },
+    "tooltips": {
+        "freelancerRate": "Per hour for Hourly, or per period for Bi-Weekly and Monthly.",
+        "scheduleNotes": "For example: Mon to Fri, 9 to 10 PM IST."
+    }
+}

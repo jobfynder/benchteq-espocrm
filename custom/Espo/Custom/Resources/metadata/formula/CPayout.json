@@ -1,0 +1,3 @@
+{
+    "beforeSaveCustomScript": "ifThen(!name, name = string\\concatenate(payoutType, ' - ', datetime\\format(datetime\\today(), 'Asia/Kolkata', 'DD MMM YYYY')));\nifThen(status == 'Paid' && !payoutDate, payoutDate = datetime\\today());\n"
+}

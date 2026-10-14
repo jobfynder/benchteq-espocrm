@@ -12,6 +12,7 @@ The repository is not a copy of production data and must never contain credentia
 - `.github/workflows/deploy-elestio.yml` — manually triggered Elestio deployment.
 - `compose.yaml` — optional isolated local/test environment, not Elestio production.
 - `BENCHTEQ_BLUEPRINT.md` — business process and integration design.
+- `docs/SPEC_V2_SETUP.md` — spec v2 (Job Support, Interview Support, BGC): what the code does and the manual admin steps.
 - `infrastructure/metabase/` — pinned Metabase reporting service and subdomain
   proxy specification.
 

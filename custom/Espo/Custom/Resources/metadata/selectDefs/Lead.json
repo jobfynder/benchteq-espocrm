@@ -1,0 +1,6 @@
+{
+    "primaryFilterClassNameMap": {
+        "bgcInVerification": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\BgcInVerification",
+        "referralDue": "Espo\\Custom\\Classes\\Select\\Lead\\PrimaryFilters\\ReferralDue"
+    }
+}

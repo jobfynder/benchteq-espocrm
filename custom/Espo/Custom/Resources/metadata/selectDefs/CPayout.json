@@ -1,0 +1,5 @@
+{
+    "primaryFilterClassNameMap": {
+        "due": "Espo\\Custom\\Classes\\Select\\CPayout\\PrimaryFilters\\Due"
+    }
+}

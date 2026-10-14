@@ -13,13 +13,20 @@
             "layout": null,
             "selectPrimaryFilterName": null
         },
-        "sessionLog": {
-            "layout": null,
-            "selectPrimaryFilterName": null
+        "projects": {
+            "layout": "listSmall"
         },
-        "primaryDeliveryResource": {
-            "layout": null,
-            "selectPrimaryFilterName": null
+        "timesheets": {
+            "layout": "listSmall"
+        },
+        "interviewSessions": {
+            "layout": "listSmall"
         }
-    }
+    },
+    "filterList": [
+        {
+            "name": "shortlist",
+            "style": "success"
+        }
+    ]
 }
