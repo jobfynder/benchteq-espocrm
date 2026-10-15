@@ -37,6 +37,9 @@
     "relationshipPanels": {
         "paymentBlocks": {
             "layout": "listSmall"
+        },
+        "timesheets": {
+            "layout": "listSmall"
         }
     },
     "filterList": [

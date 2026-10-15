@@ -5,6 +5,7 @@
                   Referrer. Only records where WhatsApp is empty and Phone is filled.
   --demo          Create one complete demo story (Job Support, Interview Support, BGC,
                   payments, payouts). Every record is named or described "DEMO ...".
+  --link-timesheets  Fill Timesheet.project from the Payment Block (so Projects list them).
   --remove-demo   Delete every record whose description starts with "DEMO".
 
 Run the WhatsApp job after the code with the new field is deployed and EspoCRM is rebuilt.
@@ -271,6 +272,38 @@ def diagnose_phones(api):
             print(f'  {r.get("id")}: {json.dumps(keys)} data={json.dumps(data)}')
 
 
+def link_timesheets(api):
+    """Fill Timesheet.project from its Payment Block, so a Project lists its timesheets."""
+    print('\n== Link timesheets to projects ==')
+    blocks = {}
+    offset = 0
+    while True:
+        page = api.call('GET', 'CPaymentBlock', params={
+            'select': 'id,projectId', 'maxSize': 200, 'offset': offset})
+        rows = page.get('list', [])
+        blocks.update({r['id']: r.get('projectId') for r in rows})
+        offset += len(rows)
+        if not rows or offset >= page.get('total', 0):
+            break
+    changed = skipped = offset = 0
+    while True:
+        page = api.call('GET', 'CTimesheet', params={
+            'select': 'id,paymentBlockId,projectId', 'maxSize': 200, 'offset': offset,
+            'orderBy': 'createdAt', 'order': 'asc'})
+        rows = page.get('list', [])
+        for r in rows:
+            project = blocks.get(r.get('paymentBlockId'))
+            if project and r.get('projectId') != project:
+                api.update('CTimesheet', r['id'], {'projectId': project})
+                changed += 1
+            else:
+                skipped += 1
+        offset += len(rows)
+        if not rows or offset >= page.get('total', 0):
+            break
+    print(f'CTimesheet: {changed} to link, {skipped} already linked or without a project')
+
+
 def remove_demo(api):
     print('\n== Remove demo data ==')
     order = ['CPayout', 'CTimesheet', 'CInterviewSession', 'CPaymentBlock', 'CProject',
@@ -292,16 +325,19 @@ def main():
     p.add_argument('--demo', action='store_true')
     p.add_argument('--remove-demo', action='store_true')
     p.add_argument('--diagnose-phones', action='store_true')
+    p.add_argument('--link-timesheets', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
-    if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones):
-        p.error('choose --whatsapp, --demo, --remove-demo or --diagnose-phones')
+    if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets):
+        p.error('choose --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
     api = Api(a.url, a.user, a.password, a.api_key, a.dry_run)
     api.call('GET', 'App/user')
     if a.diagnose_phones:
         diagnose_phones(api)
+    if a.link_timesheets:
+        link_timesheets(api)
     if a.whatsapp:
         copy_whatsapp(api)
     if a.demo:

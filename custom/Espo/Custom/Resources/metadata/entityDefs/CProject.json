@@ -112,6 +112,10 @@
         "payouts": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "timesheets": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -163,6 +167,12 @@
         "payouts": {
             "type": "hasMany",
             "entity": "CPayout",
+            "foreign": "project",
+            "isCustom": true
+        },
+        "timesheets": {
+            "type": "hasMany",
+            "entity": "CTimesheet",
             "foreign": "project",
             "isCustom": true
         }
