@@ -14,14 +14,16 @@
         "scheduleNotes": "Agreed Time Slots",
         "status": "Status",
         "paymentBlocks": "Payment Blocks",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "timesheets": "Timesheets"
     },
     "links": {
         "consultant": "Consultant",
         "account": "Account",
         "freelancer": "Freelancer",
         "paymentBlocks": "Payment Blocks",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "timesheets": "Timesheets"
     },
     "options": {
         "freelancerPayType": {

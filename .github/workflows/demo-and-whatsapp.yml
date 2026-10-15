@@ -21,6 +21,16 @@ on:
         required: false
         default: true
         type: boolean
+      diagnose_phones:
+        description: Read only. Show how phone numbers are stored (numbers masked)
+        required: false
+        default: false
+        type: boolean
+      link_timesheets:
+        description: Link existing timesheets to their project (run once after the Project timesheets update)
+        required: false
+        default: false
+        type: boolean
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -51,6 +61,8 @@ jobs:
           WHATSAPP: ${{ inputs.whatsapp }}
           DEMO: ${{ inputs.demo }}
           REMOVE_DEMO: ${{ inputs.remove_demo }}
+          DIAGNOSE: ${{ inputs.diagnose_phones }}
+          LINK_TIMESHEETS: ${{ inputs.link_timesheets }}
         shell: bash
         run: |
           set -euo pipefail
@@ -69,4 +81,6 @@ jobs:
           [ "$WHATSAPP" = "true" ] && args+=(--whatsapp)
           [ "$DEMO" = "true" ] && args+=(--demo)
           [ "$REMOVE_DEMO" = "true" ] && args+=(--remove-demo)
+          [ "$DIAGNOSE" = "true" ] && args+=(--diagnose-phones)
+          [ "$LINK_TIMESHEETS" = "true" ] && args+=(--link-timesheets)
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"

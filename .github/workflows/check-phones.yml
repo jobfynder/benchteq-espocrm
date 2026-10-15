@@ -1,0 +1,72 @@
+name: Check phone data
+
+# Read only. Counts phone rows in the database per record type and lists the phone columns.
+# Prints no phone numbers. Run it from Actions, Check phone data, Run workflow.
+
+on:
+  workflow_dispatch:
+    inputs:
+      expected_hostname:
+        description: Confirm the production EspoCRM hostname
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: elestio-production
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Verify target
+        env:
+          EXPECTED_HOSTNAME: ${{ vars.ESPOCRM_PRODUCTION_HOSTNAME }}
+          CONFIRMED_HOSTNAME: ${{ inputs.expected_hostname }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$EXPECTED_HOSTNAME"
+          test "$CONFIRMED_HOSTNAME" = "$EXPECTED_HOSTNAME"
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.ELESTIO_SSH_PRIVATE_KEY }}
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/elestio
+          chmod 600 ~/.ssh/elestio
+          ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts
+
+      - name: Read phone data (SELECT only)
+        env:
+          SSH_HOST: ${{ secrets.ELESTIO_HOST }}
+          SSH_USER: ${{ secrets.ELESTIO_SSH_USER }}
+          SSH_PORT: ${{ secrets.ELESTIO_SSH_PORT || '22' }}
+          STACK_PATH: ${{ secrets.ELESTIO_STACK_PATH }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh -i ~/.ssh/elestio -p "$SSH_PORT" "$SSH_USER@$SSH_HOST" \
+            "cd '$STACK_PATH' && pw=\$(sed -n 's/^ADMIN_PASSWORD=//p' .env | tail -n 1 | tr -d '\r') && test -n \"\$pw\" && docker compose exec -T -e MYSQL_PWD=\"\$pw\" mysql mysql --user=root --database=espocrm --table" <<'SQL'
+          SET SESSION TRANSACTION READ ONLY;
+          SELECT 'phone rows per record type' AS info;
+          SELECT epn.entity_type, COUNT(*) AS rows_total, SUM(epn.deleted = 0) AS not_deleted,
+                 SUM(epn.`primary` = 1) AS is_primary
+          FROM entity_phone_number epn GROUP BY epn.entity_type ORDER BY epn.entity_type;
+          SELECT 'phone columns' AS info;
+          SELECT table_name, column_name FROM information_schema.columns
+          WHERE table_schema = DATABASE() AND column_name LIKE '%phone%'
+            AND table_name IN ('c_delivery_resource','c_provider','c_referrer','contact','lead')
+          ORDER BY table_name, column_name;
+          SELECT 'freelancer rows' AS info;
+          SELECT COUNT(*) AS freelancers FROM c_delivery_resource WHERE deleted = 0;
+          SQL

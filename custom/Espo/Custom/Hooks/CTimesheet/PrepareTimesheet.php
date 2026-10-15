@@ -9,7 +9,8 @@ use Espo\ORM\Repository\Option\SaveOptions;
 
 /**
  * Calculates hours from the start and end time, and fills the freelancer and
- * coordinator from the Project when they are empty.
+ * coordinator from the Project when they are empty. Keeps the Project link in step with
+ * the Payment Block so a Project can list its timesheets.
  */
 class PrepareTimesheet implements BeforeSave
 {
@@ -29,11 +30,15 @@ class PrepareTimesheet implements BeforeSave
             $entity->set('hours', $this->calculateHours($entity));
         }
 
+        $project = $this->getProject($entity->get('paymentBlockId'));
+
+        if ($project && $entity->get('projectId') !== $project->getId()) {
+            $entity->set('projectId', $project->getId());
+        }
+
         if ($entity->get('freelancerId') && $entity->get('assignedUserId')) {
             return;
         }
-
-        $project = $this->getProject($entity->get('paymentBlockId'));
 
         if (!$project) {
             return;

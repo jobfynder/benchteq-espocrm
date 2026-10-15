@@ -11,12 +11,14 @@
         "status": "Status",
         "duration": "Duration",
         "reminders": "Reminders",
-        "isAllDay": "All-Day"
+        "isAllDay": "All-Day",
+        "project": "Project"
     },
     "links": {
         "paymentBlock": "Payment Block",
         "freelancer": "Freelancer",
-        "payout": "Payout"
+        "payout": "Payout",
+        "project": "Project"
     },
     "options": {
         "status": {

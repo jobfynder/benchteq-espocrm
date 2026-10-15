@@ -131,6 +131,12 @@
         },
         "payout": {
             "type": "link"
+        },
+        "project": {
+            "type": "link",
+            "layoutDetailDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "isCustom": true
         }
     },
     "links": {
@@ -169,6 +175,13 @@
         "payout": {
             "type": "belongsTo",
             "entity": "CPayout",
+            "foreign": "timesheets",
+            "audited": false,
+            "isCustom": true
+        },
+        "project": {
+            "type": "belongsTo",
+            "entity": "CProject",
             "foreign": "timesheets",
             "audited": false,
             "isCustom": true
