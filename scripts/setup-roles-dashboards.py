@@ -170,9 +170,6 @@ def group_tab(tab_id, text, icon, items):
 TAB_LIST = [
     'Lead', 'Contact', 'Account',
     'CDeliveryResource',
-    url_tab('bqShortlist', 'Freelancer Shortlist',
-            '#CDeliveryResource/list/primaryFilter=shortlist', 'fas fa-user-check',
-            'CDeliveryResource'),
     'CProject', 'CTimesheet', 'CInterviewSession', 'Calendar',
     group_tab('bqMoney', 'Money', 'fas fa-rupee-sign', ['CPaymentBlock', 'CPayout']),
     group_tab('bqPartners', 'Partners', 'fas fa-handshake',

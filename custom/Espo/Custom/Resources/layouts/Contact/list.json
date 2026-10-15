@@ -5,33 +5,24 @@
     },
     {
         "name": "account",
-        "width": 25
+        "width": 22
     },
     {
         "name": "emailAddress",
-        "width": 20,
+        "width": 22,
         "notSortable": true
     },
     {
         "name": "phoneNumber",
-        "width": 18,
+        "width": 20,
         "notSortable": true
     },
     {
         "name": "assignedUser",
-        "width": 18,
-        "hidden": true
-    },
-    {
-        "name": "cServicePackage",
         "width": 16
     },
     {
-        "name": "description",
-        "width": 16
-    },
-    {
-        "name": "createdBy",
-        "width": 16
+        "name": "createdAt",
+        "width": 13
     }
 ]
