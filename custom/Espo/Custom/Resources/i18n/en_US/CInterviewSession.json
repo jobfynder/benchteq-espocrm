@@ -6,7 +6,7 @@
         "customerFeeCurrency": "Customer Fee (Currency)",
         "paymentStatus": "Payment Status",
         "paidDate": "Paid Date",
-        "supporterFee": "Supporter Fee (INR)",
+        "supporterFee": "Supporter Fee",
         "supporterFeeCurrency": "Supporter Fee (Currency)",
         "payout": "Payout",
         "feedback": "Feedback",

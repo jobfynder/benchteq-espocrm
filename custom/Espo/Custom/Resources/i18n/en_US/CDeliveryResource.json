@@ -3,7 +3,7 @@
         "roleType": "Role Type",
         "sourcedVia": "Sourced Via",
         "skillSpecialty": "Skill Specialty",
-        "rate": "Payout Rate (INR)",
+        "rate": "Payout Rate",
         "rateCurrency": "Rate (Currency)",
         "rateConverted": "Rate (Converted)",
         "status": "Status",
