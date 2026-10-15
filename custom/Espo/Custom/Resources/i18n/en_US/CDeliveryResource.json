@@ -17,14 +17,10 @@
         "screeningNotes": "Screening Notes",
         "workStatus": "Work Status",
         "email": "Email",
-        "phone": "Phone",
         "projects": "Projects",
         "timesheets": "Timesheets",
         "interviewSessions": "Interview Sessions",
         "payouts": "Payouts",
-        "whatsAppNumber": "WhatsApp",
-        "phoneCountry": "Phone country",
-        "whatsAppCountry": "WhatsApp country",
         "phoneNumber": "Phone"
     },
     "links": {
@@ -82,42 +78,6 @@
             "SAP": "SAP",
             "QA Testing": "QA Testing",
             "Other": "Other"
-        },
-        "phoneCountry": {
-            "+91": "India (+91)",
-            "+1": "USA / Canada (+1)",
-            "+44": "United Kingdom (+44)",
-            "+971": "UAE (+971)",
-            "+61": "Australia (+61)",
-            "+65": "Singapore (+65)",
-            "+49": "Germany (+49)",
-            "+966": "Saudi Arabia (+966)",
-            "+974": "Qatar (+974)",
-            "+64": "New Zealand (+64)",
-            "+60": "Malaysia (+60)",
-            "+94": "Sri Lanka (+94)",
-            "+977": "Nepal (+977)",
-            "+880": "Bangladesh (+880)",
-            "+92": "Pakistan (+92)",
-            "Other": "Other (number includes its code)"
-        },
-        "whatsAppCountry": {
-            "+91": "India (+91)",
-            "+1": "USA / Canada (+1)",
-            "+44": "United Kingdom (+44)",
-            "+971": "UAE (+971)",
-            "+61": "Australia (+61)",
-            "+65": "Singapore (+65)",
-            "+49": "Germany (+49)",
-            "+966": "Saudi Arabia (+966)",
-            "+974": "Qatar (+974)",
-            "+64": "New Zealand (+64)",
-            "+60": "Malaysia (+60)",
-            "+94": "Sri Lanka (+94)",
-            "+977": "Nepal (+977)",
-            "+880": "Bangladesh (+880)",
-            "+92": "Pakistan (+92)",
-            "Other": "Other (number includes its code)"
         }
     },
     "presetFilters": {
@@ -125,8 +85,6 @@
     },
     "tooltips": {
         "screeningResult": "Only Passed freelancers appear in the Shortlist and in project lookups.",
-        "provider": "Leave empty when the freelancer was sourced directly.",
-        "whatsAppNumber": "WhatsApp number without the country code. Pick the country on the left. If a number already includes its code, pick Other.",
-        "phone": "Number without the country code. Pick the country on the left. If a number already includes its code, pick Other."
+        "provider": "Leave empty when the freelancer was sourced directly."
     }
 }

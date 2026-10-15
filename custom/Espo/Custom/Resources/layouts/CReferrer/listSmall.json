@@ -4,7 +4,7 @@
         "link": true
     },
     {
-        "name": "phone",
+        "name": "phoneNumber",
         "width": 25
     },
     {
