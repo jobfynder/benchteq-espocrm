@@ -255,6 +255,28 @@ def show_record(api, spec):
         print(f'  {k}: {json.dumps(v)}')
 
 
+def inspect(api, spec):
+    """Read only. For each entity, count records and how often each link field is filled."""
+    for entity in [e.strip() for e in spec.split(',') if e.strip()]:
+        print(f'\n== {entity} ==')
+        rows, offset = [], 0
+        while True:
+            page = api.call('GET', entity, params={'maxSize': 200, 'offset': offset,
+                                                   'orderBy': 'createdAt', 'order': 'asc'})
+            part = page.get('list', [])
+            rows += part
+            offset += len(part)
+            if not part or offset >= page.get('total', 0):
+                break
+        print(f'{len(rows)} record(s)')
+        links = sorted({k for r in rows for k in r if k.endswith('Id') and k != 'id'})
+        for k in links:
+            print(f'  {k}: filled on {sum(1 for r in rows if r.get(k))} of {len(rows)}')
+        for r in rows[:5]:
+            shown = {k[:-2] + 'Name': r.get(k[:-2] + 'Name') for k in links if r.get(k)}
+            print(f'  - {r.get("name")} | {r.get("status")} | {json.dumps(shown)}')
+
+
 def link_timesheets(api):
     """Fill Timesheet.project from its Payment Block, so a Project lists its timesheets."""
     print('\n== Link timesheets to projects ==')
@@ -393,10 +415,11 @@ def main():
     p.add_argument('--fix-dashboards', action='store_true')
     p.add_argument('--probe-project', action='store_true')
     p.add_argument('--show-record', help='read only, Entity/id')
+    p.add_argument('--inspect', help='read only, comma separated entities, like CSessionLog,CInterviewSession')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards or a.probe_project or a.show_record):
+            or a.fix_dashboards or a.probe_project or a.show_record or a.inspect):
         p.error('choose --fix-dashboards, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -406,6 +429,8 @@ def main():
         diagnose_phones(api)
     if a.show_record:
         show_record(api, a.show_record)
+    if a.inspect:
+        inspect(api, a.inspect)
     if a.probe_project:
         probe_project(api)
     if a.fix_dashboards:

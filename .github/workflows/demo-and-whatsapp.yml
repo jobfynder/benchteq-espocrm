@@ -41,6 +41,11 @@ on:
         required: false
         default: ''
         type: string
+      inspect:
+        description: Read only. Count records and filled links, like CSessionLog,CInterviewSession
+        required: false
+        default: ''
+        type: string
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -75,6 +80,7 @@ jobs:
           FIX_DASHBOARDS: ${{ inputs.fix_dashboards }}
           PROBE_PROJECT: ${{ inputs.probe_project }}
           SHOW_RECORD: ${{ inputs.show_record }}
+          INSPECT: ${{ inputs.inspect }}
         shell: bash
         run: |
           set -euo pipefail
@@ -97,4 +103,5 @@ jobs:
           [ "$FIX_DASHBOARDS" = "true" ] && args+=(--fix-dashboards)
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
           [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
+          [ -n "$INSPECT" ] && args+=(--inspect "$INSPECT")
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"
