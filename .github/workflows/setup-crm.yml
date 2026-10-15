@@ -50,10 +50,17 @@ jobs:
           set -euo pipefail
           test -n "$ESPO_URL" && test -n "$ESPO_USER" && test -n "$ESPO_PASSWORD"
           test -n "$EXPECTED_HOSTNAME"
-          case "$ESPO_URL" in
-            "https://$EXPECTED_HOSTNAME"|"https://$EXPECTED_HOSTNAME/") ;;
-            *) echo "ESPO_URL does not match the production hostname"; exit 1 ;;
-          esac
+          # Accept the address with or without https:// and a trailing slash.
+          # The host itself must still match exactly.
+          norm() { printf '%s' "$1" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]' | sed -E 's#^https?://##; s#/+$##'; }
+          url_host="$(norm "$ESPO_URL")"
+          expected_host="$(norm "$EXPECTED_HOSTNAME")"
+          if [ "$url_host" != "$expected_host" ]; then
+            echo "ESPO_URL does not match the production hostname"
+            echo "Hint: the hostname setting should be the host only, and ESPO_URL the same host (optionally with https://)."
+            exit 1
+          fi
+          export ESPO_URL="https://$url_host"
           args=()
           [ "$DRY_RUN" = "true" ] && args+=(--dry-run)
           [ "$RESET_DASHBOARDS" = "true" ] && args+=(--reset-user-dashboards)
