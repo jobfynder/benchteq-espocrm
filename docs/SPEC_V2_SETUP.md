@@ -51,10 +51,10 @@ and `ESPO_PASSWORD` for a CRM admin. Or run the script by hand:
 
 It creates or updates the four roles, the menu, the plus-button list, the Calendar entity
 list, INR as default currency, the India time zone, India and US first in phone numbers,
-and the default dashboard (tabs Today and Money). It does not create users: create them in
+and one dashboard per role: Manager (Today, Attention, Money), Coordinator (Today, Follow up), Interview Manager (Interviews), Finance (Money). A user with several roles gets the first match in that order. It does not create users: create them in
 Administration, Users, then assign roles with `--assign` (or in the user form).
 Users who already built their own dashboard keep it. Use `--reset-user-dashboards` to push
-the default to everyone after the dashboard definition changes in the script.
+each person's role dashboard after it changes in the script. Repeat `--assign` for the same user to give them two roles.
 
 Access (the team is small, so it is open):
 
