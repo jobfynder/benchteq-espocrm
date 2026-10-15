@@ -24,7 +24,8 @@
         "payouts": "Payouts",
         "whatsAppNumber": "WhatsApp",
         "phoneCountry": "Phone country",
-        "whatsAppCountry": "WhatsApp country"
+        "whatsAppCountry": "WhatsApp country",
+        "phoneNumber": "Phone (trial, with country)"
     },
     "links": {
         "provider": "Provider",

@@ -27,6 +27,12 @@
             ],
             [
                 {
+                    "name": "phoneNumber"
+                },
+                false
+            ],
+            [
+                {
                     "name": "email"
                 },
                 false

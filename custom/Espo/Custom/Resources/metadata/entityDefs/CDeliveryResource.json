@@ -232,6 +232,17 @@
             ],
             "default": "+91",
             "isCustom": true
+        },
+        "phoneNumber": {
+            "type": "phone",
+            "typeList": [
+                "Mobile",
+                "WhatsApp",
+                "Office",
+                "Other"
+            ],
+            "defaultType": "Mobile",
+            "isCustom": true
         }
     },
     "links": {
