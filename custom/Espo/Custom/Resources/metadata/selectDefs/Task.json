@@ -1,0 +1,5 @@
+{
+    "primaryFilterClassNameMap": {
+        "overdueCritical": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\OverdueCritical"
+    }
+}

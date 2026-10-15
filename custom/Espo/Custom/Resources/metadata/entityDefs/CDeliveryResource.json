@@ -94,14 +94,8 @@
             "type": "link"
         },
         "phone": {
-            "type": "phone",
-            "typeList": [
-                "Mobile",
-                "WhatsApp",
-                "Office",
-                "Other"
-            ],
-            "defaultType": "Mobile",
+            "type": "varchar",
+            "maxLength": 255,
             "isCustom": true
         },
         "sessionLogs": {
