@@ -46,6 +46,11 @@ on:
         required: false
         default: false
         type: boolean
+      show_record:
+        description: Read only. Show phone data of one record, like Lead/6ad022706b0544e92
+        required: false
+        default: ''
+        type: string
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -81,6 +86,7 @@ jobs:
           FIX_DASHBOARDS: ${{ inputs.fix_dashboards }}
           PROBE_PROJECT: ${{ inputs.probe_project }}
           NATIVE_PHONES: ${{ inputs.native_phones }}
+          SHOW_RECORD: ${{ inputs.show_record }}
         shell: bash
         run: |
           set -euo pipefail
@@ -104,4 +110,5 @@ jobs:
           [ "$FIX_DASHBOARDS" = "true" ] && args+=(--fix-dashboards)
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
           [ "$NATIVE_PHONES" = "true" ] && args+=(--native-phones)
+          [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"

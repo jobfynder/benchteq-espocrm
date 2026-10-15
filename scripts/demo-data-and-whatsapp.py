@@ -281,6 +281,21 @@ def diagnose_phones(api):
             print(f'  {r.get("id")}: {json.dumps(keys)} data={json.dumps(data)}')
 
 
+def show_record(api, spec):
+    """Read-only. spec is Entity/id. Prints the phone data of one record, numbers masked."""
+    entity, rid = spec.split('/', 1)
+    r = api.call('GET', f'{entity}/{rid}')
+    print(f'\n== {entity} {rid}: {r.get("name") or r.get("lastName")} ==')
+    for k, v in r.items():
+        if k == 'phoneNumberData':
+            v = [{**d, 'phoneNumber': mask(d.get('phoneNumber', ''))} for d in (v or [])]
+        elif 'phone' in k.lower() or 'whatsapp' in k.lower():
+            v = mask(v) if v else v
+        else:
+            continue
+        print(f'  {k}: {json.dumps(v)}')
+
+
 def link_timesheets(api):
     """Fill Timesheet.project from its Payment Block, so a Project lists its timesheets."""
     print('\n== Link timesheets to projects ==')
@@ -499,10 +514,11 @@ def main():
     p.add_argument('--fix-dashboards', action='store_true')
     p.add_argument('--probe-project', action='store_true')
     p.add_argument('--native-phones', action='store_true')
+    p.add_argument('--show-record', help='read only, Entity/id')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards or a.probe_project or a.native_phones):
+            or a.fix_dashboards or a.probe_project or a.native_phones or a.show_record):
         p.error('choose --fix-dashboards, --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -510,6 +526,8 @@ def main():
     api.call('GET', 'App/user')
     if a.diagnose_phones:
         diagnose_phones(api)
+    if a.show_record:
+        show_record(api, a.show_record)
     if a.native_phones:
         native_phones(api)
     if a.probe_project:
