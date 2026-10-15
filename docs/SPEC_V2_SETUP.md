@@ -3,7 +3,7 @@
 ## Daily use (what the team does)
 
 **Job Support.** Lead (Service = Job Support) → Convert → Project (technology, consultant,
-freelancer, rates; the name fills itself) → Hours Package (hours, amount) → Timesheets.
+freelancer, rates; the name fills itself) → Package (hours, amount) → Timesheets.
 After each call open the Timesheet and set Held. Connected and Remaining hours update by
 themselves, and the block closes at zero hours. The dashboard shows blocks with 5 or fewer
 hours left, so you know when to ask for the next payment.
@@ -15,6 +15,9 @@ Status = Paid, then set Held and write the feedback. Held and No-Show are blocke
 
 **BGC.** Lead (Service = BGC) → pick Referrer, BGC Type (the fee fills in), Provider, BGC
 Status → Cleared → Convert.
+Repeat BGC for a customer you already have: open the Contact, go to the Delivery tab, BGC
+Checks panel, Create. Pick BGC Type, Provider, Referrer (if any) and the fee. No new Lead.
+Payouts to the Provider or Referrer link to the BGC Check the same way they link to a Lead.
 
 **Finance.** Dashboard tab "Money" lists everything to pay. Create a Payout, then open it
 and use Select on the Timesheets or Interview Sessions panel (it only offers unpaid ones).
@@ -59,7 +62,7 @@ Access (the team is small, so it is open):
 |---|---|---|---|---|
 | Lead, Contact, Account | all | create, read, edit | create, read, edit | read |
 | Freelancers | all | read | create, read, edit | read |
-| Project, Hours Package | all | none | create, read, edit, delete own | read (Hours Package: edit) |
+| Project, Package | all | none | create, read, edit, delete own | read (Package: edit) |
 | Timesheet | all | none | create, read, edit, delete own | read, edit |
 | Interview Session | all | create, read, edit, delete own | create, read, edit, delete own | read, edit |
 | Referrer | all | read | create, read, edit | read |
@@ -78,7 +81,7 @@ Mass update Freelancers whose Role Type is "Freelancer" to "Trainer".
 | Spec | Built | Reason |
 |---|---|---|
 | `paidToFreelancer` and `referralPaid` tick boxes | A `payout` link on Timesheet and Interview Session. `Lead.referralPaid` is filled by a hook | One place to record a payment |
-| `Project.amount` | Removed | Duplicated the Hours Packages |
+| `Project.amount` | Removed | Duplicated the Packages |
 | Timesheet `hours` formula | PHP hook from start and end | `duration` is not stored |
 | Supporter assigned only after Paid | Booking allowed. Held and No-Show need Paid | Slots are booked before money arrives |
 | Interview type, slots | `Type`, slots 30/45/60/90/180, default 30, Assessment moves a default slot to 90 | Asked for by the team |

@@ -15,6 +15,9 @@
         },
         "bgcLeads": {
             "layout": "listSmall"
+        },
+        "bgcChecks": {
+            "layout": "listSmall"
         }
     }
 }

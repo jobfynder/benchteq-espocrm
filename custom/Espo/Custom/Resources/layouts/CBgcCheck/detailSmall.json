@@ -1,0 +1,32 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "contact"
+                },
+                {
+                    "name": "bgcType"
+                }
+            ],
+            [
+                {
+                    "name": "bgcStatus"
+                },
+                {
+                    "name": "customerFee"
+                }
+            ],
+            [
+                {
+                    "name": "provider"
+                },
+                {
+                    "name": "referrer"
+                }
+            ]
+        ],
+        "style": "default",
+        "label": ""
+    }
+]

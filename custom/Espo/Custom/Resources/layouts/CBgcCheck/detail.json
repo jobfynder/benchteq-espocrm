@@ -1,0 +1,54 @@
+[
+    {
+        "rows": [
+            [
+                {
+                    "name": "contact"
+                },
+                {
+                    "name": "bgcType"
+                }
+            ],
+            [
+                {
+                    "name": "bgcStatus"
+                },
+                {
+                    "name": "assignedUser"
+                }
+            ],
+            [
+                {
+                    "name": "customerFee"
+                },
+                {
+                    "name": "amountReceived"
+                }
+            ],
+            [
+                {
+                    "name": "provider"
+                },
+                {
+                    "name": "providerCost"
+                }
+            ],
+            [
+                {
+                    "name": "referrer"
+                },
+                {
+                    "name": "referralPaid"
+                }
+            ],
+            [
+                {
+                    "name": "description",
+                    "fullWidth": true
+                }
+            ]
+        ],
+        "style": "default",
+        "label": "Overview"
+    }
+]

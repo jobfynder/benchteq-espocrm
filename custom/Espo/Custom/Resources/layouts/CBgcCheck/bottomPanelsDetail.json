@@ -1,0 +1,12 @@
+{
+    "_delimiter_": {
+        "disabled": true
+    },
+    "payouts": {
+        "index": 0
+    },
+    "stream": {
+        "index": 1,
+        "sticked": false
+    }
+}

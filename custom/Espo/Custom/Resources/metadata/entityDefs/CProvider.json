@@ -114,6 +114,10 @@
             ],
             "defaultType": "Mobile",
             "isCustom": true
+        },
+        "bgcChecks": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -165,6 +169,12 @@
             "type": "hasMany",
             "entity": "Lead",
             "foreign": "bgcProvider",
+            "isCustom": true
+        },
+        "bgcChecks": {
+            "type": "hasMany",
+            "entity": "CBgcCheck",
+            "foreign": "provider",
             "isCustom": true
         }
     },

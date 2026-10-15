@@ -1,0 +1,30 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "contact",
+        "width": 20
+    },
+    {
+        "name": "bgcType",
+        "width": 8
+    },
+    {
+        "name": "bgcStatus",
+        "width": 12
+    },
+    {
+        "name": "customerFee",
+        "width": 12
+    },
+    {
+        "name": "provider",
+        "width": 16
+    },
+    {
+        "name": "assignedUser",
+        "width": 14
+    }
+]

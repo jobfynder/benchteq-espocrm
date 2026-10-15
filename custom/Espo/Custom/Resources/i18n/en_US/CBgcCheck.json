@@ -1,0 +1,41 @@
+{
+    "fields": {
+        "contact": "Customer",
+        "bgcType": "BGC Type",
+        "bgcStatus": "BGC Status",
+        "customerFee": "BGC Fee",
+        "amountReceived": "Amount Received",
+        "provider": "Provider",
+        "providerCost": "Provider Cost",
+        "referrer": "Referrer",
+        "referralPaid": "Referral Fee Paid",
+        "assignedUser": "Coordinator",
+        "payouts": "Payouts"
+    },
+    "links": {
+        "contact": "Customer",
+        "provider": "Provider",
+        "referrer": "Referrer",
+        "payouts": "Payouts"
+    },
+    "options": {
+        "bgcType": {
+            "US": "US",
+            "India": "India",
+            "Both": "Both"
+        },
+        "bgcStatus": {
+            "Not Started": "Not Started",
+            "In Verification": "In Verification",
+            "Cleared": "Cleared",
+            "Failed": "Failed"
+        }
+    },
+    "labels": {
+        "Create CBgcCheck": "Create BGC Check"
+    },
+    "presetFilters": {
+        "inVerification": "In verification",
+        "referralDue": "Referral fee due"
+    }
+}

@@ -1,12 +1,14 @@
 {
     "fields": {
         "cReferrers": "Referrers",
-        "cServicePackages": "Service Packages"
+        "cServicePackages": "Service Packages",
+        "cBgcChecks": "BGC Checks"
     },
     "links": {
         "cReferrers": "Referrers",
         "cServicePackages": "Service Packages",
         "cProjects": "Projects",
-        "cInterviewSessions": "Interview Sessions"
+        "cInterviewSessions": "Interview Sessions",
+        "cBgcChecks": "BGC Checks"
     }
 }

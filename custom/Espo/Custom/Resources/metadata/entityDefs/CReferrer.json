@@ -85,6 +85,10 @@
             ],
             "defaultType": "Mobile",
             "isCustom": true
+        },
+        "bgcChecks": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -158,6 +162,12 @@
         "payouts": {
             "type": "hasMany",
             "entity": "CPayout",
+            "foreign": "referrer",
+            "isCustom": true
+        },
+        "bgcChecks": {
+            "type": "hasMany",
+            "entity": "CBgcCheck",
             "foreign": "referrer",
             "isCustom": true
         }

@@ -31,7 +31,7 @@ import urllib.request
 # --------------------------------------------------------------------- roles
 
 CUSTOM_ENTITIES = ['CDeliveryResource', 'CProject', 'CPaymentBlock', 'CTimesheet',
-                   'CInterviewSession', 'CPayout', 'CReferrer', 'CProvider']
+                   'CInterviewSession', 'CPayout', 'CReferrer', 'CProvider', 'CBgcCheck']
 CORE_ENTITIES = ['Lead', 'Contact', 'Account']
 
 # Retired in v2: nobody sees them, data is kept.
@@ -100,7 +100,7 @@ def build_roles():
             'CInterviewSession': WORK_DEL,
             'CDeliveryResource': READ, 'CProvider': READ, 'CReferrer': READ,
             'CProject': False, 'CPaymentBlock': False, 'CTimesheet': False,
-            'CPayout': False,
+            'CPayout': False, 'CBgcCheck': False,
         },
         'permissions': {
             'assignmentPermission': 'all', 'userPermission': 'all',
@@ -117,6 +117,7 @@ def build_roles():
             'CDeliveryResource': WORK,
             'CProject': WORK_DEL, 'CPaymentBlock': WORK_DEL,
             'CTimesheet': WORK_DEL, 'CInterviewSession': WORK_DEL,
+            'CBgcCheck': WORK_DEL,
             'CReferrer': WORK,          # a referral lead needs its Referrer
             'CProvider': READ,
             'CPayout': READ,
@@ -135,7 +136,7 @@ def build_roles():
             'CDeliveryResource': READ, 'CProvider': READ, 'CReferrer': READ,
             'CProject': READ,
             'CPaymentBlock': EDIT_ONLY, 'CTimesheet': EDIT_ONLY,
-            'CInterviewSession': EDIT_ONLY,
+            'CInterviewSession': EDIT_ONLY, 'CBgcCheck': EDIT_ONLY,
             'CPayout': acl('yes', 'all', 'all', 'no'),
         },
         'permissions': {
@@ -170,12 +171,12 @@ def group_tab(tab_id, text, icon, items):
 TAB_LIST = [
     'Lead', 'Contact', 'Account',
     'CDeliveryResource',
-    'CProject', 'CTimesheet', 'CInterviewSession', 'Calendar',
+    'CProject', 'CTimesheet', 'CInterviewSession', 'CBgcCheck', 'Calendar',
     group_tab('bqMoney', 'Money', 'fas fa-rupee-sign', ['CPaymentBlock', 'CPayout']),
     group_tab('bqPartners', 'Partners', 'fas fa-handshake',
               ['CReferrer', 'CProvider']),
 ]
-QUICK_CREATE = ['Lead', 'Contact', 'CTimesheet', 'CInterviewSession',
+QUICK_CREATE = ['Lead', 'Contact', 'CTimesheet', 'CInterviewSession', 'CBgcCheck',
                 'CPaymentBlock', 'CProject']
 CALENDAR_ENTITIES = ['Meeting', 'Call', 'Task', 'CTimesheet', 'CInterviewSession']
 
