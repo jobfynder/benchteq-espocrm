@@ -11,15 +11,23 @@
             ],
             [
                 {
-                    "name": "email"
+                    "name": "phoneCountry"
                 },
                 {
-                    "name": "phone"
+                    "name": "whatsAppCountry"
                 }
             ],
             [
                 {
+                    "name": "phone"
+                },
+                {
                     "name": "whatsAppNumber"
+                }
+            ],
+            [
+                {
+                    "name": "email"
                 },
                 false
             ],

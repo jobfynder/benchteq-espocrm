@@ -11,6 +11,14 @@
             ],
             [
                 {
+                    "name": "phoneCountry"
+                },
+                {
+                    "name": "whatsAppCountry"
+                }
+            ],
+            [
+                {
                     "name": "phone"
                 },
                 {
