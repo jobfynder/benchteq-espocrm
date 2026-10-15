@@ -10,7 +10,7 @@ use Espo\ORM\Repository\Option\RemoveOptions;
 use Espo\ORM\Repository\Option\SaveOptions;
 
 /**
- * Connected Hrs on a Hours Package = hours of its Held and No-Show timesheets.
+ * Connected Hrs on a Package = hours of its Held and No-Show timesheets.
  * Planned and Cancelled timesheets do not count.
  */
 class RecalculateConnectedHours implements AfterSave, AfterRemove
