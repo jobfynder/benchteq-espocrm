@@ -102,6 +102,12 @@
             "type": "bool",
             "readOnly": true,
             "isCustom": true
+        },
+        "margin": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "readOnly": true,
+            "isCustom": true
         }
     },
     "links": {

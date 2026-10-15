@@ -28,6 +28,10 @@
         "width": 10
     },
     {
+        "name": "margin",
+        "width": 10
+    },
+    {
         "name": "supporterFee",
         "width": 10,
         "hidden": true

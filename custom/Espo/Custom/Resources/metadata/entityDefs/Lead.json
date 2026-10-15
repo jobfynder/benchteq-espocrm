@@ -88,6 +88,17 @@
                 "Other"
             ],
             "defaultType": "Mobile"
+        },
+        "nextFollowUpDate": {
+            "type": "date",
+            "isCustom": true,
+            "audited": true
+        },
+        "followUpAlertDate": {
+            "type": "date",
+            "isCustom": true,
+            "readOnly": true,
+            "customizationDisabled": true
         }
     },
     "links": {

@@ -105,3 +105,10 @@ Three tests, all on STAGING only (they create fake records):
 ### Who is a customer
 
 Contacts and Accounts have a **Customer status**. It is filled in by the CRM: a Contact with no Project, Interview or BGC Check is a Prospect, with one it is a Customer, with two or more a Repeat customer. An Account is a Customer when any of its Contacts is. Use the **Customers** filter on the Contact and Account lists. Someone served before the CRM existed can be set to Customer by hand. Run workflow "Demo data and WhatsApp" with *refresh_customers* once to fill existing records.
+
+### Global search, margin, alerts and follow-ups
+
+- **Global search** (top bar) covers every module: Contacts, Accounts, Leads, Freelancers, Projects, Interviews, BGC Checks, Timesheets, Packages, Payouts, Referrers and Providers. Setup CRM sets the list.
+- **Margin.** Interviews and BGC Checks show a Margin in INR: what the customer pays minus what we pay out. USD is converted with the rate in Administration, Currency, so keep that rate current. Project and Timesheet margin is not calculated, because payout types differ (hourly, bi-weekly, monthly).
+- **Alerts** (the bell). A job runs every hour and notifies the assigned person and every Interview Manager once about: an Interview in the next 24 hours with no freelancer; an Interview in the next 24 hours to confirm with the customer and freelancer. Setup CRM creates the job. Check it under Administration, Scheduled Jobs.
+- **Lead follow-up.** Leads have a Next follow-up date and a "Follow-up due" filter. The assigned person gets one alert on the day, and dashboards list the leads due.

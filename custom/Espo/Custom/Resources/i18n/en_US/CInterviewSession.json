@@ -18,7 +18,8 @@
         "status": "Status",
         "duration": "Duration",
         "reminders": "Reminders",
-        "isAllDay": "All-Day"
+        "isAllDay": "All-Day",
+        "margin": "Margin (INR)"
     },
     "links": {
         "contact": "Customer",

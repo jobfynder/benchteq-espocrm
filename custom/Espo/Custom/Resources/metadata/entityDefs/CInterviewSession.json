@@ -175,6 +175,24 @@
         "feedback": {
             "type": "text",
             "isCustom": true
+        },
+        "margin": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "readOnly": true,
+            "isCustom": true
+        },
+        "reminderSent": {
+            "type": "bool",
+            "isCustom": true,
+            "readOnly": true,
+            "customizationDisabled": true
+        },
+        "noFreelancerAlertSent": {
+            "type": "bool",
+            "isCustom": true,
+            "readOnly": true,
+            "customizationDisabled": true
         }
     },
     "links": {
