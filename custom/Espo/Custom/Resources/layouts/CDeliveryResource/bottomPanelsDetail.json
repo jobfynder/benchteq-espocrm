@@ -17,5 +17,8 @@
     "stream": {
         "index": 4,
         "sticked": false
+    },
+    "primaryDeliveryResource": {
+        "disabled": true
     }
 }

@@ -26,5 +26,8 @@
     },
     "bgcChecks": {
         "index": 1
+    },
+    "servicePackages": {
+        "disabled": true
     }
 }

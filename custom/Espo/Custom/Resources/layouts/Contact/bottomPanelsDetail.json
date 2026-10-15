@@ -26,12 +26,10 @@
         "index": 7
     },
     "_tabBreak_0": {
-        "index": 8,
-        "tabBreak": true,
-        "tabLabel": "$Services"
+        "disabled": true
     },
     "cServicePackages": {
-        "index": 9
+        "disabled": true
     },
     "_tabBreak_2": {
         "index": 10,

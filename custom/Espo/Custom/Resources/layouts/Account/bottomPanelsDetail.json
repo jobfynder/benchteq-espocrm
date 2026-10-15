@@ -34,12 +34,10 @@
         "index": 5
     },
     "_tabBreak_2": {
-        "index": 6,
-        "tabBreak": true,
-        "tabLabel": "$Services"
+        "disabled": true
     },
     "cServicePackages": {
-        "index": 7
+        "disabled": true
     },
     "cReferrers": {
         "index": 8
