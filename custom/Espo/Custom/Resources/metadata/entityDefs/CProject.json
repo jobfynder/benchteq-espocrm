@@ -116,6 +116,18 @@
         "timesheets": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "marginPerHour": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "readOnly": true,
+            "isCustom": true
+        },
+        "margin": {
+            "type": "currency",
+            "conversionDisabled": true,
+            "readOnly": true,
+            "isCustom": true
         }
     },
     "links": {

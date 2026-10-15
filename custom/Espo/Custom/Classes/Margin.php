@@ -9,7 +9,8 @@ use Espo\ORM\Entity;
 use Throwable;
 
 /**
- * Margin = what the customer pays minus what we pay out, in INR. The amounts can be in
+ * Margin = what the customer pays minus what we pay out, in INR. It stays empty until both
+ * amounts are known. The amounts can be in
  * different currencies, so both are converted with the rates in Administration, Currency.
  */
 class Margin
@@ -22,25 +23,22 @@ class Margin
 
     public function apply(Entity $entity, string $incomeField, string $costField): void
     {
-        $income = $this->inInr($entity, $incomeField);
-        $cost = $this->inInr($entity, $costField);
+        $income = $this->toInr($entity->get($incomeField), $entity->get($incomeField . 'Currency'));
+        $cost = $this->toInr($entity->get($costField), $entity->get($costField . 'Currency'));
 
-        if ($income === null) {
+        if ($income === null || $cost === null) {
             $entity->set('margin', null);
             $entity->set('marginCurrency', null);
 
             return;
         }
 
-        $entity->set('margin', round($income - ($cost ?? 0.0), 2));
+        $entity->set('margin', round($income - $cost, 2));
         $entity->set('marginCurrency', self::CODE);
     }
 
-    private function inInr(Entity $entity, string $field): ?float
+    public function toInr(mixed $amount, mixed $code): ?float
     {
-        $amount = $entity->get($field);
-        $code = $entity->get($field . 'Currency');
-
         if ($amount === null || !$code) {
             return null;
         }

@@ -37,6 +37,14 @@
                 {
                     "name": "freelancerRate"
                 },
+                {
+                    "name": "marginPerHour"
+                }
+            ],
+            [
+                {
+                    "name": "margin"
+                },
                 false
             ],
             [

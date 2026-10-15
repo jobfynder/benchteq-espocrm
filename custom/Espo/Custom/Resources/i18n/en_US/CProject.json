@@ -15,7 +15,9 @@
         "status": "Status",
         "paymentBlocks": "Packages",
         "payouts": "Payouts",
-        "timesheets": "Timesheets"
+        "timesheets": "Timesheets",
+        "marginPerHour": "Margin per hour (INR)",
+        "margin": "Margin (INR)"
     },
     "links": {
         "consultant": "Consultant",

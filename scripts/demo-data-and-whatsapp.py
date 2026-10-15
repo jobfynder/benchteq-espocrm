@@ -407,6 +407,31 @@ def refresh_customers(api):
     print(f'Updated {changed} record(s). Customers: {sum(1 for v in counts.values() if v)} contact(s).')
 
 
+def refresh_margins(api):
+    """Re-save every Interview, BGC Check and Project with no change, so the CRM works out
+    the margin for records made before margin existed. A record that cannot be saved is
+    listed and skipped. Safe to run again."""
+    print('\n== Calculate margins ==')
+    done = failed = 0
+    for entity in ('CInterviewSession', 'CBgcCheck', 'CProject'):
+        offset = 0
+        while True:
+            page = api.call('GET', entity, params={'select': 'id,name', 'maxSize': 100,
+                                                   'offset': offset})
+            rows = page.get('list', [])
+            for r in rows:
+                try:
+                    api.update(entity, r['id'], {'name': r['name']})
+                    done += 1
+                except SystemExit as e:
+                    failed += 1
+                    print(f'  skipped {entity} {r.get("name")}: {e}')
+            offset += len(rows)
+            if not rows or offset >= page.get('total', 0):
+                break
+    print(f'Re-saved {done} record(s), skipped {failed}.')
+
+
 def link_timesheets(api):
     """Fill Timesheet.project from its Payment Block, so a Project lists its timesheets."""
     print('\n== Link timesheets to projects ==')
@@ -548,11 +573,12 @@ def main():
     p.add_argument('--inspect', help='read only, comma separated entities, like CSessionLog,CInterviewSession')
     p.add_argument('--migrate-interviews', action='store_true')
     p.add_argument('--refresh-customers', action='store_true')
+    p.add_argument('--refresh-margins', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
             or a.fix_dashboards or a.probe_project or a.show_record or a.inspect or a.migrate_interviews
-            or a.refresh_customers):
+            or a.refresh_customers or a.refresh_margins):
         p.error('choose --fix-dashboards, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -568,6 +594,8 @@ def main():
         migrate_interviews(api)
     if a.refresh_customers:
         refresh_customers(api)
+    if a.refresh_margins:
+        refresh_margins(api)
     if a.probe_project:
         probe_project(api)
     if a.fix_dashboards:
