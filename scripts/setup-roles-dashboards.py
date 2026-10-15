@@ -5,7 +5,7 @@ Creates or updates (safe to run again, it never creates duplicates):
   - the four roles: Manager, Interview Manager, Coordinator, Finance
   - the menu, quick-create list, Calendar entity list, INR currency, India time zone
     and India/US as the first phone-number countries
-  - the default dashboard (tabs "Today" and "Money")
+  - a dashboard per role
 
 It does not create users. To give someone a role, pass --assign.
 
@@ -188,6 +188,8 @@ DASHLET_ROWS = {
     'CPaymentBlock': [['name', 'link'], ['remainingHrs', 'paymentStatus']],
     'CPayout': [['name', 'link'], ['amount', 'payeeType']],
     'Lead': [['name', 'link'], ['bgcStatus', 'referrer']],
+    'CBgcCheck': [['name', 'link'], ['bgcType', 'bgcStatus']],
+    'Task': [['name', 'link'], ['dateEnd', 'priority']],
 }
 
 
@@ -202,59 +204,102 @@ def expanded_layout(entity):
 
 
 def records(dashlet_id, title, entity, primary, x, y, width=2, height=2,
-            sort_by=None, direction='asc'):
+            sort_by=None, direction='asc', only_my=False):
     """Returns (layout item, options) for a Records dashlet."""
     item = {'id': dashlet_id, 'name': 'Records', 'x': x, 'y': y,
             'width': width, 'height': height}
     options = {
         'title': title, 'entityType': entity, 'primaryFilter': primary,
         'displayRecords': 8, 'autorefreshInterval': 1,
-        'expandedLayout': expanded_layout(entity), 'boolFilterList': [],
+        'expandedLayout': expanded_layout(entity),
+        'boolFilterList': ['onlyMy'] if only_my else [],
     }
     if sort_by:
         options.update({'sortBy': sort_by, 'sortDirection': direction})
     return item, options
 
 
-def build_dashboard():
-    layout_today, layout_money, options = [], [], {}
+def calendar(dashlet_id, title, scopes):
+    item = {'id': dashlet_id, 'name': 'Calendar', 'x': 0, 'y': 0, 'width': 4, 'height': 3}
+    return item, {'title': title, 'mode': 'basicWeek', 'autorefreshInterval': 1,
+                  'enabledScopeList': scopes}
 
-    def add(target, pair):
-        target.append(pair[0])
-        options[pair[0]['id']] = pair[1]
 
-    layout_today.append({'id': 'bqCalendar', 'name': 'Calendar', 'x': 0, 'y': 0,
-                         'width': 4, 'height': 3})
-    options['bqCalendar'] = {
-        'title': 'My week', 'mode': 'basicWeek', 'autorefreshInterval': 1,
-        'enabledScopeList': ['CTimesheet', 'CInterviewSession', 'Meeting', 'Call', 'Task'],
-    }
-    add(layout_today, records('bqPlannedTs', 'Planned timesheets', 'CTimesheet',
-                              'planned', 0, 3, sort_by='dateStart'))
-    add(layout_today, records('bqPlannedIv', 'Planned interviews', 'CInterviewSession',
-                              'planned', 2, 3, sort_by='dateStart'))
-    add(layout_today, records('bqLowHrs', 'Blocks with 5 or fewer hours left',
-                              'CPaymentBlock', 'lowHours', 0, 5))
-    add(layout_today, records('bqAwaitPay', 'Interviews waiting for payment',
-                              'CInterviewSession', 'awaitingPayment', 2, 5,
-                              sort_by='dateStart'))
-    add(layout_today, records('bqBgc', 'BGC in verification', 'Lead',
-                              'bgcInVerification', 0, 7))
+# Each dashboard is a list of tabs. A tab is (name, [dashlets]); a dashlet is
+# (kind, id, title, entity, filter, extra). Positions are filled in below: two per row.
+W = [
+    ('cal', 'bqCalendar', 'My week', ['CTimesheet', 'CInterviewSession', 'Meeting', 'Call', 'Task']),
+    ('cal', 'bqCalendarIv', 'My week', ['CInterviewSession', 'Meeting', 'Call', 'Task']),
+]
+CAL_ALL, CAL_IV = W
 
-    add(layout_money, records('bqUnpaidTs', 'Timesheets to pay out', 'CTimesheet',
-                              'unpaid', 0, 0, sort_by='dateStart'))
-    add(layout_money, records('bqUnpaidIv', 'Interviews to pay out',
-                              'CInterviewSession', 'unpaid', 2, 0, sort_by='dateStart'))
-    add(layout_money, records('bqDuePayouts', 'Payouts due', 'CPayout', 'due', 0, 3))
-    add(layout_money, records('bqReferral', 'Referral fees to pay', 'Lead',
-                              'referralDue', 2, 3))
-    add(layout_money, records('bqPendingBlocks', 'Payment blocks awaiting payment',
-                              'CPaymentBlock', 'pendingPayment', 0, 6))
+PLANNED_TS = ('rec', 'bqPlannedTs', 'Planned timesheets', 'CTimesheet', 'planned',
+              {'sort_by': 'dateStart'})
+PLANNED_IV = ('rec', 'bqPlannedIv', 'Planned interviews', 'CInterviewSession', 'planned',
+              {'sort_by': 'dateStart'})
+NO_FREELANCER = ('rec', 'bqNoFreelancer', 'Interviews with no freelancer',
+                 'CInterviewSession', 'noFreelancer', {'sort_by': 'dateStart'})
+AWAIT_PAY = ('rec', 'bqAwaitPay', 'Interviews waiting for payment', 'CInterviewSession',
+             'awaitingPayment', {'sort_by': 'dateStart'})
+LOW_HRS = ('rec', 'bqLowHrs', 'Packages with 5 or fewer hours left', 'CPaymentBlock',
+           'lowHours', {})
+MY_OVERDUE = ('rec', 'bqMyOverdue', 'My overdue tasks', 'Task', 'overdue',
+              {'only_my': True, 'sort_by': 'dateEnd'})
+MY_TODAY = ('rec', 'bqMyToday', 'My tasks due today', 'Task', 'today', {'only_my': True})
+BGC_CHECK = ('rec', 'bqBgcCheck', 'BGC checks in verification', 'CBgcCheck',
+             'inVerification', {})
+BGC_LEAD = ('rec', 'bqBgc', 'New-lead BGC in verification', 'Lead', 'bgcInVerification', {})
+UNPAID_TS = ('rec', 'bqUnpaidTs', 'Timesheets to pay out', 'CTimesheet', 'unpaid',
+             {'sort_by': 'dateStart'})
+UNPAID_IV = ('rec', 'bqUnpaidIv', 'Interviews to pay out', 'CInterviewSession', 'unpaid',
+             {'sort_by': 'dateStart'})
+DUE_PAYOUTS = ('rec', 'bqDuePayouts', 'Payouts due', 'CPayout', 'due', {})
+REF_LEAD = ('rec', 'bqReferral', 'Referral fees to pay (leads)', 'Lead', 'referralDue', {})
+REF_BGC = ('rec', 'bqReferralBgc', 'Referral fees to pay (BGC)', 'CBgcCheck',
+           'referralDue', {})
+PENDING_PKG = ('rec', 'bqPendingBlocks', 'Packages awaiting payment', 'CPaymentBlock',
+               'pendingPayment', {})
 
-    layout = [
-        {'id': 'bqTabToday', 'name': 'Today', 'layout': layout_today},
-        {'id': 'bqTabMoney', 'name': 'Money', 'layout': layout_money},
-    ]
+# Who sees what. Manager first: anyone with the Manager role gets the full set.
+DASHBOARDS = {
+    'Manager': [
+        ('Today', [CAL_ALL, PLANNED_IV, PLANNED_TS, MY_OVERDUE, MY_TODAY]),
+        ('Attention', [NO_FREELANCER, LOW_HRS, AWAIT_PAY, BGC_CHECK, BGC_LEAD]),
+        ('Money', [UNPAID_TS, UNPAID_IV, DUE_PAYOUTS, REF_LEAD, REF_BGC, PENDING_PKG]),
+    ],
+    'Interview Manager': [
+        ('Interviews', [CAL_IV, PLANNED_IV, NO_FREELANCER, AWAIT_PAY, MY_OVERDUE,
+                        MY_TODAY]),
+    ],
+    'Coordinator': [
+        ('Today', [CAL_ALL, PLANNED_IV, PLANNED_TS, MY_OVERDUE, MY_TODAY]),
+        ('Follow up', [NO_FREELANCER, LOW_HRS, BGC_CHECK, BGC_LEAD]),
+    ],
+    'Finance': [
+        ('Money', [UNPAID_TS, UNPAID_IV, DUE_PAYOUTS, REF_LEAD, REF_BGC, PENDING_PKG]),
+    ],
+}
+ROLE_ORDER = ['Manager', 'Interview Manager', 'Coordinator', 'Finance']
+
+
+def build_dashboard(role='Manager'):
+    layout, options = [], {}
+    for tab_name, dashlets in DASHBOARDS[role]:
+        tab, y, col = [], 0, 0
+        for d in dashlets:
+            if d[0] == 'cal':
+                pair = calendar(d[1], d[2], d[3])
+                y, col = 3, 0
+            else:
+                extra = d[5]
+                pair = records(d[1], d[2], d[3], d[4], col * 2, y, **extra)
+                col += 1
+                if col == 2:
+                    col, y = 0, y + 2
+            tab.append(pair[0])
+            options[pair[0]['id']] = pair[1]
+        tab_id = 'bqTab' + ''.join(c for c in tab_name.title() if c.isalnum())
+        layout.append({'id': tab_id, 'name': tab_name, 'layout': tab})
     return layout, options
 
 
@@ -320,7 +365,7 @@ def sync_settings(api):
     currencies = settings.get('currencyList') or []
     if 'INR' not in currencies:
         currencies = currencies + ['INR']
-    layout, options = build_dashboard()
+    layout, options = build_dashboard('Manager')
     body = {
         'tabList': TAB_LIST,
         'quickCreateList': QUICK_CREATE,
@@ -337,8 +382,8 @@ def sync_settings(api):
 
 
 def apply_dashboards(api, force):
-    """Copies the default dashboard into each user's own preferences. EspoCRM shows the
-    default only through this copy. Users who already built their own dashboard are left
+    """Gives each user the dashboard that fits their role. A user with several roles gets
+    the first match in ROLE_ORDER. Users who already built their own dashboard are left
     alone unless --reset-user-dashboards is given."""
     for user in api.list('User', 'id,userName,isActive'):
         if not user.get('isActive', True):
@@ -347,15 +392,21 @@ def apply_dashboards(api, force):
         if prefs.get('dashboardLayout') and not force:
             print(f'Dashboard for {user["userName"]}: kept (personal layout)')
             continue
-        print(f'Dashboard for {user["userName"]}: set to default')
-        api.call('POST', 'Preferences/action/resetDashboard', {'id': user['id']}, write=True)
+        names = set((api.get(f'User/{user["id"]}').get('rolesNames') or {}).values())
+        role = next((r for r in ROLE_ORDER if r in names), 'Manager')
+        layout, options = build_dashboard(role)
+        print(f'Dashboard for {user["userName"]}: {role}')
+        api.call('PUT', f'Preferences/{user["id"]}',
+                 {'dashboardLayout': layout, 'dashletsOptions': options}, write=True)
 
 
 def assign_users(api, assignments, role_ids):
+    """A user can get several of our roles: repeat --assign for the same user."""
     if not assignments:
         return
     users = api.list('User', 'id,userName,emailAddress')
     ours = {i for i in role_ids.values() if i}
+    wanted = {}
     for item in assignments:
         who, _, role = item.partition('=')
         if role not in role_ids:
@@ -364,11 +415,13 @@ def assign_users(api, assignments, role_ids):
         if not match:
             sys.exit(f'User "{who}" not found. Create the user first.')
         user = match[0]
+        wanted.setdefault(user['id'], (user, []))[1].append(role)
+    for user, roles in wanted.values():
         current = api.get(f'User/{user["id"]}')
         keep = [r for r in (current.get('rolesIds') or []) if r not in ours]
-        print(f'User {user["userName"]}: role {role}')
+        print(f'User {user["userName"]}: role {", ".join(roles)}')
         api.call('PUT', f'User/{user["id"]}',
-                 {'rolesIds': keep + [role_ids[role]]}, write=True)
+                 {'rolesIds': keep + [role_ids[r] for r in roles]}, write=True)
 
 
 def main():

@@ -30,8 +30,7 @@ What you see where:
 | Freelancer | Projects, timesheets, interview sessions, payouts |
 | Provider | Freelancers, BGC leads, payouts |
 | Referrer | Leads, payouts, contacts |
-| Dashboard, tab **Today** | Planned timesheets and sessions, blocks with 5 or fewer hours left, BGC in verification |
-| Dashboard, tab **Money** | Held timesheets and sessions not yet paid, due payouts, referral fees due |
+| Dashboard (by role) | Manager: Today, Attention (no freelancer, low hours, BGC), Money. Coordinator: Today, Follow up. Interview Manager: Interviews. Finance: Money |
 
 ## What the demo contains
 
