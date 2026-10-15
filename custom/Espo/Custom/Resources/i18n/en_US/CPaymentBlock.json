@@ -28,7 +28,7 @@
         }
     },
     "labels": {
-        "Create CPaymentBlock": "Create Hours Purchase"
+        "Create CPaymentBlock": "Create Hours Package"
     },
     "presetFilters": {
         "lowHours": "5 or fewer hours left",

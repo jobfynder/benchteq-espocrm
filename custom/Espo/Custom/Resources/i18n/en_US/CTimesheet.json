@@ -1,6 +1,6 @@
 {
     "fields": {
-        "paymentBlock": "Hours Purchase",
+        "paymentBlock": "Hours Package",
         "freelancer": "Freelancer",
         "hours": "Hours",
         "payout": "Payout",
@@ -15,7 +15,7 @@
         "project": "Project"
     },
     "links": {
-        "paymentBlock": "Hours Purchase",
+        "paymentBlock": "Hours Package",
         "freelancer": "Freelancer",
         "payout": "Payout",
         "project": "Project"
