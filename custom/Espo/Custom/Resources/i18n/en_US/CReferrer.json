@@ -14,7 +14,8 @@
         "whatsApp": "WhatsApp",
         "leads": "Leads",
         "payouts": "Payouts",
-        "phone": "Phone"
+        "phone": "Phone",
+        "whatsAppNumber": "WhatsApp"
     },
     "links": {
         "accounts": "Accounts",
@@ -40,5 +41,8 @@
             "Active": "Active",
             "In-Active": "In-Active"
         }
+    },
+    "tooltips": {
+        "whatsAppNumber": "WhatsApp number with country code, for example +919876543210. Copied from Phone when the CRM was updated."
     }
 }

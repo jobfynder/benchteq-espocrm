@@ -18,6 +18,11 @@
         "notSortable": true
     },
     {
+        "name": "whatsAppNumber",
+        "width": 16,
+        "notSortable": true
+    },
+    {
         "name": "assignedUser",
         "width": 18,
         "hidden": true

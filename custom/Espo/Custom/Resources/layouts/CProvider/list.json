@@ -21,6 +21,11 @@
         "width": 16
     },
     {
+        "name": "whatsAppNumber",
+        "width": 16,
+        "notSortable": true
+    },
+    {
         "name": "commissionTerms",
         "width": 16
     }

@@ -13,7 +13,8 @@
         "bgcProviderCost": "Provider Cost (INR)",
         "bgcProviderCostCurrency": "Provider Cost (Currency)",
         "bgcStatus": "BGC Status",
-        "cPayouts": "Payouts"
+        "cPayouts": "Payouts",
+        "whatsAppNumber": "WhatsApp"
     },
     "options": {
         "cServicetype": {
@@ -52,7 +53,8 @@
     },
     "tooltips": {
         "bgcFee": "Fills in from BGC Type when empty: US 55,000, India 18,000, Both 55,000. You can edit it.",
-        "referralPaid": "Ticks itself when a Referrer Payout linked to this lead is marked Paid."
+        "referralPaid": "Ticks itself when a Referrer Payout linked to this lead is marked Paid.",
+        "whatsAppNumber": "WhatsApp number with country code, for example +919876543210. Copied from Phone when the CRM was updated."
     },
     "panels": {
         "bgc": "BGC"

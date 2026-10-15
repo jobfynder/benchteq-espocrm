@@ -1,0 +1,72 @@
+name: Demo data and WhatsApp
+
+# Runs scripts/demo-data-and-whatsapp.py against production through the EspoCRM API.
+# Deploy the code with the WhatsApp field first. Start with dry_run on (the default).
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: Show what would change without changing anything
+        required: true
+        default: true
+        type: boolean
+      whatsapp:
+        description: Copy Phone into WhatsApp where WhatsApp is empty
+        required: false
+        default: true
+        type: boolean
+      demo:
+        description: Create the DEMO story (lead, project, payments, payouts)
+        required: false
+        default: true
+        type: boolean
+      remove_demo:
+        description: Delete every DEMO record (use after the training)
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: read
+
+concurrency:
+  group: crm-setup-production
+  cancel-in-progress: false
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Run script
+        env:
+          ESPO_URL: ${{ secrets.ESPO_URL }}
+          ESPO_USER: ${{ secrets.ESPO_USER }}
+          ESPO_PASSWORD: ${{ secrets.ESPO_PASSWORD }}
+          EXPECTED_HOSTNAME: ${{ vars.ESPOCRM_PRODUCTION_HOSTNAME }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          WHATSAPP: ${{ inputs.whatsapp }}
+          DEMO: ${{ inputs.demo }}
+          REMOVE_DEMO: ${{ inputs.remove_demo }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$ESPO_URL" && test -n "$ESPO_USER" && test -n "$ESPO_PASSWORD"
+          test -n "$EXPECTED_HOSTNAME"
+          norm() { printf '%s' "$1" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]' | sed -E 's#^https?://##; s#/+$##'; }
+          url_host="$(norm "$ESPO_URL")"
+          expected_host="$(norm "$EXPECTED_HOSTNAME")"
+          if [ "$url_host" != "$expected_host" ]; then
+            echo "ESPO_URL does not match the production hostname"
+            exit 1
+          fi
+          export ESPO_URL="https://$url_host"
+          args=()
+          [ "$DRY_RUN" = "true" ] && args+=(--dry-run)
+          [ "$WHATSAPP" = "true" ] && args+=(--whatsapp)
+          [ "$DEMO" = "true" ] && args+=(--demo)
+          [ "$REMOVE_DEMO" = "true" ] && args+=(--remove-demo)
+          python3 scripts/demo-data-and-whatsapp.py "${args[@]}"

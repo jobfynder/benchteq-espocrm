@@ -11,7 +11,8 @@
         "deliveryResources": "Delivery Resources",
         "referrer": "Referrer",
         "bgcLeads": "BGC Leads",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "whatsAppNumber": "WhatsApp"
     },
     "links": {
         "deliveryResources": "Freelancers",
@@ -38,5 +39,8 @@
         "interviewSupport": "Interview Support Providers",
         "jobSupport": "Job Support Providers",
         "bgc": "BGC Providers"
+    },
+    "tooltips": {
+        "whatsAppNumber": "WhatsApp number with country code, for example +919876543210. Copied from Phone when the CRM was updated."
     }
 }

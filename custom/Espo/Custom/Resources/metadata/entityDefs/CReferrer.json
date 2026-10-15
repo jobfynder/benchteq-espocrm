@@ -82,6 +82,12 @@
         "payouts": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "whatsAppNumber": {
+            "type": "varchar",
+            "maxLength": 50,
+            "isCustom": true,
+            "tooltip": true
         }
     },
     "links": {

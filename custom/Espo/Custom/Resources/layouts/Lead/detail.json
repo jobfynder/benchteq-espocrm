@@ -27,6 +27,12 @@
             ],
             [
                 {
+                    "name": "whatsAppNumber"
+                },
+                false
+            ],
+            [
+                {
                     "name": "status"
                 },
                 {
