@@ -53,8 +53,8 @@ What you see where:
   *Referral Fee Paid*.
 - Open the second Payment Block, set Payment Status to **Paid**, then add a timesheet.
 
-## WhatsApp
+## Phone and WhatsApp
 
-Contact, Lead, Freelancer, Provider and Referrer now have a **WhatsApp** field next to
-Phone. The job copies Phone into WhatsApp only where WhatsApp is empty. It never overwrites
-a WhatsApp number and never touches Account (a company, not a person).
+Contact, Lead, Account, Freelancer, Provider and Referrer use the standard **Phone** field.
+Click **+** to add more numbers, pick the country, and choose the type: Mobile, Mobile and
+WhatsApp, WhatsApp, Office, Home, Fax or Other.

@@ -1,11 +1,5 @@
 {
     "fields": {
-        "whatsAppNumber": {
-            "type": "varchar",
-            "maxLength": 50,
-            "isCustom": true,
-            "tooltip": true
-        },
         "phoneNumber": {
             "typeList": [
                 "Mobile",

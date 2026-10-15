@@ -64,11 +64,6 @@
             "maxLength": 100,
             "isCustom": true
         },
-        "phone": {
-            "type": "varchar",
-            "maxLength": 255,
-            "isCustom": true
-        },
         "leads": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
@@ -76,58 +71,6 @@
         "payouts": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
-        },
-        "whatsAppNumber": {
-            "type": "varchar",
-            "maxLength": 50,
-            "isCustom": true,
-            "tooltip": true
-        },
-        "phoneCountry": {
-            "type": "enum",
-            "options": [
-                "+91",
-                "+1",
-                "+44",
-                "+971",
-                "+61",
-                "+65",
-                "+49",
-                "+966",
-                "+974",
-                "+64",
-                "+60",
-                "+94",
-                "+977",
-                "+880",
-                "+92",
-                "Other"
-            ],
-            "default": "+91",
-            "isCustom": true
-        },
-        "whatsAppCountry": {
-            "type": "enum",
-            "options": [
-                "+91",
-                "+1",
-                "+44",
-                "+971",
-                "+61",
-                "+65",
-                "+49",
-                "+966",
-                "+974",
-                "+64",
-                "+60",
-                "+94",
-                "+977",
-                "+880",
-                "+92",
-                "Other"
-            ],
-            "default": "+91",
-            "isCustom": true
         },
         "phoneNumber": {
             "type": "phone",

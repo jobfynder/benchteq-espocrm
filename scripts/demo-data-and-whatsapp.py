@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-"""Two one-off jobs for the live CRM, both safe to run again:
+"""One-off jobs for the live CRM, both safe to run again:
 
-  --whatsapp      Copy Phone into WhatsApp for Contact, Lead, Freelancer, Provider and
-                  Referrer. Only records where WhatsApp is empty and Phone is filled.
+  --show-record   Read only. Show the phone data of one record, like Lead/6ad022706b0544e92.
   --demo          Create one complete demo story (Job Support, Interview Support, BGC,
                   payments, payouts). Every record is named or described "DEMO ...".
   --link-timesheets  Fill Timesheet.project from the Payment Block (so Projects list them).
@@ -10,11 +9,10 @@
                   no longer exists, which causes "No primary filter ... for ...".
   --remove-demo   Delete every record whose description starts with "DEMO".
 
-Run the WhatsApp job after the code with the new field is deployed and EspoCRM is rebuilt.
 Start with --dry-run: it reads the CRM and prints what it would do, and changes nothing.
 
   export ESPO_URL=https://crm.example.com ESPO_USER=admin ESPO_PASSWORD=...
-  python3 scripts/demo-data-and-whatsapp.py --whatsapp --demo --dry-run
+  python3 scripts/demo-data-and-whatsapp.py --demo --dry-run
 
 Only Python 3.8+ is needed, no extra packages.
 """
@@ -28,13 +26,9 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timedelta, timezone
 
-WA = 'whatsAppNumber'
-# entity -> field that holds its phone number
-PHONE_FIELD = {'Contact': 'phoneNumber', 'Lead': 'phoneNumber', 'CDeliveryResource': 'phone',
-               'CProvider': 'phone', 'CReferrer': 'phone'}
-# entities where Phone and WhatsApp each have a country code picker
-COUNTRY = ('phoneCountry', 'whatsAppCountry')
-HAS_COUNTRY = ('CDeliveryResource', 'CProvider', 'CReferrer')
+# entity -> field that holds its phone number (EspoCRM's native phone field)
+PHONE_FIELD = {'Contact': 'phoneNumber', 'Lead': 'phoneNumber', 'CDeliveryResource': 'phoneNumber',
+               'CProvider': 'phoneNumber', 'CReferrer': 'phoneNumber'}
 TAG = 'DEMO'
 NOTE = 'DEMO data for team training. Safe to delete.'
 NEW = '(new)'
@@ -93,38 +87,6 @@ def ts(days, hour, minutes=0):
     return (d + timedelta(days=days)).strftime('%Y-%m-%d %H:%M:%S')
 
 
-# ------------------------------------------------------------------ WhatsApp
-
-def copy_whatsapp(api):
-    print('\n== Copy Phone to WhatsApp ==')
-    for entity, phone in PHONE_FIELD.items():
-        changed = skipped = 0
-        offset = 0
-        while True:
-            page = api.call('GET', entity, params={
-                'select': f'id,name,{phone},{WA}' + (',' + ','.join(COUNTRY) if entity in HAS_COUNTRY else ''),
-                'maxSize': 200, 'offset': offset,
-                'orderBy': 'createdAt', 'order': 'asc'})
-            rows = page.get('list', [])
-            if WA not in (rows[0] if rows else {WA: ''}):
-                sys.exit(f'{entity} has no WhatsApp field yet. Deploy the new code and rebuild '
-                         'EspoCRM first.')
-            for r in rows:
-                if r.get(phone) and not r.get(WA):
-                    body = {WA: r[phone]}
-                    if entity in HAS_COUNTRY and r.get(COUNTRY[0]):
-                        body[COUNTRY[1]] = r[COUNTRY[0]]
-                    api.update(entity, r['id'], body)
-                    changed += 1
-                else:
-                    skipped += 1
-            offset += len(rows)
-            if not rows or offset >= page.get('total', 0):
-                break
-        print(f'{entity}: {changed} to copy, {skipped} left as they are '
-              '(no phone, or WhatsApp already filled)')
-
-
 # ---------------------------------------------------------------------- demo
 
 def ensure(api, entity, where, body):
@@ -159,29 +121,28 @@ def demo_data(api):
     # People and companies that supply the work
     referrer = ensure(api, 'CReferrer', [eq('name', 'DEMO Referrer - Anil')], {
         'name': 'DEMO Referrer - Anil', 'referrerType': 'Existing Consultant', 'referralFee': 2000,
-        'status': 'Active', 'phone': '+919800000001', WA: '+919800000001'})
+        'status': 'Active', 'phoneNumber': '+919800000001'})
     provider = ensure(api, 'CProvider', [eq('name', 'DEMO BGC Provider')], {
         'name': 'DEMO BGC Provider', 'providerType': 'Company', 'servicesSupplied': ['BGC Verification'],
-        'phone': '+919800000002', WA: '+919800000002', 'email': 'demo-provider@example.com'})
+        'phoneNumber': '+919800000002', 'email': 'demo-provider@example.com'})
     trainer = ensure(api, 'CDeliveryResource', [eq('name', 'DEMO Trainer - Meena')], {
         'name': 'DEMO Trainer - Meena', 'roleType': 'Trainer', 'technologies': ['Java'],
         'screeningResult': 'Passed', 'rating': 5, 'workStatus': 'On Project',
-        'phone': '+919800000003', WA: '+919800000003', 'email': 'demo-meena@example.com',
+        'phoneNumber': '+919800000003', 'email': 'demo-meena@example.com',
         'providerId': provider})
     supporter = ensure(api, 'CDeliveryResource', [eq('name', 'DEMO Supporter - Kiran')], {
         'name': 'DEMO Supporter - Kiran', 'roleType': 'Interview Supporter', 'technologies': ['Java'],
         'screeningResult': 'Passed', 'rating': 4, 'workStatus': 'Available',
-        'phone': '+919800000004', WA: '+919800000004', 'email': 'demo-kiran@example.com'})
+        'phoneNumber': '+919800000004', 'email': 'demo-kiran@example.com'})
 
     # 1. Job Support: lead -> contact + account -> project -> payment block -> timesheets
     print('\n-- Job Support')
     lead = ensure(api, 'Lead', [eq('lastName', 'Kumar'), eq('firstName', 'DEMO Ravi')], {
         'firstName': 'DEMO Ravi', 'lastName': 'Kumar', 'serviceType': 'Job Support', 'status': 'New',
-        'accountName': 'DEMO Acme Technologies', 'phoneNumber': '+919800000011', WA: '+919800000011',
+        'accountName': 'DEMO Acme Technologies', 'phoneNumber': '+919800000011',
         'emailAddress': 'demo-ravi@example.com', 'source': 'Web Site'})
     ravi, acme = convert(api, lead, {
-        'Contact': {'firstName': 'DEMO Ravi', 'lastName': 'Kumar', 'phoneNumber': '+919800000011',
-                    WA: '+919800000011', 'emailAddress': 'demo-ravi@example.com', 'description': NOTE},
+        'Contact': {'firstName': 'DEMO Ravi', 'lastName': 'Kumar', 'phoneNumber': '+919800000011', 'emailAddress': 'demo-ravi@example.com', 'description': NOTE},
         'Account': {'name': 'DEMO Acme Technologies', 'description': NOTE}})
     project = ensure(api, 'CProject', [eq('consultantId', ravi), eq('technology', 'Java')], {
         'assignedUserId': me, 'technology': 'Java', 'consultantId': ravi, 'accountId': acme,
@@ -206,11 +167,10 @@ def demo_data(api):
     print('\n-- Interview Support')
     lead = ensure(api, 'Lead', [eq('lastName', 'Rao'), eq('firstName', 'DEMO Sita')], {
         'firstName': 'DEMO Sita', 'lastName': 'Rao', 'serviceType': 'Interview Support',
-        'status': 'New', 'phoneNumber': '+919800000012', WA: '+919800000012',
+        'status': 'New', 'phoneNumber': '+919800000012',
         'emailAddress': 'demo-sita@example.com'})
     sita, _ = convert(api, lead, {
-        'Contact': {'firstName': 'DEMO Sita', 'lastName': 'Rao', 'phoneNumber': '+919800000012',
-                    WA: '+919800000012', 'emailAddress': 'demo-sita@example.com',
+        'Contact': {'firstName': 'DEMO Sita', 'lastName': 'Rao', 'phoneNumber': '+919800000012', 'emailAddress': 'demo-sita@example.com',
                     'description': NOTE}})
     held = ensure(api, 'CInterviewSession', [eq('contactId', sita), eq('dateStart', ts(-3, 10))], {
         'assignedUserId': me, 'contactId': sita, 'freelancerId': supporter, 'interviewType': 'Interview',
@@ -227,13 +187,12 @@ def demo_data(api):
     print('\n-- BGC')
     lead = ensure(api, 'Lead', [eq('lastName', 'Patel'), eq('firstName', 'DEMO Dev')], {
         'firstName': 'DEMO Dev', 'lastName': 'Patel', 'serviceType': 'BGC', 'status': 'New',
-        'phoneNumber': '+919800000013', WA: '+919800000013', 'emailAddress': 'demo-dev@example.com',
+        'phoneNumber': '+919800000013', 'emailAddress': 'demo-dev@example.com',
         'referrerId': referrer, 'bgcType': 'US', 'bgcProviderId': provider})
     api.update('Lead', lead, {'bgcStatus': 'In Verification', 'bgcAmountReceived': 55000})
     api.update('Lead', lead, {'bgcStatus': 'Cleared', 'bgcProviderCost': 20000})
     convert(api, lead, {
-        'Contact': {'firstName': 'DEMO Dev', 'lastName': 'Patel', 'phoneNumber': '+919800000013',
-                    WA: '+919800000013', 'emailAddress': 'demo-dev@example.com', 'description': NOTE}})
+        'Contact': {'firstName': 'DEMO Dev', 'lastName': 'Patel', 'phoneNumber': '+919800000013', 'emailAddress': 'demo-dev@example.com', 'description': NOTE}})
 
     # 4. Money out
     print('\n-- Payouts')
@@ -266,7 +225,7 @@ def diagnose_phones(api):
     """Read-only. Shows how phone data looks for Contact and Freelancer records."""
     print('\n== Phone diagnosis (read only, numbers masked) ==')
     for entity in ('CDeliveryResource', 'CProvider', 'CReferrer', 'Contact'):
-        field = PHONE_FIELD.get(entity, 'phone')
+        field = PHONE_FIELD.get(entity, 'phoneNumber')
         meta = api.call('GET', 'Metadata', params={'key': f'entityDefs.{entity}.fields.{field}'})
         print(f'{entity}: field definition at runtime: {json.dumps(meta)[:300]}')
         page = api.call('GET', entity, params={'maxSize': 200, 'orderBy': 'createdAt', 'order': 'asc'})
@@ -410,85 +369,6 @@ def probe_project(api):
                 print(f'  {e.code}  {path}  {e.headers.get("X-Status-Reason", "")}')
 
 
-# ------------------------------------------------- native phone with WhatsApp type
-
-NATIVE_ENTITIES = ('Contact', 'Lead', 'Account', 'CDeliveryResource', 'CProvider', 'CReferrer')
-LEGACY_PHONE = ('CDeliveryResource', 'CProvider', 'CReferrer')   # old text Phone + country picker
-
-
-def digits(v):
-    return ''.join(ch for ch in (v or '') if ch.isdigit())
-
-
-def with_code(number, country):
-    n = (number or '').strip()
-    if not n or n.startswith('+') or not (country or '').startswith('+'):
-        return n
-    return country + digits(n).lstrip('0')
-
-
-def native_phones(api):
-    """Move old Phone and WhatsApp text into EspoCRM's native phone field.
-    A number that is both Phone and WhatsApp becomes one entry typed "Mobile and WhatsApp";
-    a different WhatsApp number becomes an extra entry typed "WhatsApp". Old values are kept."""
-    print('\n== Move Phone and WhatsApp into the native phone field ==')
-    for entity in NATIVE_ENTITIES:
-        legacy = entity in LEGACY_PHONE
-        select = 'id,name,phoneNumber,phoneNumberData'
-        if entity != 'Account':
-            select += ',whatsAppNumber'
-        if legacy:
-            select += ',phone,phoneCountry,whatsAppCountry'
-        changed = same = 0
-        offset = 0
-        shown = 0
-        while True:
-            page = api.call('GET', entity, params={'select': select, 'maxSize': 200, 'offset': offset,
-                                                   'orderBy': 'createdAt', 'order': 'asc'})
-            rows = page.get('list', [])
-            for r in rows:
-                entries = [dict(e) for e in (r.get('phoneNumberData') or [])]
-                if not entries and r.get('phoneNumber'):
-                    entries = [{'phoneNumber': r['phoneNumber'], 'type': 'Mobile', 'primary': True,
-                                'optOut': False, 'invalid': False}]
-                before = json.dumps(entries, sort_keys=True)
-
-                def find(num):
-                    d = digits(num)
-                    return next((e for e in entries if d and digits(e['phoneNumber']) == d), None)
-
-                def add(num, kind):
-                    entries.append({'phoneNumber': num, 'type': kind, 'primary': not entries,
-                                    'optOut': False, 'invalid': False})
-
-                if legacy:
-                    ph = with_code(r.get('phone'), r.get('phoneCountry'))
-                    if ph and not find(ph):
-                        add(ph, 'Mobile')
-                wa = with_code(r.get('whatsAppNumber'), r.get('whatsAppCountry')) if entity != 'Account' else ''
-                if wa:
-                    hit = find(wa)
-                    if hit is None:
-                        add(wa, 'WhatsApp')
-                    elif hit.get('type') == 'Mobile':
-                        hit['type'] = 'Mobile and WhatsApp'
-                if json.dumps(entries, sort_keys=True) != before:
-                    primary = next((e for e in entries if e.get('primary')), entries[0])
-                    if shown < 3:
-                        print(f'  {entity} {r.get("name")}: ' + ', '.join(
-                            f'{e["type"]} {mask(e["phoneNumber"])}' for e in entries))
-                        shown += 1
-                    api.update(entity, r['id'], {'phoneNumber': primary['phoneNumber'],
-                                                 'phoneNumberData': entries})
-                    changed += 1
-                else:
-                    same += 1
-            offset += len(rows)
-            if not rows or offset >= page.get('total', 0):
-                break
-        print(f'{entity}: {changed} to update, {same} already fine')
-
-
 def remove_demo(api):
     print('\n== Remove demo data ==')
     order = ['CPayout', 'CTimesheet', 'CInterviewSession', 'CPaymentBlock', 'CProject',
@@ -506,20 +386,18 @@ def main():
     p.add_argument('--user', default=os.environ.get('ESPO_USER'))
     p.add_argument('--password', default=os.environ.get('ESPO_PASSWORD'))
     p.add_argument('--api-key', default=os.environ.get('ESPO_API_KEY'))
-    p.add_argument('--whatsapp', action='store_true')
     p.add_argument('--demo', action='store_true')
     p.add_argument('--remove-demo', action='store_true')
     p.add_argument('--diagnose-phones', action='store_true')
     p.add_argument('--link-timesheets', action='store_true')
     p.add_argument('--fix-dashboards', action='store_true')
     p.add_argument('--probe-project', action='store_true')
-    p.add_argument('--native-phones', action='store_true')
     p.add_argument('--show-record', help='read only, Entity/id')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
-    if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards or a.probe_project or a.native_phones or a.show_record):
-        p.error('choose --fix-dashboards, --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
+    if not (a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
+            or a.fix_dashboards or a.probe_project or a.show_record):
+        p.error('choose --fix-dashboards, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
     api = Api(a.url, a.user, a.password, a.api_key, a.dry_run)
@@ -528,16 +406,12 @@ def main():
         diagnose_phones(api)
     if a.show_record:
         show_record(api, a.show_record)
-    if a.native_phones:
-        native_phones(api)
     if a.probe_project:
         probe_project(api)
     if a.fix_dashboards:
         fix_dashboards(api)
     if a.link_timesheets:
         link_timesheets(api)
-    if a.whatsapp:
-        copy_whatsapp(api)
     if a.demo:
         demo_data(api)
     if a.remove_demo:

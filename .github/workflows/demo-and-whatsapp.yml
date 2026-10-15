@@ -1,7 +1,7 @@
 name: Demo data and WhatsApp
 
 # Runs scripts/demo-data-and-whatsapp.py against production through the EspoCRM API.
-# Deploy the code with the WhatsApp field first. Start with dry_run on (the default).
+# Start with dry_run on (the default).
 
 on:
   workflow_dispatch:
@@ -11,15 +11,10 @@ on:
         required: true
         default: true
         type: boolean
-      whatsapp:
-        description: Copy Phone into WhatsApp where WhatsApp is empty
-        required: false
-        default: true
-        type: boolean
       demo:
         description: Create the DEMO story (lead, project, payments, payouts)
         required: false
-        default: true
+        default: false
         type: boolean
       diagnose_phones:
         description: Read only. Show how phone numbers are stored (numbers masked)
@@ -33,11 +28,6 @@ on:
         type: boolean
       fix_dashboards:
         description: Remove dashboard widgets whose filter no longer exists
-        required: false
-        default: false
-        type: boolean
-      native_phones:
-        description: Move Phone and WhatsApp into the native phone field (old values are kept)
         required: false
         default: false
         type: boolean
@@ -78,14 +68,12 @@ jobs:
           ESPO_PASSWORD: ${{ secrets.ESPO_PASSWORD }}
           EXPECTED_HOSTNAME: ${{ vars.ESPOCRM_PRODUCTION_HOSTNAME }}
           DRY_RUN: ${{ inputs.dry_run }}
-          WHATSAPP: ${{ inputs.whatsapp }}
           DEMO: ${{ inputs.demo }}
           REMOVE_DEMO: ${{ inputs.remove_demo }}
           DIAGNOSE: ${{ inputs.diagnose_phones }}
           LINK_TIMESHEETS: ${{ inputs.link_timesheets }}
           FIX_DASHBOARDS: ${{ inputs.fix_dashboards }}
           PROBE_PROJECT: ${{ inputs.probe_project }}
-          NATIVE_PHONES: ${{ inputs.native_phones }}
           SHOW_RECORD: ${{ inputs.show_record }}
         shell: bash
         run: |
@@ -102,13 +90,11 @@ jobs:
           export ESPO_URL="https://$url_host"
           args=()
           [ "$DRY_RUN" = "true" ] && args+=(--dry-run)
-          [ "$WHATSAPP" = "true" ] && args+=(--whatsapp)
           [ "$DEMO" = "true" ] && args+=(--demo)
           [ "$REMOVE_DEMO" = "true" ] && args+=(--remove-demo)
           [ "$DIAGNOSE" = "true" ] && args+=(--diagnose-phones)
           [ "$LINK_TIMESHEETS" = "true" ] && args+=(--link-timesheets)
           [ "$FIX_DASHBOARDS" = "true" ] && args+=(--fix-dashboards)
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
-          [ "$NATIVE_PHONES" = "true" ] && args+=(--native-phones)
           [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"
