@@ -36,6 +36,11 @@ on:
         required: false
         default: false
         type: boolean
+      probe_project:
+        description: Read only. Test every request made when a Project is opened
+        required: false
+        default: false
+        type: boolean
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -69,6 +74,7 @@ jobs:
           DIAGNOSE: ${{ inputs.diagnose_phones }}
           LINK_TIMESHEETS: ${{ inputs.link_timesheets }}
           FIX_DASHBOARDS: ${{ inputs.fix_dashboards }}
+          PROBE_PROJECT: ${{ inputs.probe_project }}
         shell: bash
         run: |
           set -euo pipefail
@@ -90,4 +96,5 @@ jobs:
           [ "$DIAGNOSE" = "true" ] && args+=(--diagnose-phones)
           [ "$LINK_TIMESHEETS" = "true" ] && args+=(--link-timesheets)
           [ "$FIX_DASHBOARDS" = "true" ] && args+=(--fix-dashboards)
+          [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"
