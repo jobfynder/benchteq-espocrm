@@ -16,6 +16,12 @@
             ],
             [
                 {
+                    "name": "whatsAppNumber"
+                },
+                false
+            ],
+            [
+                {
                     "name": "providerType"
                 },
                 {

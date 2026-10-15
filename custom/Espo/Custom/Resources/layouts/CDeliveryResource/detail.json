@@ -19,6 +19,12 @@
             ],
             [
                 {
+                    "name": "whatsAppNumber"
+                },
+                false
+            ],
+            [
+                {
                     "name": "technologies"
                 },
                 {

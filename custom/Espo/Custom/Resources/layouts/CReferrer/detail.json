@@ -13,7 +13,9 @@
                 {
                     "name": "phone"
                 },
-                false
+                {
+                    "name": "whatsAppNumber"
+                }
             ],
             [
                 {

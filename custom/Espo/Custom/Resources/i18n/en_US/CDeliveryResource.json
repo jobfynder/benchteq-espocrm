@@ -21,7 +21,8 @@
         "projects": "Projects",
         "timesheets": "Timesheets",
         "interviewSessions": "Interview Sessions",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "whatsAppNumber": "WhatsApp"
     },
     "links": {
         "provider": "Provider",
@@ -85,6 +86,7 @@
     },
     "tooltips": {
         "screeningResult": "Only Passed freelancers appear in the Shortlist and in project lookups.",
-        "provider": "Leave empty when the freelancer was sourced directly."
+        "provider": "Leave empty when the freelancer was sourced directly.",
+        "whatsAppNumber": "WhatsApp number with country code, for example +919876543210. Copied from Phone when the CRM was updated."
     }
 }

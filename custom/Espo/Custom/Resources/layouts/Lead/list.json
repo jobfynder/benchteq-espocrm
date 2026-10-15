@@ -27,6 +27,11 @@
         "notSortable": true
     },
     {
+        "name": "whatsAppNumber",
+        "width": 16,
+        "notSortable": true
+    },
+    {
         "name": "source",
         "width": 15,
         "notSortable": true,

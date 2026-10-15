@@ -18,6 +18,11 @@
         "notSortable": true
     },
     {
+        "name": "whatsAppNumber",
+        "width": 16,
+        "notSortable": true
+    },
+    {
         "name": "screeningResult",
         "width": 11
     },

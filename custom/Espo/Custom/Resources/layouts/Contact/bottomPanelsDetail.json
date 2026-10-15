@@ -6,16 +6,16 @@
         "disabled": true
     },
     "_tabBreak_1": {
-        "index": 0,
+        "index": 3,
         "tabBreak": true,
         "tabLabel": "$Stream"
     },
     "stream": {
         "sticked": false,
-        "index": 1
+        "index": 4
     },
     "_tabBreak_3": {
-        "index": 2,
+        "index": 5,
         "tabBreak": true,
         "tabLabel": "$Deals"
     },
@@ -23,30 +23,41 @@
         "dynamicLogicVisible": null,
         "style": "default",
         "sticked": false,
-        "index": 3
+        "index": 6
     },
     "_tabBreak_0": {
-        "index": 4,
+        "index": 7,
         "tabBreak": true,
         "tabLabel": "$Services"
     },
     "cServicePackages": {
-        "index": 5
+        "index": 8
     },
     "_tabBreak_2": {
-        "index": 6,
+        "index": 9,
         "tabBreak": true,
         "tabLabel": "$Referrer"
     },
     "cReferrers": {
-        "index": 7
+        "index": 10
     },
     "_tabBreak_4": {
-        "index": 8,
+        "index": 11,
         "tabBreak": true,
         "tabLabel": "$History"
     },
     "history": {
-        "index": 9
+        "index": 12
+    },
+    "_tabBreak_5": {
+        "index": 0,
+        "tabBreak": true,
+        "tabLabel": "Delivery"
+    },
+    "cProjects": {
+        "index": 1
+    },
+    "cInterviewSessions": {
+        "index": 2
     }
 }

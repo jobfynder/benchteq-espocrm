@@ -1,12 +1,16 @@
 {
     "fields": {
         "cReferrers": "Referrers",
-        "cServicePackages": "Service Packages"
+        "cServicePackages": "Service Packages",
+        "whatsAppNumber": "WhatsApp"
     },
     "links": {
         "cReferrers": "Referrers",
         "cServicePackages": "Service Packages",
         "cProjects": "Projects",
         "cInterviewSessions": "Interview Sessions"
+    },
+    "tooltips": {
+        "whatsAppNumber": "WhatsApp number with country code, for example +919876543210. Copied from Phone when the CRM was updated."
     }
 }
