@@ -368,6 +368,26 @@ def fix_dashboards(api):
     print(f'Checked {len(users)} user(s) and the default dashboard.')
 
 
+def probe_project(api):
+    print('\n== Open a Project: which request answers Not found ==')
+    rows = api.call('GET', 'CProject', params={'maxSize': 3, 'select': 'id,name'}).get('list', [])
+    print(f'{len(rows)} project(s) found')
+    for r in rows:
+        print(f'Project {r["name"]}')
+        paths = [f'CProject/{r["id"]}', f'CProject/{r["id"]}/timesheets',
+                 f'CProject/{r["id"]}/paymentBlocks', f'CProject/{r["id"]}/payouts',
+                 f'Activities/CProject/{r["id"]}/activities',
+                 f'Activities/CProject/{r["id"]}/history',
+                 f'CProject/{r["id"]}/tasks', f'Stream/CProject/{r["id"]}']
+        for path in paths:
+            req = urllib.request.Request(api.base + path + '?maxSize=1', headers=api.headers)
+            try:
+                urllib.request.urlopen(req, timeout=60).read()
+                print(f'  OK   {path}')
+            except urllib.error.HTTPError as e:
+                print(f'  {e.code}  {path}  {e.headers.get("X-Status-Reason", "")}')
+
+
 def remove_demo(api):
     print('\n== Remove demo data ==')
     order = ['CPayout', 'CTimesheet', 'CInterviewSession', 'CPaymentBlock', 'CProject',
@@ -391,10 +411,11 @@ def main():
     p.add_argument('--diagnose-phones', action='store_true')
     p.add_argument('--link-timesheets', action='store_true')
     p.add_argument('--fix-dashboards', action='store_true')
+    p.add_argument('--probe-project', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards):
+            or a.fix_dashboards or a.probe_project):
         p.error('choose --fix-dashboards, --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -402,6 +423,8 @@ def main():
     api.call('GET', 'App/user')
     if a.diagnose_phones:
         diagnose_phones(api)
+    if a.probe_project:
+        probe_project(api)
     if a.fix_dashboards:
         fix_dashboards(api)
     if a.link_timesheets:
