@@ -10,7 +10,8 @@
         "CProject": "Project",
         "CPaymentBlock": "Package",
         "CTimesheet": "Timesheet",
-        "CInterviewSession": "Interview Session"
+        "CInterviewSession": "Interview Session",
+        "CBgcCheck": "BGC Check"
     },
     "scopeNamesPlural": {
         "CDeliveryResource": "Freelancers",
@@ -23,6 +24,7 @@
         "CProject": "Projects",
         "CPaymentBlock": "Packages",
         "CTimesheet": "Timesheets",
-        "CInterviewSession": "Interview Sessions"
+        "CInterviewSession": "Interview Sessions",
+        "CBgcCheck": "BGC Checks"
     }
 }

@@ -26,6 +26,9 @@
         },
         "payouts": {
             "layout": "listSmall"
+        },
+        "bgcChecks": {
+            "layout": "listSmall"
         }
     }
 }

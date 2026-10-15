@@ -1,0 +1,21 @@
+{
+    "controller": "controllers/record",
+    "boolFilterList": [
+        "onlyMy"
+    ],
+    "iconClass": "fas fa-user-check",
+    "filterList": [
+        {
+            "name": "inVerification",
+            "style": "warning"
+        },
+        {
+            "name": "referralDue"
+        }
+    ],
+    "relationshipPanels": {
+        "payouts": {
+            "layout": "listSmall"
+        }
+    }
+}

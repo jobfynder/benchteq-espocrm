@@ -1,0 +1,18 @@
+[
+    {
+        "name": "name",
+        "link": true
+    },
+    {
+        "name": "bgcType",
+        "width": 12
+    },
+    {
+        "name": "bgcStatus",
+        "width": 16
+    },
+    {
+        "name": "customerFee",
+        "width": 16
+    }
+]

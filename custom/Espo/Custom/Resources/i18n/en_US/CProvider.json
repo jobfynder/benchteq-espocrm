@@ -11,13 +11,15 @@
         "referrer": "Referrer",
         "bgcLeads": "BGC Leads",
         "payouts": "Payouts",
-        "phoneNumber": "Phone"
+        "phoneNumber": "Phone",
+        "bgcChecks": "BGC Checks"
     },
     "links": {
         "deliveryResources": "Freelancers",
         "referrer": "Referrer",
         "bgcLeads": "BGC Leads",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "bgcChecks": "BGC Checks"
     },
     "labels": {
         "Create CProvider": "Create Provider"

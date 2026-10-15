@@ -118,6 +118,9 @@
         "interviewSessions": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "bgcCheck": {
+            "type": "link"
         }
     },
     "links": {
@@ -192,6 +195,12 @@
             "type": "hasMany",
             "foreign": "payout",
             "entity": "CInterviewSession",
+            "isCustom": true
+        },
+        "bgcCheck": {
+            "type": "belongsTo",
+            "foreign": "payouts",
+            "entity": "CBgcCheck",
             "isCustom": true
         }
     },

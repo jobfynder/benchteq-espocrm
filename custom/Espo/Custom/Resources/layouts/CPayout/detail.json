@@ -29,7 +29,9 @@
                 {
                     "name": "lead"
                 },
-                false
+                {
+                    "name": "bgcCheck"
+                }
             ],
             [
                 {
