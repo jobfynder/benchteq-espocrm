@@ -354,10 +354,12 @@ def apply_dashboards(api, force):
 
 
 def assign_users(api, assignments, role_ids):
+    """A user can get several of our roles: repeat --assign for the same user."""
     if not assignments:
         return
     users = api.list('User', 'id,userName,emailAddress')
     ours = {i for i in role_ids.values() if i}
+    wanted = {}
     for item in assignments:
         who, _, role = item.partition('=')
         if role not in role_ids:
@@ -366,11 +368,13 @@ def assign_users(api, assignments, role_ids):
         if not match:
             sys.exit(f'User "{who}" not found. Create the user first.')
         user = match[0]
+        wanted.setdefault(user['id'], (user, []))[1].append(role)
+    for user, roles in wanted.values():
         current = api.get(f'User/{user["id"]}')
         keep = [r for r in (current.get('rolesIds') or []) if r not in ours]
-        print(f'User {user["userName"]}: role {role}')
+        print(f'User {user["userName"]}: role {", ".join(roles)}')
         api.call('PUT', f'User/{user["id"]}',
-                 {'rolesIds': keep + [role_ids[role]]}, write=True)
+                 {'rolesIds': keep + [role_ids[r] for r in roles]}, write=True)
 
 
 def main():
