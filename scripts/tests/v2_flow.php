@@ -103,7 +103,7 @@ $lead->set('bgcType', 'Both'); $em->saveEntity($lead);
 check('bgc Both fee', (float) $lead->get('bgcFee'), 55000.0);
 $lead2 = $em->createEntity('Lead', ['lastName' => 'Custom', 'serviceType' => 'BGC', 'bgcType' => 'India', 'bgcFee' => 12000]);
 check('manual fee kept on create', (float) $lead2->get('bgcFee'), 12000.0);
-check('fee currency INR', $lead->get('bgcFeeCurrency'), 'INR');
+check('fee currency USD', $lead->get('bgcFeeCurrency'), 'USD');
 
 // payouts
 $p = $em->createEntity('CPayout', ['payeeType' => 'Referrer', 'referrerId' => $ref->getId(), 'leadId' => $lead->getId(), 'payoutType' => 'Referral Fee', 'amount' => 2000]);

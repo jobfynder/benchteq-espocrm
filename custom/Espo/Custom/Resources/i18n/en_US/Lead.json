@@ -10,7 +10,7 @@
         "bgcAmountReceived": "Amount Received",
         "bgcAmountReceivedCurrency": "Amount Received (Currency)",
         "bgcProvider": "Provider",
-        "bgcProviderCost": "Provider Cost (INR)",
+        "bgcProviderCost": "Provider Cost",
         "bgcProviderCostCurrency": "Provider Cost (Currency)",
         "bgcStatus": "BGC Status",
         "cPayouts": "Payouts"
