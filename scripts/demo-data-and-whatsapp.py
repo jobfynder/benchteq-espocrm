@@ -6,6 +6,8 @@
   --demo          Create one complete demo story (Job Support, Interview Support, BGC,
                   payments, payouts). Every record is named or described "DEMO ...".
   --link-timesheets  Fill Timesheet.project from the Payment Block (so Projects list them).
+  --fix-dashboards  Remove dashboard widgets (every user, plus the default) whose saved filter
+                  no longer exists, which causes "No primary filter ... for ...".
   --remove-demo   Delete every record whose description starts with "DEMO".
 
 Run the WhatsApp job after the code with the new field is deployed and EspoCRM is rebuilt.
@@ -304,6 +306,68 @@ def link_timesheets(api):
     print(f'CTimesheet: {changed} to link, {skipped} already linked or without a project')
 
 
+def filter_exists(api, entity, name, cache):
+    key = (entity, name)
+    if key not in cache:
+        req = urllib.request.Request(
+            api.base + entity + '?' + urllib.parse.urlencode(
+                {'maxSize': 1, 'primaryFilter': name}), headers=api.headers)
+        try:
+            urllib.request.urlopen(req, timeout=60).read()
+            cache[key] = True
+        except urllib.error.HTTPError as e:
+            reason = e.headers.get('X-Status-Reason', '')
+            cache[key] = not (e.code == 400 and 'primary filter' in reason.lower())
+    return cache[key]
+
+
+def clean_layout(api, layout, options, cache, label):
+    """Returns (new layout, new options, number removed). Handles tabs and flat lists."""
+    removed = 0
+    options = dict(options or {})
+
+    def keep(item):
+        nonlocal removed
+        opts = options.get(item.get('id')) or {}
+        entity, flt = opts.get('entityType'), opts.get('primaryFilter')
+        if item.get('name') == 'Records' and entity and flt and \
+                not filter_exists(api, entity, flt, cache):
+            print(f'  {label}: remove "{opts.get("title") or item.get("id")}" '
+                  f'({entity}, filter {flt} is gone)')
+            options.pop(item.get('id'), None)
+            removed += 1
+            return False
+        return True
+
+    out = []
+    for tab in layout or []:
+        if isinstance(tab, dict) and 'layout' in tab:
+            out.append(dict(tab, layout=[i for i in tab['layout'] if keep(i)]))
+        elif keep(tab):
+            out.append(tab)
+    return out, options, removed
+
+
+def fix_dashboards(api):
+    print('\n== Remove dashboard widgets with a missing filter ==')
+    cache = {}
+    users = api.call('GET', 'User', params={'maxSize': 200, 'select': 'id,userName'}).get('list', [])
+    for u in users:
+        pref = api.call('GET', f'Preferences/{u["id"]}')
+        layout, options, n = clean_layout(
+            api, pref.get('dashboardLayout'), pref.get('dashletsOptions'), cache, u['userName'])
+        if n:
+            api.call('PUT', f'Preferences/{u["id"]}',
+                     {'dashboardLayout': layout, 'dashletsOptions': options}, write=True)
+    st = api.call('GET', 'Settings')
+    layout, options, n = clean_layout(
+        api, st.get('dashboardLayout'), st.get('dashletsOptions'), cache, 'default dashboard')
+    if n:
+        api.call('PUT', 'Settings', {'dashboardLayout': layout, 'dashletsOptions': options},
+                 write=True)
+    print(f'Checked {len(users)} user(s) and the default dashboard.')
+
+
 def remove_demo(api):
     print('\n== Remove demo data ==')
     order = ['CPayout', 'CTimesheet', 'CInterviewSession', 'CPaymentBlock', 'CProject',
@@ -326,16 +390,20 @@ def main():
     p.add_argument('--remove-demo', action='store_true')
     p.add_argument('--diagnose-phones', action='store_true')
     p.add_argument('--link-timesheets', action='store_true')
+    p.add_argument('--fix-dashboards', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
-    if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets):
-        p.error('choose --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
+    if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
+            or a.fix_dashboards):
+        p.error('choose --fix-dashboards, --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
     api = Api(a.url, a.user, a.password, a.api_key, a.dry_run)
     api.call('GET', 'App/user')
     if a.diagnose_phones:
         diagnose_phones(api)
+    if a.fix_dashboards:
+        fix_dashboards(api)
     if a.link_timesheets:
         link_timesheets(api)
     if a.whatsapp:
