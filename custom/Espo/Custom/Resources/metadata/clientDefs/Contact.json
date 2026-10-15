@@ -25,5 +25,12 @@
         "cBgcChecks": {
             "layout": "listSmall"
         }
-    }
+    },
+    "filterList": [
+        "__APPEND__",
+        {
+            "name": "customers",
+            "style": "success"
+        }
+    ]
 }

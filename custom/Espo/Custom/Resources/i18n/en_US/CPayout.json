@@ -15,7 +15,7 @@
         "project": "Project",
         "lead": "Lead",
         "timesheets": "Timesheets",
-        "interviewSessions": "Interview Sessions",
+        "interviewSessions": "Interviews",
         "description": "Notes",
         "bgcCheck": "BGC Check"
     },
@@ -28,7 +28,7 @@
         "project": "Project",
         "lead": "Lead",
         "timesheets": "Timesheets",
-        "interviewSessions": "Interview Sessions",
+        "interviewSessions": "Interviews",
         "bgcCheck": "BGC Check"
     },
     "labels": {

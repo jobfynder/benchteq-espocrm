@@ -8,6 +8,10 @@
         "width": 22
     },
     {
+        "name": "customerStatus",
+        "width": 14
+    },
+    {
         "name": "emailAddress",
         "width": 22,
         "notSortable": true

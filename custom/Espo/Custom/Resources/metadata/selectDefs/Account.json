@@ -1,0 +1,5 @@
+{
+    "primaryFilterClassNameMap": {
+        "customers": "Espo\\Custom\\Classes\\Select\\Account\\PrimaryFilters\\Customers"
+    }
+}

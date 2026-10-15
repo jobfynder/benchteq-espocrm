@@ -10,7 +10,7 @@
         "CProject": "Project",
         "CPaymentBlock": "Package",
         "CTimesheet": "Timesheet",
-        "CInterviewSession": "Interview Session",
+        "CInterviewSession": "Interview",
         "CBgcCheck": "BGC Check"
     },
     "scopeNamesPlural": {
@@ -24,7 +24,7 @@
         "CProject": "Projects",
         "CPaymentBlock": "Packages",
         "CTimesheet": "Timesheets",
-        "CInterviewSession": "Interview Sessions",
+        "CInterviewSession": "Interviews",
         "CBgcCheck": "BGC Checks"
     }
 }

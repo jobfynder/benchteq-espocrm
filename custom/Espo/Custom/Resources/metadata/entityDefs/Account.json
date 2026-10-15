@@ -34,6 +34,20 @@
                 "Other"
             ],
             "defaultType": "Mobile"
+        },
+        "customerStatus": {
+            "type": "enum",
+            "options": [
+                "Prospect",
+                "Customer"
+            ],
+            "default": "Prospect",
+            "isCustom": true,
+            "audited": true,
+            "style": {
+                "Customer": "success"
+            },
+            "maxLength": 20
         }
     }
 }

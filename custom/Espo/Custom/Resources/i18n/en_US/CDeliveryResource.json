@@ -19,7 +19,7 @@
         "email": "Email",
         "projects": "Projects",
         "timesheets": "Timesheets",
-        "interviewSessions": "Interview Sessions",
+        "interviewSessions": "Interviews",
         "payouts": "Payouts",
         "phoneNumber": "Phone"
     },
@@ -30,7 +30,7 @@
         "primaryDeliveryResource": "Service Packages",
         "projects": "Projects",
         "timesheets": "Timesheets",
-        "interviewSessions": "Interview Sessions",
+        "interviewSessions": "Interviews",
         "payouts": "Payouts"
     },
     "labels": {

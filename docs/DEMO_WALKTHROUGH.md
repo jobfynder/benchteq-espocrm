@@ -13,7 +13,7 @@ record* ticked.
      │ Service =          ├─► Project ──► Package ──► Timesheets ──┐
      │ Job Support        │      │            (customer pays hours)      │
      │                    │      └─ Freelancer (does the work)           │
-     │ Interview Support  ├─► Interview Session ─────────────────────────┤
+     │ Interview Support  ├─► Interview ─────────────────────────┤
      │                    │      (type, slot, paid, feedback)            ▼
      │ BGC ── Provider    │                                           Payout
      └─ (fee, status)     │                       (Finance pays Freelancer, Provider, Referrer)
