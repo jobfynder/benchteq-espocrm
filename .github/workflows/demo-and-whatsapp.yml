@@ -56,6 +56,11 @@ on:
         required: false
         default: false
         type: boolean
+      refresh_margins:
+        description: Calculate the margin of existing Interviews, BGC Checks and Projects (run once after the update)
+        required: false
+        default: false
+        type: boolean
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -93,6 +98,7 @@ jobs:
           INSPECT: ${{ inputs.inspect }}
           MIGRATE_INTERVIEWS: ${{ inputs.migrate_interviews }}
           REFRESH_CUSTOMERS: ${{ inputs.refresh_customers }}
+          REFRESH_MARGINS: ${{ inputs.refresh_margins }}
         shell: bash
         run: |
           set -euo pipefail
@@ -117,5 +123,6 @@ jobs:
           [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
           [ "$MIGRATE_INTERVIEWS" = "true" ] && args+=(--migrate-interviews)
           [ "$REFRESH_CUSTOMERS" = "true" ] && args+=(--refresh-customers)
+          [ "$REFRESH_MARGINS" = "true" ] && args+=(--refresh-margins)
           [ -n "$INSPECT" ] && args+=(--inspect "$INSPECT")
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"
