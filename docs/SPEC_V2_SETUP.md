@@ -3,7 +3,7 @@
 ## Daily use (what the team does)
 
 **Job Support.** Lead (Service = Job Support) → Convert → Project (technology, consultant,
-freelancer, rates; the name fills itself) → Payment Block (hours, amount) → Timesheets.
+freelancer, rates; the name fills itself) → Hours Package (hours, amount) → Timesheets.
 After each call open the Timesheet and set Held. Connected and Remaining hours update by
 themselves, and the block closes at zero hours. The dashboard shows blocks with 5 or fewer
 hours left, so you know when to ask for the next payment.
@@ -59,7 +59,7 @@ Access (the team is small, so it is open):
 |---|---|---|---|---|
 | Lead, Contact, Account | all | create, read, edit | create, read, edit | read |
 | Freelancers | all | read | create, read, edit | read |
-| Project, Payment Block | all | none | create, read, edit, delete own | read (Payment Block: edit) |
+| Project, Hours Package | all | none | create, read, edit, delete own | read (Hours Package: edit) |
 | Timesheet | all | none | create, read, edit, delete own | read, edit |
 | Interview Session | all | create, read, edit, delete own | create, read, edit, delete own | read, edit |
 | Referrer | all | read | create, read, edit | read |
@@ -78,7 +78,7 @@ Mass update Freelancers whose Role Type is "Freelancer" to "Trainer".
 | Spec | Built | Reason |
 |---|---|---|
 | `paidToFreelancer` and `referralPaid` tick boxes | A `payout` link on Timesheet and Interview Session. `Lead.referralPaid` is filled by a hook | One place to record a payment |
-| `Project.amount` | Removed | Duplicated the Payment Blocks |
+| `Project.amount` | Removed | Duplicated the Hours Packages |
 | Timesheet `hours` formula | PHP hook from start and end | `duration` is not stored |
 | Supporter assigned only after Paid | Booking allowed. Held and No-Show need Paid | Slots are booked before money arrives |
 | Interview type, slots | `Type`, slots 30/45/60/90/180, default 30, Assessment moves a default slot to 90 | Asked for by the team |

@@ -10,7 +10,7 @@ record* ticked.
                            ▼
     Lead ── Convert ──► Contact (the consultant)  +  Account (their company)
      │                    │
-     │ Service =          ├─► Project ──► Payment Block ──► Timesheets ──┐
+     │ Service =          ├─► Project ──► Hours Package ──► Timesheets ──┐
      │ Job Support        │      │            (customer pays hours)      │
      │                    │      └─ Freelancer (does the work)           │
      │ Interview Support  ├─► Interview Session ─────────────────────────┤
@@ -25,8 +25,8 @@ What you see where:
 |---|---|
 | Contact, tab **Delivery** | Their projects and interview sessions |
 | Account, tab **Delivery** | Projects for that company |
-| Project | Payment Blocks and Payouts |
-| Payment Block | Timesheets, hours connected and remaining |
+| Project | Hours Packages and Payouts |
+| Hours Package | Timesheets, hours connected and remaining |
 | Freelancer | Projects, timesheets, interview sessions, payouts |
 | Provider | Freelancers, BGC leads, payouts |
 | Referrer | Leads, payouts, contacts |
@@ -36,8 +36,8 @@ What you see where:
 ## What the demo contains
 
 1. **Job Support: DEMO Ravi Kumar** (company DEMO Acme Technologies). Project Java with
-   freelancer DEMO Trainer - Meena. Payment Block 1: 5 hours, paid, 4 held, 1 hour left, so
-   it shows on the low hours list. Payment Block 2: 10 hours, payment pending (the "ask for
+   freelancer DEMO Trainer - Meena. Hours Package 1: 5 hours, paid, 4 held, 1 hour left, so
+   it shows on the low hours list. Hours Package 2: 10 hours, payment pending (the "ask for
    the next payment" case). Two timesheets are planned and show on the calendar. Two held
    timesheets are paid out; two are still to pay.
 2. **Interview Support: DEMO Sita Rao.** One held and paid interview with feedback, one
@@ -51,7 +51,7 @@ What you see where:
   Sessions, pick the held session, then set the payout to **Paid**.
 - Open the Referral Fee payout and set it to **Paid**. The DEMO Dev Patel lead now shows
   *Referral Fee Paid*.
-- Open the second Payment Block, set Payment Status to **Paid**, then add a timesheet.
+- Open the second Hours Package, set Payment Status to **Paid**, then add a timesheet.
 
 ## Phone and WhatsApp
 

@@ -59,6 +59,10 @@
         {
             "name": "awaitingPayment",
             "style": "warning"
+        },
+        {
+            "name": "noFreelancer",
+            "style": "danger"
         }
     ],
     "forcePatchAttributeDependencyMap": {

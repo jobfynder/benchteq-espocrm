@@ -46,7 +46,8 @@
     },
     "presetFilters": {
         "unpaid": "Held, supporter not yet paid out",
-        "awaitingPayment": "Planned, customer payment pending"
+        "awaitingPayment": "Planned, customer payment pending",
+        "noFreelancer": "No freelancer assigned"
     },
     "tooltips": {
         "paymentStatus": "A session can only be set to Held or No-Show once it is Paid.",
