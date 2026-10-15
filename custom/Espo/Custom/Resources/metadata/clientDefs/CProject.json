@@ -12,10 +12,6 @@
             {
                 "name": "history",
                 "reference": "history"
-            },
-            {
-                "name": "tasks",
-                "reference": "tasks"
             }
         ]
     },
