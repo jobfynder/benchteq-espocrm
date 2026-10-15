@@ -15,15 +15,10 @@
         "index": 5
     },
     "_tabBreak_3": {
-        "index": 6,
-        "tabBreak": true,
-        "tabLabel": "$Deals"
+        "disabled": true
     },
     "opportunities": {
-        "dynamicLogicVisible": null,
-        "style": "default",
-        "sticked": false,
-        "index": 7
+        "disabled": true
     },
     "_tabBreak_0": {
         "disabled": true
