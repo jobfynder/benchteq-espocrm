@@ -272,6 +272,21 @@ def inspect(api, spec):
         links = sorted({k for r in rows for k in r if k.endswith('Id') and k != 'id'})
         for k in links:
             print(f'  {k}: filled on {sum(1 for r in rows if r.get(k))} of {len(rows)}')
+        for key in ('serviceType', 'status', 'paymentStatus'):
+            if any(key in r for r in rows):
+                counts = {}
+                for r in rows:
+                    counts[r.get(key)] = counts.get(r.get(key), 0) + 1
+                print(f'  {key}: {json.dumps(counts)}')
+        if rows and 'serviceType' in rows[0]:
+            combo = {}
+            for r in rows:
+                k = (f'{r.get("serviceType")} | status {r.get("status")} | '
+                     f'freelancer {"yes" if r.get("primaryDeliveryResourceId") else "no"} | '
+                     f'provider {"yes" if r.get("fulfillingProviderId") else "no"}')
+                combo[k] = combo.get(k, 0) + 1
+            for k, v in sorted(combo.items()):
+                print(f'    {v:4d}  {k}')
         for r in rows[:5]:
             shown = {k[:-2] + 'Name': r.get(k[:-2] + 'Name') for k in links if r.get(k)}
             print(f'  - {r.get("name")} | {r.get("status")} | {json.dumps(shown)}')
