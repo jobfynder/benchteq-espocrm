@@ -24,6 +24,11 @@ class RequirePaymentBeforeHeld implements BeforeSave
             return;
         }
 
+        // History copied from the old Service Packages keeps its real status.
+        if (str_starts_with((string) $entity->get('description'), 'Migrated from Service Package ')) {
+            return;
+        }
+
         if (
             !$entity->isNew() &&
             !$entity->isAttributeChanged('status') &&

@@ -49,7 +49,7 @@
             "isCustom": true
         },
         "amountCurrency": {
-            "default": "INR"
+            "default": "USD"
         },
         "paymentStatus": {
             "type": "enum",

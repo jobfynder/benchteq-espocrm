@@ -5,7 +5,7 @@
         "account": "Account",
         "freelancer": "Freelancer",
         "assignedUser": "Coordinator",
-        "customerRate": "Customer Rate (INR/hr)",
+        "customerRate": "Customer Rate (per hour)",
         "customerRateCurrency": "Customer Rate (Currency)",
         "freelancerPayType": "Freelancer Pay Type",
         "freelancerRate": "Freelancer Rate (INR)",

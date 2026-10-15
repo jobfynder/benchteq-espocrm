@@ -292,6 +292,74 @@ def inspect(api, spec):
             print(f'  - {r.get("name")} | {r.get("status")} | {json.dumps(shown)}')
 
 
+MIGRATED = 'Migrated from Service Package '
+
+
+def migrate_interviews(api):
+    """Copy each old Interview Support Service Package into one Interview Session.
+    Nothing is changed or deleted on the old package. Safe to run again."""
+    print('\n== Move Interview Support packages into Interview Sessions ==')
+    select = ('id,name,contactId,contactName,primaryDeliveryResourceId,status,paymentStatus,'
+              'packagePrice,packagePriceCurrency,amountPaid,amountPaidCurrency,sessionsTotal,'
+              'sessionsRemaining,startDate,createdAt,assignedUserId')
+    packages, offset = [], 0
+    while True:
+        page = api.call('GET', 'CServicePackage', params={
+            'select': select, 'maxSize': 200, 'offset': offset, 'orderBy': 'createdAt',
+            'order': 'asc', 'where[0][type]': 'equals', 'where[0][attribute]': 'serviceType',
+            'where[0][value]': 'Interview Support'})
+        rows = page.get('list', [])
+        packages += rows
+        offset += len(rows)
+        if not rows or offset >= page.get('total', 0):
+            break
+    done, offset = set(), 0
+    while True:
+        page = api.call('GET', 'CInterviewSession', params={
+            'select': 'id,description', 'maxSize': 200, 'offset': offset})
+        rows = page.get('list', [])
+        for r in rows:
+            d = r.get('description') or ''
+            if d.startswith(MIGRATED):
+                done.add(d[len(MIGRATED):].split()[0].rstrip('.'))
+        offset += len(rows)
+        if not rows or offset >= page.get('total', 0):
+            break
+    made = skipped = no_contact = no_freelancer = 0
+    status_map = {'Completed': 'Held', 'Active': 'Planned', 'Expired': 'Cancelled'}
+    for p in packages:
+        if p['id'] in done:
+            skipped += 1
+            continue
+        if not p.get('contactId'):
+            no_contact += 1
+            print(f'  skipped (no customer): {p.get("name")}')
+            continue
+        day = (p.get('startDate') or (p.get('createdAt') or '')[:10] or '2026-01-01')
+        start = f'{day} 09:00:00'
+        end = f'{day} 09:30:00'
+        notes = (f'{MIGRATED}{p["id"]}. Sessions in the old package: {p.get("sessionsTotal")}, '
+                 f'remaining: {p.get("sessionsRemaining")}. Old payment status: '
+                 f'{p.get("paymentStatus")}. Amount paid so far: {p.get("amountPaid")} '
+                 f'{p.get("amountPaidCurrency") or ""}.')
+        body = {
+            'name': f'Interview - {p.get("contactName")}',
+            'interviewType': 'Interview', 'status': status_map.get(p.get('status'), 'Planned'),
+            'dateStart': start, 'dateEnd': end, 'contactId': p['contactId'],
+            'freelancerId': p.get('primaryDeliveryResourceId'),
+            'paymentStatus': 'Paid' if p.get('paymentStatus') == 'Paid' else 'Pending',
+            'assignedUserId': p.get('assignedUserId'), 'description': notes}
+        if p.get('packagePrice') is not None:
+            body['customerFee'] = p['packagePrice']
+            body['customerFeeCurrency'] = p.get('packagePriceCurrency') or 'INR'
+        if not body['freelancerId']:
+            no_freelancer += 1
+        api.create('CInterviewSession', body)
+        made += 1
+    print(f'{len(packages)} Interview Support package(s): {made} to create, {skipped} already moved, '
+          f'{no_contact} skipped without a customer; {no_freelancer} of the new ones have no Freelancer')
+
+
 def link_timesheets(api):
     """Fill Timesheet.project from its Payment Block, so a Project lists its timesheets."""
     print('\n== Link timesheets to projects ==')
@@ -431,10 +499,11 @@ def main():
     p.add_argument('--probe-project', action='store_true')
     p.add_argument('--show-record', help='read only, Entity/id')
     p.add_argument('--inspect', help='read only, comma separated entities, like CSessionLog,CInterviewSession')
+    p.add_argument('--migrate-interviews', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards or a.probe_project or a.show_record or a.inspect):
+            or a.fix_dashboards or a.probe_project or a.show_record or a.inspect or a.migrate_interviews):
         p.error('choose --fix-dashboards, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -446,6 +515,8 @@ def main():
         show_record(api, a.show_record)
     if a.inspect:
         inspect(api, a.inspect)
+    if a.migrate_interviews:
+        migrate_interviews(api)
     if a.probe_project:
         probe_project(api)
     if a.fix_dashboards:
