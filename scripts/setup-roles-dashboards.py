@@ -168,7 +168,7 @@ def group_tab(tab_id, text, icon, items):
 
 
 TAB_LIST = [
-    'Lead', 'Contact',
+    'Lead', 'Contact', 'Account',
     'CDeliveryResource',
     url_tab('bqShortlist', 'Freelancer Shortlist',
             '#CDeliveryResource/list/primaryFilter=shortlist', 'fas fa-user-check',
@@ -176,7 +176,7 @@ TAB_LIST = [
     'CProject', 'CTimesheet', 'CInterviewSession', 'Calendar',
     group_tab('bqMoney', 'Money', 'fas fa-rupee-sign', ['CPaymentBlock', 'CPayout']),
     group_tab('bqPartners', 'Partners', 'fas fa-handshake',
-              ['CReferrer', 'CProvider', 'Account']),
+              ['CReferrer', 'CProvider']),
 ]
 QUICK_CREATE = ['Lead', 'Contact', 'CTimesheet', 'CInterviewSession',
                 'CPaymentBlock', 'CProject']
@@ -383,6 +383,8 @@ def main():
                    help='give a user (username or email) a role; repeatable')
     p.add_argument('--reset-user-dashboards', action='store_true',
                    help='replace every user\'s personal dashboard with the default')
+    p.add_argument('--menu-only', action='store_true',
+                   help='only update the navigation menu (Settings tabList); roles, dashboards and the rest are left alone')
     p.add_argument('--dry-run', action='store_true', help='show what would change')
     a = p.parse_args()
 
@@ -391,6 +393,11 @@ def main():
 
     api = Api(a.url, a.user, a.password, a.api_key, a.dry_run)
     api.get('App/user')  # fails early on bad URL or login
+    if a.menu_only:
+        print('Settings: navigation menu only')
+        api.call('PUT', 'Settings', {'tabList': TAB_LIST}, write=True)
+        print('Done.' + (' (dry run, nothing was changed)' if a.dry_run else ''))
+        return
     role_ids = sync_roles(api)
     sync_settings(api)
     assign_users(api, a.assign, role_ids)

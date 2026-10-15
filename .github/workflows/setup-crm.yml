@@ -16,6 +16,11 @@ on:
         description: 'Give users a role. Comma separated, for example: priya=Coordinator,rahul=Finance,amit=Interview Manager'
         required: false
         type: string
+      menu_only:
+        description: Only update the navigation menu (leave roles and dashboards alone)
+        required: false
+        default: false
+        type: boolean
       reset_user_dashboards:
         description: Replace every user's personal dashboard with the default
         required: false
@@ -45,6 +50,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           ASSIGN: ${{ inputs.assign }}
           RESET_DASHBOARDS: ${{ inputs.reset_user_dashboards }}
+          MENU_ONLY: ${{ inputs.menu_only }}
         shell: bash
         run: |
           set -euo pipefail
@@ -64,6 +70,7 @@ jobs:
           args=()
           [ "$DRY_RUN" = "true" ] && args+=(--dry-run)
           [ "$RESET_DASHBOARDS" = "true" ] && args+=(--reset-user-dashboards)
+          [ "$MENU_ONLY" = "true" ] && args+=(--menu-only)
           if [ -n "$ASSIGN" ]; then
             IFS=',' read -ra items <<< "$ASSIGN"
             for item in "${items[@]}"; do
