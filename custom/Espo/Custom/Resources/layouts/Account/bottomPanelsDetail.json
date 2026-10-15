@@ -26,12 +26,10 @@
         "index": 3
     },
     "_tabBreak_3": {
-        "index": 4,
-        "tabBreak": true,
-        "tabLabel": "$Deals"
+        "disabled": true
     },
     "opportunities": {
-        "index": 5
+        "disabled": true
     },
     "_tabBreak_2": {
         "disabled": true
