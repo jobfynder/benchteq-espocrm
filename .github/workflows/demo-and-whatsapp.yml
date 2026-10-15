@@ -46,6 +46,11 @@ on:
         required: false
         default: ''
         type: string
+      migrate_interviews:
+        description: Copy old Interview Support packages into Interview Sessions (old packages stay as they are)
+        required: false
+        default: false
+        type: boolean
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -81,6 +86,7 @@ jobs:
           PROBE_PROJECT: ${{ inputs.probe_project }}
           SHOW_RECORD: ${{ inputs.show_record }}
           INSPECT: ${{ inputs.inspect }}
+          MIGRATE_INTERVIEWS: ${{ inputs.migrate_interviews }}
         shell: bash
         run: |
           set -euo pipefail
@@ -103,5 +109,6 @@ jobs:
           [ "$FIX_DASHBOARDS" = "true" ] && args+=(--fix-dashboards)
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
           [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
+          [ "$MIGRATE_INTERVIEWS" = "true" ] && args+=(--migrate-interviews)
           [ -n "$INSPECT" ] && args+=(--inspect "$INSPECT")
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"

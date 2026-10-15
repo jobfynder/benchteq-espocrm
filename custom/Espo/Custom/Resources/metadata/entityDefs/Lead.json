@@ -35,7 +35,7 @@
             "isCustom": true
         },
         "bgcFeeCurrency": {
-            "default": "INR"
+            "default": "USD"
         },
         "bgcAmountReceived": {
             "type": "currency",
@@ -43,7 +43,7 @@
             "isCustom": true
         },
         "bgcAmountReceivedCurrency": {
-            "default": "INR"
+            "default": "USD"
         },
         "bgcProvider": {
             "type": "link"

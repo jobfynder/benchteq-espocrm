@@ -391,8 +391,12 @@ def main():
     api = Api(a.url, a.user, a.password, a.api_key, a.dry_run)
     api.get('App/user')  # fails early on bad URL or login
     if a.menu_only:
-        print('Settings: navigation menu only')
-        api.call('PUT', 'Settings', {'tabList': TAB_LIST}, write=True)
+        print('Settings: navigation menu and currency list (INR and USD)')
+        currencies = api.get('Settings').get('currencyList') or []
+        for code in ('INR', 'USD'):
+            if code not in currencies:
+                currencies = currencies + [code]
+        api.call('PUT', 'Settings', {'tabList': TAB_LIST, 'currencyList': currencies}, write=True)
         print('Done.' + (' (dry run, nothing was changed)' if a.dry_run else ''))
         return
     role_ids = sync_roles(api)

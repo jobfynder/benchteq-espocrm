@@ -140,7 +140,7 @@
             "isCustom": true
         },
         "customerFeeCurrency": {
-            "default": "INR"
+            "default": "USD"
         },
         "paymentStatus": {
             "type": "enum",

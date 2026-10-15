@@ -2,7 +2,7 @@
     "fields": {
         "contact": "Customer",
         "freelancer": "Interview Supporter",
-        "customerFee": "Customer Fee (INR)",
+        "customerFee": "Customer Fee",
         "customerFeeCurrency": "Customer Fee (Currency)",
         "paymentStatus": "Payment Status",
         "paidDate": "Paid Date",
