@@ -25,7 +25,7 @@
         "whatsAppNumber": "WhatsApp",
         "phoneCountry": "Phone country",
         "whatsAppCountry": "WhatsApp country",
-        "phoneNumber": "Phone (trial, with country)"
+        "phoneNumber": "Phone"
     },
     "links": {
         "provider": "Provider",

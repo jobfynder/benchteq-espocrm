@@ -13,13 +13,8 @@
         "notSortable": true
     },
     {
-        "name": "phone",
+        "name": "phoneNumber",
         "width": 14,
-        "notSortable": true
-    },
-    {
-        "name": "whatsAppNumber",
-        "width": 16,
         "notSortable": true
     },
     {

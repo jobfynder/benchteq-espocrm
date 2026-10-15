@@ -5,6 +5,18 @@
             "maxLength": 50,
             "isCustom": true,
             "tooltip": true
+        },
+        "phoneNumber": {
+            "typeList": [
+                "Mobile",
+                "Mobile and WhatsApp",
+                "WhatsApp",
+                "Office",
+                "Home",
+                "Fax",
+                "Other"
+            ],
+            "defaultType": "Mobile"
         }
     },
     "links": {

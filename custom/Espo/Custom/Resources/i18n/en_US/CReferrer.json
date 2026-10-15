@@ -17,7 +17,8 @@
         "phone": "Phone",
         "whatsAppNumber": "WhatsApp",
         "phoneCountry": "Phone country",
-        "whatsAppCountry": "WhatsApp country"
+        "whatsAppCountry": "WhatsApp country",
+        "phoneNumber": "Phone"
     },
     "links": {
         "accounts": "Accounts",

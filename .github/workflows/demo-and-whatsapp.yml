@@ -36,6 +36,11 @@ on:
         required: false
         default: false
         type: boolean
+      native_phones:
+        description: Move Phone and WhatsApp into the native phone field (old values are kept)
+        required: false
+        default: false
+        type: boolean
       probe_project:
         description: Read only. Test every request made when a Project is opened
         required: false
@@ -75,6 +80,7 @@ jobs:
           LINK_TIMESHEETS: ${{ inputs.link_timesheets }}
           FIX_DASHBOARDS: ${{ inputs.fix_dashboards }}
           PROBE_PROJECT: ${{ inputs.probe_project }}
+          NATIVE_PHONES: ${{ inputs.native_phones }}
         shell: bash
         run: |
           set -euo pipefail
@@ -97,4 +103,5 @@ jobs:
           [ "$LINK_TIMESHEETS" = "true" ] && args+=(--link-timesheets)
           [ "$FIX_DASHBOARDS" = "true" ] && args+=(--fix-dashboards)
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
+          [ "$NATIVE_PHONES" = "true" ] && args+=(--native-phones)
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"

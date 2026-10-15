@@ -237,8 +237,11 @@
             "type": "phone",
             "typeList": [
                 "Mobile",
+                "Mobile and WhatsApp",
                 "WhatsApp",
                 "Office",
+                "Home",
+                "Fax",
                 "Other"
             ],
             "defaultType": "Mobile",

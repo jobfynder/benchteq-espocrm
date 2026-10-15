@@ -26,12 +26,6 @@
             ],
             [
                 {
-                    "name": "whatsAppNumber"
-                },
-                false
-            ],
-            [
-                {
                     "name": "referrer"
                 },
                 {
