@@ -247,6 +247,30 @@ def demo_data(api):
     # dashboard then has something to show, and the team can attach and pay them live.
 
 
+def mask(v):
+    v = str(v)
+    return '*' * max(len(v) - 2, 0) + v[-2:]
+
+
+def diagnose_phones(api):
+    """Read-only. Shows how phone data looks for Contact and Freelancer records."""
+    print('\n== Phone diagnosis (read only, numbers masked) ==')
+    for entity in ('CDeliveryResource', 'CProvider', 'CReferrer', 'Contact'):
+        field = PHONE_FIELD.get(entity, 'phone')
+        meta = api.call('GET', 'Metadata', params={'key': f'entityDefs.{entity}.fields.{field}'})
+        print(f'{entity}: field definition at runtime: {json.dumps(meta)[:300]}')
+        page = api.call('GET', entity, params={'maxSize': 200, 'orderBy': 'createdAt', 'order': 'asc'})
+        rows = page.get('list', [])
+        with_value = sum(1 for r in rows if r.get(field))
+        with_data = sum(1 for r in rows if r.get(field + 'Data'))
+        print(f'{entity}: {len(rows)} read, {with_value} with {field}, {with_data} with {field}Data')
+        for r in rows[:3]:
+            keys = {k: (mask(v) if k == field and v else v) for k, v in r.items()
+                    if 'phone' in k.lower() and k != field + 'Data'}
+            data = [{**d, 'phoneNumber': mask(d.get('phoneNumber', ''))} for d in (r.get(field + 'Data') or [])]
+            print(f'  {r.get("id")}: {json.dumps(keys)} data={json.dumps(data)}')
+
+
 def remove_demo(api):
     print('\n== Remove demo data ==')
     order = ['CPayout', 'CTimesheet', 'CInterviewSession', 'CPaymentBlock', 'CProject',
@@ -267,14 +291,17 @@ def main():
     p.add_argument('--whatsapp', action='store_true')
     p.add_argument('--demo', action='store_true')
     p.add_argument('--remove-demo', action='store_true')
+    p.add_argument('--diagnose-phones', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
-    if not (a.whatsapp or a.demo or a.remove_demo):
-        p.error('choose --whatsapp, --demo or --remove-demo')
+    if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones):
+        p.error('choose --whatsapp, --demo, --remove-demo or --diagnose-phones')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
     api = Api(a.url, a.user, a.password, a.api_key, a.dry_run)
     api.call('GET', 'App/user')
+    if a.diagnose_phones:
+        diagnose_phones(api)
     if a.whatsapp:
         copy_whatsapp(api)
     if a.demo:

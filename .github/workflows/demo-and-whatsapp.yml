@@ -21,6 +21,11 @@ on:
         required: false
         default: true
         type: boolean
+      diagnose_phones:
+        description: Read only. Show how phone numbers are stored (numbers masked)
+        required: false
+        default: false
+        type: boolean
       remove_demo:
         description: Delete every DEMO record (use after the training)
         required: false
@@ -51,6 +56,7 @@ jobs:
           WHATSAPP: ${{ inputs.whatsapp }}
           DEMO: ${{ inputs.demo }}
           REMOVE_DEMO: ${{ inputs.remove_demo }}
+          DIAGNOSE: ${{ inputs.diagnose_phones }}
         shell: bash
         run: |
           set -euo pipefail
@@ -69,4 +75,5 @@ jobs:
           [ "$WHATSAPP" = "true" ] && args+=(--whatsapp)
           [ "$DEMO" = "true" ] && args+=(--demo)
           [ "$REMOVE_DEMO" = "true" ] && args+=(--remove-demo)
+          [ "$DIAGNOSE" = "true" ] && args+=(--diagnose-phones)
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"
