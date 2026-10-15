@@ -13,7 +13,7 @@
         "startDate": "Start Date",
         "scheduleNotes": "Agreed Time Slots",
         "status": "Status",
-        "paymentBlocks": "Payment Blocks",
+        "paymentBlocks": "Hours Purchases",
         "payouts": "Payouts",
         "timesheets": "Timesheets"
     },
@@ -21,7 +21,7 @@
         "consultant": "Consultant",
         "account": "Account",
         "freelancer": "Freelancer",
-        "paymentBlocks": "Payment Blocks",
+        "paymentBlocks": "Hours Purchases",
         "payouts": "Payouts",
         "timesheets": "Timesheets"
     },

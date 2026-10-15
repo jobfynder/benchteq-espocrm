@@ -13,6 +13,7 @@
         "held": "Espo\\Classes\\Select\\Event\\PrimaryFilters\\Held",
         "todays": "Espo\\Classes\\Select\\Event\\PrimaryFilters\\Todays",
         "unpaid": "Espo\\Custom\\Classes\\Select\\CInterviewSession\\PrimaryFilters\\Unpaid",
-        "awaitingPayment": "Espo\\Custom\\Classes\\Select\\CInterviewSession\\PrimaryFilters\\AwaitingPayment"
+        "awaitingPayment": "Espo\\Custom\\Classes\\Select\\CInterviewSession\\PrimaryFilters\\AwaitingPayment",
+        "noFreelancer": "Espo\\Custom\\Classes\\Select\\CInterviewSession\\PrimaryFilters\\NoFreelancer"
     }
 }

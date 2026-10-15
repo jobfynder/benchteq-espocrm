@@ -10,7 +10,7 @@ use Espo\ORM\Repository\Option\SaveOptions;
 /**
  * Calculates hours from the start and end time, and fills the freelancer and
  * coordinator from the Project when they are empty. Keeps the Project link in step with
- * the Payment Block so a Project can list its timesheets.
+ * the Hours Purchase so a Project can list its timesheets.
  */
 class PrepareTimesheet implements BeforeSave
 {

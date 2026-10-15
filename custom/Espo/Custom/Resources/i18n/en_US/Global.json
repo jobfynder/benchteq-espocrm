@@ -8,7 +8,7 @@
         "CPayout": "Payout",
         "Opportunity": "Deal",
         "CProject": "Project",
-        "CPaymentBlock": "Payment Block",
+        "CPaymentBlock": "Hours Purchase",
         "CTimesheet": "Timesheet",
         "CInterviewSession": "Interview Session"
     },
@@ -21,7 +21,7 @@
         "CPayout": "Payouts",
         "Opportunity": "Deals",
         "CProject": "Projects",
-        "CPaymentBlock": "Payment Blocks",
+        "CPaymentBlock": "Hours Purchases",
         "CTimesheet": "Timesheets",
         "CInterviewSession": "Interview Sessions"
     }
