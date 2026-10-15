@@ -8,15 +8,23 @@
             ],
             [
                 {
-                    "name": "servicesSupplied"
+                    "name": "phoneCountry"
                 },
                 {
-                    "name": "phone"
+                    "name": "whatsAppCountry"
                 }
             ],
             [
                 {
+                    "name": "phone"
+                },
+                {
                     "name": "whatsAppNumber"
+                }
+            ],
+            [
+                {
+                    "name": "servicesSupplied"
                 },
                 false
             ],

@@ -32,6 +32,9 @@ WA = 'whatsAppNumber'
 # entity -> field that holds its phone number
 PHONE_FIELD = {'Contact': 'phoneNumber', 'Lead': 'phoneNumber', 'CDeliveryResource': 'phone',
                'CProvider': 'phone', 'CReferrer': 'phone'}
+# entities where Phone and WhatsApp each have a country code picker
+COUNTRY = ('phoneCountry', 'whatsAppCountry')
+HAS_COUNTRY = ('CDeliveryResource', 'CProvider', 'CReferrer')
 TAG = 'DEMO'
 NOTE = 'DEMO data for team training. Safe to delete.'
 NEW = '(new)'
@@ -99,7 +102,8 @@ def copy_whatsapp(api):
         offset = 0
         while True:
             page = api.call('GET', entity, params={
-                'select': f'id,name,{phone},{WA}', 'maxSize': 200, 'offset': offset,
+                'select': f'id,name,{phone},{WA}' + (',' + ','.join(COUNTRY) if entity in HAS_COUNTRY else ''),
+                'maxSize': 200, 'offset': offset,
                 'orderBy': 'createdAt', 'order': 'asc'})
             rows = page.get('list', [])
             if WA not in (rows[0] if rows else {WA: ''}):
@@ -107,7 +111,10 @@ def copy_whatsapp(api):
                          'EspoCRM first.')
             for r in rows:
                 if r.get(phone) and not r.get(WA):
-                    api.update(entity, r['id'], {WA: r[phone]})
+                    body = {WA: r[phone]}
+                    if entity in HAS_COUNTRY and r.get(COUNTRY[0]):
+                        body[COUNTRY[1]] = r[COUNTRY[0]]
+                    api.update(entity, r['id'], body)
                     changed += 1
                 else:
                     skipped += 1
