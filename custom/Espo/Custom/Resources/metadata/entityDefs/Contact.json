@@ -11,6 +11,22 @@
                 "Other"
             ],
             "defaultType": "Mobile"
+        },
+        "customerStatus": {
+            "type": "enum",
+            "options": [
+                "Prospect",
+                "Customer",
+                "Repeat customer"
+            ],
+            "default": "Prospect",
+            "isCustom": true,
+            "audited": true,
+            "style": {
+                "Customer": "success",
+                "Repeat customer": "success"
+            },
+            "maxLength": 20
         }
     },
     "links": {

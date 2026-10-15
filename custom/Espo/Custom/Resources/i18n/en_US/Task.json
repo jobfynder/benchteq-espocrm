@@ -1,5 +1,7 @@
 {
     "presetFilters": {
-        "overdueCritical": "Overdue critical"
+        "overdueCritical": "Overdue critical",
+        "openTasks": "Open",
+        "pastDue": "Past due"
     }
 }

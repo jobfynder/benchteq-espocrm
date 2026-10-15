@@ -2,6 +2,10 @@
     "filterList": [
         "__APPEND__",
         {
+            "name": "followUpDue",
+            "style": "danger"
+        },
+        {
             "name": "bgcInVerification",
             "style": "warning"
         },

@@ -13,7 +13,9 @@
         "bgcProviderCost": "Provider Cost",
         "bgcProviderCostCurrency": "Provider Cost (Currency)",
         "bgcStatus": "BGC Status",
-        "cPayouts": "Payouts"
+        "cPayouts": "Payouts",
+        "nextFollowUpDate": "Next follow-up",
+        "followUpAlertDate": "Follow-up alerted on"
     },
     "options": {
         "cServicetype": {
@@ -48,7 +50,8 @@
     },
     "presetFilters": {
         "bgcInVerification": "BGC in verification",
-        "referralDue": "Referred, converted, fee not paid"
+        "referralDue": "Referred, converted, fee not paid",
+        "followUpDue": "Follow-up due"
     },
     "tooltips": {
         "bgcFee": "Fills in from BGC Type when empty: US 55,000, India 18,000, Both 55,000. You can edit it.",

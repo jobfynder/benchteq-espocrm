@@ -20,6 +20,10 @@
         "width": 12
     },
     {
+        "name": "margin",
+        "width": 12
+    },
+    {
         "name": "provider",
         "width": 16
     },

@@ -1,0 +1,4 @@
+{
+    "name": "Send alerts",
+    "jobClassName": "Espo\\Custom\\Jobs\\SendAlerts"
+}

@@ -11,6 +11,12 @@
             ],
             [
                 {
+                    "name": "customerStatus"
+                },
+                false
+            ],
+            [
+                {
                     "name": "emailAddress"
                 },
                 {

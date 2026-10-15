@@ -18,7 +18,8 @@
         "status": "Status",
         "duration": "Duration",
         "reminders": "Reminders",
-        "isAllDay": "All-Day"
+        "isAllDay": "All-Day",
+        "margin": "Margin (INR)"
     },
     "links": {
         "contact": "Customer",
@@ -42,7 +43,7 @@
         }
     },
     "labels": {
-        "Create CInterviewSession": "Create Interview Session"
+        "Create CInterviewSession": "Create Interview"
     },
     "presetFilters": {
         "unpaid": "Held, supporter not yet paid out",

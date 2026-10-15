@@ -10,7 +10,8 @@
         "referrer": "Referrer",
         "referralPaid": "Referral Fee Paid",
         "assignedUser": "Coordinator",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "margin": "Margin (INR)"
     },
     "links": {
         "contact": "Customer",

@@ -360,6 +360,53 @@ def migrate_interviews(api):
           f'{no_contact} skipped without a customer; {no_freelancer} of the new ones have no Freelancer')
 
 
+def refresh_customers(api):
+    """Set the customer status on every Contact and Account from their Projects, Interviews
+    and BGC Checks. The CRM keeps it up to date afterwards. Safe to run again."""
+    print('\n== Set customer status ==')
+
+    def all_rows(entity, select, extra=None):
+        rows, offset = [], 0
+        while True:
+            params = {'select': select, 'maxSize': 200, 'offset': offset}
+            params.update(extra or {})
+            page = api.call('GET', entity, params=params)
+            got = page.get('list', [])
+            rows += got
+            offset += len(got)
+            if not got or offset >= page.get('total', 0):
+                return rows
+
+    counts, project_accounts = {}, set()
+    for r in all_rows('CProject', 'id,consultantId,accountId'):
+        if r.get('consultantId'):
+            counts[r['consultantId']] = counts.get(r['consultantId'], 0) + 1
+        if r.get('accountId'):
+            project_accounts.add(r['accountId'])
+    for r in all_rows('CInterviewSession', 'id,contactId,status'):
+        if r.get('contactId') and r.get('status') != 'Cancelled':
+            counts[r['contactId']] = counts.get(r['contactId'], 0) + 1
+    for r in all_rows('CBgcCheck', 'id,contactId'):
+        if r.get('contactId'):
+            counts[r['contactId']] = counts.get(r['contactId'], 0) + 1
+
+    customer_accounts, changed = set(project_accounts), 0
+    for c in all_rows('Contact', 'id,customerStatus,accountId'):
+        n = counts.get(c['id'], 0)
+        status = 'Prospect' if n == 0 else 'Customer' if n == 1 else 'Repeat customer'
+        if n and c.get('accountId'):
+            customer_accounts.add(c['accountId'])
+        if c.get('customerStatus') != status:
+            api.update('Contact', c['id'], {'customerStatus': status})
+            changed += 1
+    for a in all_rows('Account', 'id,customerStatus'):
+        status = 'Customer' if a['id'] in customer_accounts else 'Prospect'
+        if a.get('customerStatus') != status:
+            api.update('Account', a['id'], {'customerStatus': status})
+            changed += 1
+    print(f'Updated {changed} record(s). Customers: {sum(1 for v in counts.values() if v)} contact(s).')
+
+
 def link_timesheets(api):
     """Fill Timesheet.project from its Payment Block, so a Project lists its timesheets."""
     print('\n== Link timesheets to projects ==')
@@ -500,10 +547,12 @@ def main():
     p.add_argument('--show-record', help='read only, Entity/id')
     p.add_argument('--inspect', help='read only, comma separated entities, like CSessionLog,CInterviewSession')
     p.add_argument('--migrate-interviews', action='store_true')
+    p.add_argument('--refresh-customers', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards or a.probe_project or a.show_record or a.inspect or a.migrate_interviews):
+            or a.fix_dashboards or a.probe_project or a.show_record or a.inspect or a.migrate_interviews
+            or a.refresh_customers):
         p.error('choose --fix-dashboards, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -517,6 +566,8 @@ def main():
         inspect(api, a.inspect)
     if a.migrate_interviews:
         migrate_interviews(api)
+    if a.refresh_customers:
+        refresh_customers(api)
     if a.probe_project:
         probe_project(api)
     if a.fix_dashboards:

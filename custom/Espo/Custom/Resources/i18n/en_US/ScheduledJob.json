@@ -1,0 +1,7 @@
+{
+    "options": {
+        "job": {
+            "SendAlerts": "Send alerts (interviews and lead follow-ups)"
+        }
+    }
+}

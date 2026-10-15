@@ -1,5 +1,7 @@
 {
     "primaryFilterClassNameMap": {
-        "overdueCritical": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\OverdueCritical"
+        "overdueCritical": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\OverdueCritical",
+        "openTasks": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\OpenTasks",
+        "pastDue": "Espo\\Custom\\Classes\\Select\\Task\\PrimaryFilters\\PastDue"
     }
 }

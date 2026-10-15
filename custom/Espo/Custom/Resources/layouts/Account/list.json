@@ -8,6 +8,10 @@
         "link": true
     },
     {
+        "name": "customerStatus",
+        "width": 14
+    },
+    {
         "name": "website",
         "width": 25,
         "notSortable": true

@@ -12,6 +12,10 @@
         "width": 15
     },
     {
+        "name": "nextFollowUpDate",
+        "width": 12
+    },
+    {
         "name": "referrer",
         "width": 16,
         "hidden": true

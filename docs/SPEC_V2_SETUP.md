@@ -8,7 +8,7 @@ After each call open the Timesheet and set Held. Connected and Remaining hours u
 themselves, and the block closes at zero hours. The dashboard shows blocks with 5 or fewer
 hours left, so you know when to ask for the next payment.
 
-**Interview Support.** Lead (Service = Interview Support) → Convert → Interview Session.
+**Interview Support.** Lead (Service = Interview Support) → Convert → Interview.
 Pick Type (Interview or Assessment) and a slot: 30, 45, 60, 90 or 180 minutes. The default
 is 30. Choosing Assessment moves a default slot to 90. After the customer pays set Payment
 Status = Paid, then set Held and write the feedback. Held and No-Show are blocked until Paid.
@@ -20,7 +20,7 @@ Checks panel, Create. Pick BGC Type, Provider, Referrer (if any) and the fee. No
 Payouts to the Provider or Referrer link to the BGC Check the same way they link to a Lead.
 
 **Finance.** Dashboard tab "Money" lists everything to pay. Create a Payout, then open it
-and use Select on the Timesheets or Interview Sessions panel (it only offers unpaid ones).
+and use Select on the Timesheets or Interviews panel (it only offers unpaid ones).
 Mark the Payout Paid. Referral and Provider payouts: create the Payout with the Lead set;
 when the Referrer payout is Paid the Lead shows Referral Fee Paid by itself.
 
@@ -64,7 +64,7 @@ Access (the team is small, so it is open):
 | Freelancers | all | read | create, read, edit | read |
 | Project, Package | all | none | create, read, edit, delete own | read (Package: edit) |
 | Timesheet | all | none | create, read, edit, delete own | read, edit |
-| Interview Session | all | create, read, edit, delete own | create, read, edit, delete own | read, edit |
+| Interview | all | create, read, edit, delete own | create, read, edit, delete own | read, edit |
 | Referrer | all | read | create, read, edit | read |
 | Provider | all | read | read | read |
 | Payout | all | none | read | create, read, edit |
@@ -80,7 +80,7 @@ Mass update Freelancers whose Role Type is "Freelancer" to "Trainer".
 
 | Spec | Built | Reason |
 |---|---|---|
-| `paidToFreelancer` and `referralPaid` tick boxes | A `payout` link on Timesheet and Interview Session. `Lead.referralPaid` is filled by a hook | One place to record a payment |
+| `paidToFreelancer` and `referralPaid` tick boxes | A `payout` link on Timesheet and Interview. `Lead.referralPaid` is filled by a hook | One place to record a payment |
 | `Project.amount` | Removed | Duplicated the Packages |
 | Timesheet `hours` formula | PHP hook from start and end | `duration` is not stored |
 | Supporter assigned only after Paid | Booking allowed. Held and No-Show need Paid | Slots are booked before money arrives |
@@ -101,3 +101,14 @@ Three tests, all on STAGING only (they create fake records):
 - `scripts/tests/v2_api_flow.py`: the full daily flow through the API, one user per role,
   including who can and cannot do what (59 checks). Needs one user per role.
 - Look at the screens once with a real Coordinator and Finance login.
+
+### Who is a customer
+
+Contacts and Accounts have a **Customer status**. It is filled in by the CRM: a Contact with no Project, Interview or BGC Check is a Prospect, with one it is a Customer, with two or more a Repeat customer. An Account is a Customer when any of its Contacts is. Use the **Customers** filter on the Contact and Account lists. Someone served before the CRM existed can be set to Customer by hand. Run workflow "Demo data and WhatsApp" with *refresh_customers* once to fill existing records.
+
+### Global search, margin, alerts and follow-ups
+
+- **Global search** (top bar) covers every module: Contacts, Accounts, Leads, Freelancers, Projects, Interviews, BGC Checks, Timesheets, Packages, Payouts, Referrers and Providers. Setup CRM sets the list.
+- **Margin.** Interviews and BGC Checks show a Margin in INR: what the customer pays minus what we pay out. USD is converted with the rate in Administration, Currency, so keep that rate current. Project and Timesheet margin is not calculated, because payout types differ (hourly, bi-weekly, monthly).
+- **Alerts** (the bell). A job runs every hour and notifies the assigned person and every Interview Manager once about: an Interview in the next 24 hours with no freelancer; an Interview in the next 24 hours to confirm with the customer and freelancer. Setup CRM creates the job. Check it under Administration, Scheduled Jobs.
+- **Lead follow-up.** Leads have a Next follow-up date and a "Follow-up due" filter. The assigned person gets one alert on the day, and dashboards list the leads due.

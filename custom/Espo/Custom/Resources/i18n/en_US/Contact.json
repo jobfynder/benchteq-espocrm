@@ -2,13 +2,24 @@
     "fields": {
         "cReferrers": "Referrers",
         "cServicePackages": "Service Packages",
-        "cBgcChecks": "BGC Checks"
+        "cBgcChecks": "BGC Checks",
+        "customerStatus": "Customer status"
     },
     "links": {
         "cReferrers": "Referrers",
         "cServicePackages": "Service Packages",
         "cProjects": "Projects",
-        "cInterviewSessions": "Interview Sessions",
+        "cInterviewSessions": "Interviews",
         "cBgcChecks": "BGC Checks"
+    },
+    "options": {
+        "customerStatus": {
+            "Prospect": "Prospect",
+            "Customer": "Customer",
+            "Repeat customer": "Repeat customer"
+        }
+    },
+    "presetFilters": {
+        "customers": "Customers"
     }
 }

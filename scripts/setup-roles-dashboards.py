@@ -178,6 +178,10 @@ TAB_LIST = [
 ]
 QUICK_CREATE = ['Lead', 'Contact', 'CTimesheet', 'CInterviewSession', 'CBgcCheck',
                 'CPaymentBlock', 'CProject']
+# Global search looks in every module people use (the default list misses ours).
+GLOBAL_SEARCH = ['Contact', 'Account', 'Lead', 'CDeliveryResource', 'CProject',
+                 'CInterviewSession', 'CBgcCheck', 'CTimesheet', 'CPaymentBlock', 'CPayout',
+                 'CReferrer', 'CProvider']
 CALENDAR_ENTITIES = ['Meeting', 'Call', 'Task', 'CTimesheet', 'CInterviewSession']
 
 
@@ -188,14 +192,15 @@ DASHLET_ROWS = {
     'CPaymentBlock': [['name', 'link'], ['remainingHrs', 'paymentStatus']],
     'CPayout': [['name', 'link'], ['amount', 'payeeType']],
     'Lead': [['name', 'link'], ['bgcStatus', 'referrer']],
+    'LeadFollowUp': [['name', 'link'], ['nextFollowUpDate', 'status']],
     'CBgcCheck': [['name', 'link'], ['bgcType', 'bgcStatus']],
     'Task': [['name', 'link'], ['dateEnd', 'priority']],
 }
 
 
-def expanded_layout(entity):
+def expanded_layout(entity, rows_key=None):
     rows = []
-    for row in DASHLET_ROWS[entity]:
+    for row in DASHLET_ROWS[rows_key or entity]:
         if row[-1] == 'link':
             rows.append([{'name': row[0], 'link': True}])
         else:
@@ -204,14 +209,14 @@ def expanded_layout(entity):
 
 
 def records(dashlet_id, title, entity, primary, x, y, width=2, height=2,
-            sort_by=None, direction='asc', only_my=False):
+            sort_by=None, direction='asc', only_my=False, rows_key=None):
     """Returns (layout item, options) for a Records dashlet."""
     item = {'id': dashlet_id, 'name': 'Records', 'x': x, 'y': y,
             'width': width, 'height': height}
     options = {
         'title': title, 'entityType': entity, 'primaryFilter': primary,
         'displayRecords': 8, 'autorefreshInterval': 1,
-        'expandedLayout': expanded_layout(entity),
+        'expandedLayout': expanded_layout(entity, rows_key),
         'boolFilterList': ['onlyMy'] if only_my else [],
     }
     if sort_by:
@@ -243,9 +248,12 @@ AWAIT_PAY = ('rec', 'bqAwaitPay', 'Interviews waiting for payment', 'CInterviewS
              'awaitingPayment', {'sort_by': 'dateStart'})
 LOW_HRS = ('rec', 'bqLowHrs', 'Packages with 5 or fewer hours left', 'CPaymentBlock',
            'lowHours', {})
-MY_OVERDUE = ('rec', 'bqMyOverdue', 'My overdue tasks', 'Task', 'overdue',
+MY_OVERDUE = ('rec', 'bqMyOverdue', 'My overdue tasks', 'Task', 'pastDue',
               {'only_my': True, 'sort_by': 'dateEnd'})
-MY_TODAY = ('rec', 'bqMyToday', 'My tasks due today', 'Task', 'today', {'only_my': True})
+MY_OPEN = ('rec', 'bqMyOpen', 'My open tasks', 'Task', 'openTasks',
+           {'only_my': True, 'sort_by': 'dateEnd'})
+FOLLOW_UP = ('rec', 'bqFollowUp', 'Leads to follow up', 'Lead', 'followUpDue',
+             {'rows_key': 'LeadFollowUp', 'sort_by': 'nextFollowUpDate'})
 BGC_CHECK = ('rec', 'bqBgcCheck', 'BGC checks in verification', 'CBgcCheck',
              'inVerification', {})
 BGC_LEAD = ('rec', 'bqBgc', 'New-lead BGC in verification', 'Lead', 'bgcInVerification', {})
@@ -263,16 +271,16 @@ PENDING_PKG = ('rec', 'bqPendingBlocks', 'Packages awaiting payment', 'CPaymentB
 # Who sees what. Manager first: anyone with the Manager role gets the full set.
 DASHBOARDS = {
     'Manager': [
-        ('Today', [CAL_ALL, PLANNED_IV, PLANNED_TS, MY_OVERDUE, MY_TODAY]),
+        ('Today', [CAL_ALL, PLANNED_IV, PLANNED_TS, FOLLOW_UP, MY_OVERDUE, MY_OPEN]),
         ('Attention', [NO_FREELANCER, LOW_HRS, AWAIT_PAY, BGC_CHECK, BGC_LEAD]),
         ('Money', [UNPAID_TS, UNPAID_IV, DUE_PAYOUTS, REF_LEAD, REF_BGC, PENDING_PKG]),
     ],
     'Interview Manager': [
-        ('Interviews', [CAL_IV, PLANNED_IV, NO_FREELANCER, AWAIT_PAY, MY_OVERDUE,
-                        MY_TODAY]),
+        ('Interviews', [CAL_IV, PLANNED_IV, NO_FREELANCER, AWAIT_PAY, FOLLOW_UP,
+                        MY_OVERDUE, MY_OPEN]),
     ],
     'Coordinator': [
-        ('Today', [CAL_ALL, PLANNED_IV, PLANNED_TS, MY_OVERDUE, MY_TODAY]),
+        ('Today', [CAL_ALL, PLANNED_IV, PLANNED_TS, FOLLOW_UP, MY_OVERDUE, MY_OPEN]),
         ('Follow up', [NO_FREELANCER, LOW_HRS, BGC_CHECK, BGC_LEAD]),
     ],
     'Finance': [
@@ -370,6 +378,7 @@ def sync_settings(api):
         'tabList': TAB_LIST,
         'quickCreateList': QUICK_CREATE,
         'calendarEntityList': CALENDAR_ENTITIES,
+        'globalSearchEntityList': GLOBAL_SEARCH,
         'currencyList': currencies,
         'defaultCurrency': 'INR',
         'timeZone': 'Asia/Kolkata',
@@ -379,6 +388,18 @@ def sync_settings(api):
     }
     print('Settings: menu, quick create, calendar, currency, time zone, phone country, default dashboard')
     api.call('PUT', 'Settings', body, write=True)
+
+
+def sync_scheduled_job(api):
+    """Hourly job that sends the interview and lead follow-up alerts."""
+    jobs = api.list('ScheduledJob', 'id,name,job')
+    if any(j.get('job') == 'SendAlerts' for j in jobs):
+        print('Scheduled job "Send alerts": already there')
+        return
+    print('Scheduled job "Send alerts": creating (every hour)')
+    api.call('POST', 'ScheduledJob', {'name': 'Send alerts', 'job': 'SendAlerts',
+                                      'status': 'Active', 'scheduling': '0 * * * *'},
+             write=True)
 
 
 def apply_dashboards(api, force):
@@ -450,11 +471,13 @@ def main():
         for code in ('INR', 'USD'):
             if code not in currencies:
                 currencies = currencies + [code]
-        api.call('PUT', 'Settings', {'tabList': TAB_LIST, 'currencyList': currencies}, write=True)
+        api.call('PUT', 'Settings', {'tabList': TAB_LIST, 'currencyList': currencies,
+                                     'globalSearchEntityList': GLOBAL_SEARCH}, write=True)
         print('Done.' + (' (dry run, nothing was changed)' if a.dry_run else ''))
         return
     role_ids = sync_roles(api)
     sync_settings(api)
+    sync_scheduled_job(api)
     assign_users(api, a.assign, role_ids)
     apply_dashboards(api, a.reset_user_dashboards)
     print('Done.' + (' (dry run, nothing was changed)' if a.dry_run else ''))

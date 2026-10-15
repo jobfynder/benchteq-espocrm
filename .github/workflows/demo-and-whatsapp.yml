@@ -47,7 +47,12 @@ on:
         default: ''
         type: string
       migrate_interviews:
-        description: Copy old Interview Support packages into Interview Sessions (old packages stay as they are)
+        description: Copy old Interview Support packages into Interviews (old packages stay as they are)
+        required: false
+        default: false
+        type: boolean
+      refresh_customers:
+        description: Set customer status on every Contact and Account from their services (run once after the update)
         required: false
         default: false
         type: boolean
@@ -87,6 +92,7 @@ jobs:
           SHOW_RECORD: ${{ inputs.show_record }}
           INSPECT: ${{ inputs.inspect }}
           MIGRATE_INTERVIEWS: ${{ inputs.migrate_interviews }}
+          REFRESH_CUSTOMERS: ${{ inputs.refresh_customers }}
         shell: bash
         run: |
           set -euo pipefail
@@ -110,5 +116,6 @@ jobs:
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
           [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
           [ "$MIGRATE_INTERVIEWS" = "true" ] && args+=(--migrate-interviews)
+          [ "$REFRESH_CUSTOMERS" = "true" ] && args+=(--refresh-customers)
           [ -n "$INSPECT" ] && args+=(--inspect "$INSPECT")
           python3 scripts/demo-data-and-whatsapp.py "${args[@]}"

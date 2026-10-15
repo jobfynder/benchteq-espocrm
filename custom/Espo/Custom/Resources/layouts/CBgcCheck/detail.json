@@ -35,6 +35,12 @@
             ],
             [
                 {
+                    "name": "margin"
+                },
+                false
+            ],
+            [
+                {
                     "name": "referrer"
                 },
                 {
