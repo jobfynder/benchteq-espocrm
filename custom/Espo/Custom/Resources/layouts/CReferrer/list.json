@@ -4,13 +4,8 @@
         "link": true
     },
     {
-        "name": "phone",
+        "name": "phoneNumber",
         "width": 16
-    },
-    {
-        "name": "whatsAppNumber",
-        "width": 16,
-        "notSortable": true
     },
     {
         "name": "referrerType",

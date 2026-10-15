@@ -21,5 +21,19 @@
             "foreign": "account",
             "isCustom": true
         }
+    },
+    "fields": {
+        "phoneNumber": {
+            "typeList": [
+                "Mobile",
+                "Mobile and WhatsApp",
+                "WhatsApp",
+                "Office",
+                "Home",
+                "Fax",
+                "Other"
+            ],
+            "defaultType": "Mobile"
+        }
     }
 }

@@ -395,6 +395,85 @@ def probe_project(api):
                 print(f'  {e.code}  {path}  {e.headers.get("X-Status-Reason", "")}')
 
 
+# ------------------------------------------------- native phone with WhatsApp type
+
+NATIVE_ENTITIES = ('Contact', 'Lead', 'Account', 'CDeliveryResource', 'CProvider', 'CReferrer')
+LEGACY_PHONE = ('CDeliveryResource', 'CProvider', 'CReferrer')   # old text Phone + country picker
+
+
+def digits(v):
+    return ''.join(ch for ch in (v or '') if ch.isdigit())
+
+
+def with_code(number, country):
+    n = (number or '').strip()
+    if not n or n.startswith('+') or not (country or '').startswith('+'):
+        return n
+    return country + digits(n).lstrip('0')
+
+
+def native_phones(api):
+    """Move old Phone and WhatsApp text into EspoCRM's native phone field.
+    A number that is both Phone and WhatsApp becomes one entry typed "Mobile and WhatsApp";
+    a different WhatsApp number becomes an extra entry typed "WhatsApp". Old values are kept."""
+    print('\n== Move Phone and WhatsApp into the native phone field ==')
+    for entity in NATIVE_ENTITIES:
+        legacy = entity in LEGACY_PHONE
+        select = 'id,name,phoneNumber,phoneNumberData'
+        if entity != 'Account':
+            select += ',whatsAppNumber'
+        if legacy:
+            select += ',phone,phoneCountry,whatsAppCountry'
+        changed = same = 0
+        offset = 0
+        shown = 0
+        while True:
+            page = api.call('GET', entity, params={'select': select, 'maxSize': 200, 'offset': offset,
+                                                   'orderBy': 'createdAt', 'order': 'asc'})
+            rows = page.get('list', [])
+            for r in rows:
+                entries = [dict(e) for e in (r.get('phoneNumberData') or [])]
+                if not entries and r.get('phoneNumber'):
+                    entries = [{'phoneNumber': r['phoneNumber'], 'type': 'Mobile', 'primary': True,
+                                'optOut': False, 'invalid': False}]
+                before = json.dumps(entries, sort_keys=True)
+
+                def find(num):
+                    d = digits(num)
+                    return next((e for e in entries if d and digits(e['phoneNumber']) == d), None)
+
+                def add(num, kind):
+                    entries.append({'phoneNumber': num, 'type': kind, 'primary': not entries,
+                                    'optOut': False, 'invalid': False})
+
+                if legacy:
+                    ph = with_code(r.get('phone'), r.get('phoneCountry'))
+                    if ph and not find(ph):
+                        add(ph, 'Mobile')
+                wa = with_code(r.get('whatsAppNumber'), r.get('whatsAppCountry')) if entity != 'Account' else ''
+                if wa:
+                    hit = find(wa)
+                    if hit is None:
+                        add(wa, 'WhatsApp')
+                    elif hit.get('type') == 'Mobile':
+                        hit['type'] = 'Mobile and WhatsApp'
+                if json.dumps(entries, sort_keys=True) != before:
+                    primary = next((e for e in entries if e.get('primary')), entries[0])
+                    if shown < 3:
+                        print(f'  {entity} {r.get("name")}: ' + ', '.join(
+                            f'{e["type"]} {mask(e["phoneNumber"])}' for e in entries))
+                        shown += 1
+                    api.update(entity, r['id'], {'phoneNumber': primary['phoneNumber'],
+                                                 'phoneNumberData': entries})
+                    changed += 1
+                else:
+                    same += 1
+            offset += len(rows)
+            if not rows or offset >= page.get('total', 0):
+                break
+        print(f'{entity}: {changed} to update, {same} already fine')
+
+
 def remove_demo(api):
     print('\n== Remove demo data ==')
     order = ['CPayout', 'CTimesheet', 'CInterviewSession', 'CPaymentBlock', 'CProject',
@@ -419,10 +498,11 @@ def main():
     p.add_argument('--link-timesheets', action='store_true')
     p.add_argument('--fix-dashboards', action='store_true')
     p.add_argument('--probe-project', action='store_true')
+    p.add_argument('--native-phones', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.whatsapp or a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
-            or a.fix_dashboards or a.probe_project):
+            or a.fix_dashboards or a.probe_project or a.native_phones):
         p.error('choose --fix-dashboards, --whatsapp, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -430,6 +510,8 @@ def main():
     api.call('GET', 'App/user')
     if a.diagnose_phones:
         diagnose_phones(api)
+    if a.native_phones:
+        native_phones(api)
     if a.probe_project:
         probe_project(api)
     if a.fix_dashboards:

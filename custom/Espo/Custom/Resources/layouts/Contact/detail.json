@@ -19,12 +19,6 @@
             ],
             [
                 {
-                    "name": "whatsAppNumber"
-                },
-                false
-            ],
-            [
-                {
                     "name": "description"
                 }
             ]

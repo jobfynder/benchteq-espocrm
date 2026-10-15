@@ -17,13 +17,8 @@
         "width": 16
     },
     {
-        "name": "phone",
+        "name": "phoneNumber",
         "width": 16
-    },
-    {
-        "name": "whatsAppNumber",
-        "width": 16,
-        "notSortable": true
     },
     {
         "name": "commissionTerms",
