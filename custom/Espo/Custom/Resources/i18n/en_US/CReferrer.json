@@ -14,7 +14,8 @@
         "whatsApp": "WhatsApp",
         "leads": "Leads",
         "payouts": "Payouts",
-        "phoneNumber": "Phone"
+        "phoneNumber": "Phone",
+        "bgcChecks": "BGC Checks"
     },
     "links": {
         "accounts": "Accounts",
@@ -23,7 +24,8 @@
         "servicePackages": "Service Packages",
         "contacts": "Contacts",
         "leads": "Leads",
-        "payouts": "Payouts"
+        "payouts": "Payouts",
+        "bgcChecks": "BGC Checks"
     },
     "labels": {
         "Create CReferrer": "Create Referrer"

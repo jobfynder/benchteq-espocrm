@@ -21,6 +21,9 @@
         },
         "cInterviewSessions": {
             "layout": "listSmall"
+        },
+        "cBgcChecks": {
+            "layout": "listSmall"
         }
     }
 }

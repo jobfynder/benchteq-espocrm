@@ -6,22 +6,25 @@
         "index": 0
     },
     "payouts": {
-        "index": 1
-    },
-    "contacts": {
         "index": 2
     },
-    "accounts": {
+    "contacts": {
         "index": 3
     },
-    "providers": {
+    "accounts": {
         "index": 4
     },
-    "deliveryResources": {
+    "providers": {
         "index": 5
     },
+    "deliveryResources": {
+        "index": 6
+    },
     "stream": {
-        "index": 6,
+        "index": 7,
         "sticked": false
+    },
+    "bgcChecks": {
+        "index": 1
     }
 }

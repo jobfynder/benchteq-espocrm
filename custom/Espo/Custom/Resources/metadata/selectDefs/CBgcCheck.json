@@ -1,0 +1,6 @@
+{
+    "primaryFilterClassNameMap": {
+        "inVerification": "Espo\\Custom\\Classes\\Select\\CBgcCheck\\PrimaryFilters\\InVerification",
+        "referralDue": "Espo\\Custom\\Classes\\Select\\CBgcCheck\\PrimaryFilters\\ReferralDue"
+    }
+}

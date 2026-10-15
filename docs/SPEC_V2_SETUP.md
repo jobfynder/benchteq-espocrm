@@ -15,6 +15,9 @@ Status = Paid, then set Held and write the feedback. Held and No-Show are blocke
 
 **BGC.** Lead (Service = BGC) → pick Referrer, BGC Type (the fee fills in), Provider, BGC
 Status → Cleared → Convert.
+Repeat BGC for a customer you already have: open the Contact, go to the Delivery tab, BGC
+Checks panel, Create. Pick BGC Type, Provider, Referrer (if any) and the fee. No new Lead.
+Payouts to the Provider or Referrer link to the BGC Check the same way they link to a Lead.
 
 **Finance.** Dashboard tab "Money" lists everything to pay. Create a Payout, then open it
 and use Select on the Timesheets or Interview Sessions panel (it only offers unpaid ones).

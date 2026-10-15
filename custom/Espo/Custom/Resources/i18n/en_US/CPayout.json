@@ -16,7 +16,8 @@
         "lead": "Lead",
         "timesheets": "Timesheets",
         "interviewSessions": "Interview Sessions",
-        "description": "Notes"
+        "description": "Notes",
+        "bgcCheck": "BGC Check"
     },
     "links": {
         "deliveryResource": "Freelancer",
@@ -27,7 +28,8 @@
         "project": "Project",
         "lead": "Lead",
         "timesheets": "Timesheets",
-        "interviewSessions": "Interview Sessions"
+        "interviewSessions": "Interview Sessions",
+        "bgcCheck": "BGC Check"
     },
     "labels": {
         "Create CPayout": "Create Payout"

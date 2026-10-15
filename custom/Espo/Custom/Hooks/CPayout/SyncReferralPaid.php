@@ -10,8 +10,8 @@ use Espo\ORM\Repository\Option\RemoveOptions;
 use Espo\ORM\Repository\Option\SaveOptions;
 
 /**
- * Keeps Lead.referralPaid in step with the Referrer Payouts linked to the lead,
- * so Finance records a payment in one place only.
+ * Keeps Lead.referralPaid and BGC Check.referralPaid in step with the Referrer
+ * Payouts linked to them, so Finance records a payment in one place only.
  */
 class SyncReferralPaid implements AfterSave, AfterRemove
 {
@@ -29,39 +29,52 @@ class SyncReferralPaid implements AfterSave, AfterRemove
         ]));
 
         foreach ($leadIds as $leadId) {
-            $this->sync($leadId);
+            $this->sync('Lead', 'leadId', $leadId);
+        }
+
+        $checkIds = array_unique(array_filter([
+            $entity->get('bgcCheckId'),
+            $entity->getFetched('bgcCheckId'),
+        ]));
+
+        foreach ($checkIds as $checkId) {
+            $this->sync('CBgcCheck', 'bgcCheckId', $checkId);
         }
     }
 
     public function afterRemove(Entity $entity, RemoveOptions $options): void
     {
         if ($entity->get('leadId')) {
-            $this->sync($entity->get('leadId'));
+            $this->sync('Lead', 'leadId', $entity->get('leadId'));
+        }
+
+        if ($entity->get('bgcCheckId')) {
+            $this->sync('CBgcCheck', 'bgcCheckId', $entity->get('bgcCheckId'));
         }
     }
 
-    private function sync(string $leadId): void
+    private function sync(string $entityType, string $linkAttribute, string $id): void
     {
-        $lead = $this->entityManager->getEntityById('Lead', $leadId);
+        $record = $this->entityManager->getEntityById($entityType, $id);
 
-        if (!$lead) {
+        if (!$record) {
             return;
         }
 
         $paid = $this->entityManager
             ->getRDBRepository('CPayout')
             ->where([
-                'leadId' => $leadId,
+                $linkAttribute => $id,
                 'payeeType' => 'Referrer',
                 'status' => 'Paid',
             ])
             ->count() > 0;
 
-        if ((bool) $lead->get('referralPaid') === $paid) {
+        if ((bool) $record->get('referralPaid') === $paid) {
             return;
         }
 
-        $lead->set('referralPaid', $paid);
-        $this->entityManager->saveEntity($lead);
+        $record->set('referralPaid', $paid);
+        $this->entityManager->saveEntity($record);
     }
 }

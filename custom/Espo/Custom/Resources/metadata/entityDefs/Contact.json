@@ -40,6 +40,12 @@
             "entity": "CInterviewSession",
             "foreign": "contact",
             "isCustom": true
+        },
+        "cBgcChecks": {
+            "type": "hasMany",
+            "entity": "CBgcCheck",
+            "foreign": "contact",
+            "isCustom": true
         }
     }
 }
