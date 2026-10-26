@@ -303,7 +303,8 @@
             "type": "hasMany",
             "entity": "CTechnology",
             "relationName": "cDeliveryResourceSkillSet",
-            "isCustom": true
+            "isCustom": true,
+            "foreign": "skillFreelancers"
         },
         "skills": {
             "type": "hasMany",
