@@ -37,6 +37,18 @@
         "skills": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "skillProjects": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutFiltersDisabled": true
+        },
+        "skillFreelancers": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutFiltersDisabled": true
         }
     },
     "links": {
@@ -65,6 +77,22 @@
             "type": "hasMany",
             "entity": "CSkill",
             "foreign": "technology",
+            "isCustom": true
+        },
+        "skillProjects": {
+            "type": "hasMany",
+            "entity": "CProject",
+            "foreign": "skillSets",
+            "relationName": "cProjectSkillSet",
+            "layoutRelationshipsDisabled": true,
+            "isCustom": true
+        },
+        "skillFreelancers": {
+            "type": "hasMany",
+            "entity": "CDeliveryResource",
+            "foreign": "skillSets",
+            "relationName": "cDeliveryResourceSkillSet",
+            "layoutRelationshipsDisabled": true,
             "isCustom": true
         }
     },
