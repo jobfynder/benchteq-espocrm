@@ -74,6 +74,12 @@
             "type": "linkMultiple",
             "isCustom": true
         },
+        "jobTitle": {
+            "type": "varchar",
+            "maxLength": 150,
+            "audited": true,
+            "isCustom": true
+        },
         "consultant": {
             "type": "link",
             "required": true

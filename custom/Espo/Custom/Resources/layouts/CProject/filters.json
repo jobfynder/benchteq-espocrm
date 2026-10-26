@@ -3,6 +3,7 @@
     "account",
     "technologyRef",
     "skillSets",
+    "jobTitle",
     "freelancer",
     "status",
     "assignedUser"
