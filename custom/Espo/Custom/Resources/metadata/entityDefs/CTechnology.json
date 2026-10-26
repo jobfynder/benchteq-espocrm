@@ -37,6 +37,10 @@
         "skillProjects": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "skillFreelancers": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -66,6 +70,13 @@
             "entity": "CProject",
             "foreign": "skillSets",
             "relationName": "cProjectSkillSet",
+            "isCustom": true
+        },
+        "skillFreelancers": {
+            "type": "hasMany",
+            "entity": "CDeliveryResource",
+            "foreign": "skillSets",
+            "relationName": "cDeliveryResourceSkillSet",
             "isCustom": true
         }
     },

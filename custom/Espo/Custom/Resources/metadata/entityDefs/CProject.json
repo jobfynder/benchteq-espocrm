@@ -74,6 +74,12 @@
             "type": "linkMultiple",
             "isCustom": true
         },
+        "jobTitle": {
+            "type": "varchar",
+            "maxLength": 150,
+            "audited": true,
+            "isCustom": true
+        },
         "consultant": {
             "type": "link",
             "required": true
@@ -237,7 +243,13 @@
     },
     "collection": {
         "orderBy": "createdAt",
-        "order": "desc"
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "jobTitle",
+            "technologyRef.name",
+            "skillSets.name"
+        ]
     },
     "indexes": {
         "name": {

@@ -31,6 +31,12 @@
             ],
             [
                 {
+                    "name": "skillSets",
+                    "fullWidth": true
+                }
+            ],
+            [
+                {
                     "name": "experienceYears"
                 },
                 false

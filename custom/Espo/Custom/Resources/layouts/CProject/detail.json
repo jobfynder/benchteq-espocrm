@@ -19,6 +19,12 @@
             ],
             [
                 {
+                    "name": "jobTitle"
+                },
+                false
+            ],
+            [
+                {
                     "name": "skillSets",
                     "fullWidth": true
                 }
