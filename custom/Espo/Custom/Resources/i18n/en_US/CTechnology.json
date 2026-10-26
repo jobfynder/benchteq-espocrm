@@ -4,12 +4,14 @@
         "description": "Notes",
         "freelancers": "Freelancers",
         "projects": "Projects",
-        "skillProjects": "Projects (as skill set)"
+        "skillProjects": "Projects (as skill set)",
+        "skillFreelancers": "Freelancers (as skill set)"
     },
     "links": {
         "freelancers": "Freelancers",
         "projects": "Projects",
-        "skillProjects": "Projects (as skill set)"
+        "skillProjects": "Projects (as skill set)",
+        "skillFreelancers": "Freelancers (as skill set)"
     },
     "labels": {
         "Create CTechnology": "Create Technology"

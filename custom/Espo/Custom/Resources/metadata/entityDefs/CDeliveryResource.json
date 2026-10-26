@@ -133,6 +133,10 @@
             "type": "linkMultiple",
             "isCustom": true
         },
+        "skillSets": {
+            "type": "linkMultiple",
+            "isCustom": true
+        },
         "experienceYears": {
             "type": "int",
             "min": 0,
@@ -283,6 +287,13 @@
             "entity": "CTechnology",
             "foreign": "freelancers",
             "relationName": "cDeliveryResourceCTechnology",
+            "isCustom": true
+        },
+        "skillSets": {
+            "type": "hasMany",
+            "entity": "CTechnology",
+            "foreign": "skillFreelancers",
+            "relationName": "cDeliveryResourceSkillSet",
             "isCustom": true
         }
     },

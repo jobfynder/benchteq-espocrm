@@ -2,6 +2,7 @@
     "name",
     "roleType",
     "techList",
+    "skillSets",
     "experienceYears",
     "screeningResult",
     "rating",
