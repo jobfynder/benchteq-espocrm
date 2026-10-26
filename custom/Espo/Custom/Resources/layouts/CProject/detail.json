@@ -11,10 +11,16 @@
             ],
             [
                 {
-                    "name": "technology"
+                    "name": "technologyRef"
                 },
                 {
                     "name": "freelancer"
+                }
+            ],
+            [
+                {
+                    "name": "skillSets",
+                    "fullWidth": true
                 }
             ],
             [

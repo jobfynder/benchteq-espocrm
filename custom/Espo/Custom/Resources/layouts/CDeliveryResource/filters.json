@@ -1,7 +1,8 @@
 [
     "name",
     "roleType",
-    "technologies",
+    "techList",
+    "experienceYears",
     "screeningResult",
     "rating",
     "workStatus",

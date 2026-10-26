@@ -121,18 +121,21 @@ def main():
     check('lead converted to contact', bool(contact_id), True)
     check('lead status Converted', coord.get('Lead', lead['id'])['status'], 'Converted')
 
+    java = coord.create('CTechnology', {'name': f'Java{RID}'})
     f_pass = coord.create('CDeliveryResource', {'name': 'Trainer Passed', 'roleType': 'Trainer',
-                                                 'technologies': ['Java'], 'screeningResult': 'Passed', 'rating': 5})
+                                                 'techListIds': [java['id']], 'experienceYears': 8,
+                                                 'screeningResult': 'Passed', 'rating': 5})
+    check('freelancer keeps experience', coord.get('CDeliveryResource', f_pass['id'])['experienceYears'], 8)
     f_fail = coord.create('CDeliveryResource', {'name': 'Trainer Pending', 'roleType': 'Trainer'})
     shortlist = [f['id'] for f in coord.listing('CDeliveryResource', primaryFilter='shortlist')]
     check('shortlist has passed freelancer', f_pass['id'] in shortlist, True)
     check('shortlist excludes pending freelancer', f_fail['id'] in shortlist, False)
 
     me = coord.call('GET', 'App/user')['user']['id']
-    project = coord.create('CProject', {'assignedUserId': me, 'technology': 'Java', 'consultantId': contact_id,
+    project = coord.create('CProject', {'assignedUserId': me, 'technologyRefId': java['id'], 'consultantId': contact_id,
                                         'freelancerId': f_pass['id'], 'freelancerPayType': 'Hourly',
                                         'freelancerRate': 500, 'customerRate': 900})
-    check('project name', project['name'], f'Java - Ravi Kumar{RID}')
+    check('project name', project['name'], f'Java{RID} - Ravi Kumar{RID}')
     block = coord.create('CPaymentBlock', {'projectId': project['id'], 'totalHrs': 3, 'amount': 2700,
                                            'paymentStatus': 'Paid'})
     check('block coordinator defaults from project', bool(block.get('assignedUserId')), True)
@@ -266,7 +269,7 @@ def main():
     check('interview manager can read freelancers', len(iview.listing('CDeliveryResource')) >= 1, True)
     denied('finance cannot create a timesheet',
            lambda: fin.create('CTimesheet', {'paymentBlockId': block['id'], 'dateStart': ts(9, 9), 'dateEnd': ts(9, 10)}))
-    denied('finance cannot create a project', lambda: fin.create('CProject', {'technology': 'Java', 'consultantId': contact_id}))
+    denied('finance cannot create a project', lambda: fin.create('CProject', {'technologyRefId': java['id'], 'consultantId': contact_id}))
     check('manager can edit everything', mgr.update('CProject', project['id'], {'status': 'On Hold'})['status'], 'On Hold')
 
     print('\n' + (f'{len(FAILED)} FAILED: ' + '; '.join(FAILED) if FAILED else 'ALL PASSED'))

@@ -1,6 +1,8 @@
 {
     "fields": {
-        "technology": "Technology",
+        "technology": "Technology (old list)",
+        "technologyRef": "Technology",
+        "skillSets": "Skill sets",
         "consultant": "Consultant",
         "account": "Account",
         "freelancer": "Freelancer",
@@ -20,6 +22,8 @@
         "margin": "Margin (INR)"
     },
     "links": {
+        "skillSets": "Skill sets",
+        "technologyRef": "Technology",
         "consultant": "Consultant",
         "account": "Account",
         "freelancer": "Freelancer",

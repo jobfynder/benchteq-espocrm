@@ -51,6 +51,11 @@ on:
         required: false
         default: false
         type: boolean
+      migrate_technologies:
+        description: Move the old Technologies choices into the shared Technology list (run once after the update)
+        required: false
+        default: false
+        type: boolean
       refresh_customers:
         description: Set customer status on every Contact and Account from their services (run once after the update)
         required: false
@@ -97,6 +102,7 @@ jobs:
           SHOW_RECORD: ${{ inputs.show_record }}
           INSPECT: ${{ inputs.inspect }}
           MIGRATE_INTERVIEWS: ${{ inputs.migrate_interviews }}
+          MIGRATE_TECHNOLOGIES: ${{ inputs.migrate_technologies }}
           REFRESH_CUSTOMERS: ${{ inputs.refresh_customers }}
           REFRESH_MARGINS: ${{ inputs.refresh_margins }}
         shell: bash
@@ -122,6 +128,7 @@ jobs:
           [ "$PROBE_PROJECT" = "true" ] && args+=(--probe-project)
           [ -n "$SHOW_RECORD" ] && args+=(--show-record "$SHOW_RECORD")
           [ "$MIGRATE_INTERVIEWS" = "true" ] && args+=(--migrate-interviews)
+          [ "$MIGRATE_TECHNOLOGIES" = "true" ] && args+=(--migrate-technologies)
           [ "$REFRESH_CUSTOMERS" = "true" ] && args+=(--refresh-customers)
           [ "$REFRESH_MARGINS" = "true" ] && args+=(--refresh-margins)
           [ -n "$INSPECT" ] && args+=(--inspect "$INSPECT")

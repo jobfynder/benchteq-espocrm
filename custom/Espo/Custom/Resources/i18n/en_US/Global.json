@@ -11,7 +11,8 @@
         "CPaymentBlock": "Package",
         "CTimesheet": "Timesheet",
         "CInterviewSession": "Interview",
-        "CBgcCheck": "BGC Check"
+        "CBgcCheck": "BGC Check",
+        "CTechnology": "Technology"
     },
     "scopeNamesPlural": {
         "CDeliveryResource": "Freelancers",
@@ -25,6 +26,7 @@
         "CPaymentBlock": "Packages",
         "CTimesheet": "Timesheets",
         "CInterviewSession": "Interviews",
-        "CBgcCheck": "BGC Checks"
+        "CBgcCheck": "BGC Checks",
+        "CTechnology": "Technologies"
     }
 }

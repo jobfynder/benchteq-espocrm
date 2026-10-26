@@ -8,9 +8,13 @@
         "width": 13
     },
     {
-        "name": "technologies",
+        "name": "techList",
         "width": 20,
         "notSortable": true
+    },
+    {
+        "name": "experienceYears",
+        "width": 9
     },
     {
         "name": "phoneNumber",

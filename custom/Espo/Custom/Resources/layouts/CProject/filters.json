@@ -1,7 +1,8 @@
 [
     "consultant",
     "account",
-    "technology",
+    "technologyRef",
+    "skillSets",
     "freelancer",
     "status",
     "assignedUser"
