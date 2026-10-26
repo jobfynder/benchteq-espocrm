@@ -243,7 +243,13 @@
     },
     "collection": {
         "orderBy": "createdAt",
-        "order": "desc"
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "jobTitle",
+            "technologyRef.name",
+            "skillSets.name"
+        ]
     },
     "indexes": {
         "name": {

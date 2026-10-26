@@ -299,7 +299,12 @@
     },
     "collection": {
         "orderBy": "createdAt",
-        "order": "desc"
+        "order": "desc",
+        "textFilterFields": [
+            "name",
+            "techList.name",
+            "skillSets.name"
+        ]
     },
     "indexes": {
         "name": {
