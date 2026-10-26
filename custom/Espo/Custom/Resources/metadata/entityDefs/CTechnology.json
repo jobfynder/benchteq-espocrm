@@ -34,11 +34,7 @@
             "type": "linkMultiple",
             "layoutDetailDisabled": true
         },
-        "skillProjects": {
-            "type": "linkMultiple",
-            "layoutDetailDisabled": true
-        },
-        "skillFreelancers": {
+        "skills": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
         }
@@ -65,18 +61,10 @@
             "foreign": "technologyRef",
             "isCustom": true
         },
-        "skillProjects": {
+        "skills": {
             "type": "hasMany",
-            "entity": "CProject",
-            "foreign": "skillSets",
-            "relationName": "cProjectSkillSet",
-            "isCustom": true
-        },
-        "skillFreelancers": {
-            "type": "hasMany",
-            "entity": "CDeliveryResource",
-            "foreign": "skillSets",
-            "relationName": "cDeliveryResourceSkillSet",
+            "entity": "CSkill",
+            "foreign": "technology",
             "isCustom": true
         }
     },

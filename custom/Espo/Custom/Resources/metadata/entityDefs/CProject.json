@@ -72,6 +72,16 @@
         },
         "skillSets": {
             "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutFiltersDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "layoutDetailSmallDisabled": true,
+            "layoutListSmallDisabled": true
+        },
+        "skills": {
+            "type": "linkMultiple",
             "isCustom": true
         },
         "jobTitle": {
@@ -237,8 +247,14 @@
             "type": "hasMany",
             "entity": "CTechnology",
             "relationName": "cProjectSkillSet",
-            "isCustom": true,
-            "foreign": "skillProjects"
+            "isCustom": true
+        },
+        "skills": {
+            "type": "hasMany",
+            "entity": "CSkill",
+            "foreign": "projects",
+            "relationName": "cProjectCSkill",
+            "isCustom": true
         }
     },
     "collection": {
@@ -248,7 +264,7 @@
             "name",
             "jobTitle",
             "technologyRef.name",
-            "skillSets.name"
+            "skills.name"
         ]
     },
     "indexes": {

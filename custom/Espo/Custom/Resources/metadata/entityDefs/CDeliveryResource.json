@@ -135,6 +135,16 @@
         },
         "skillSets": {
             "type": "linkMultiple",
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutFiltersDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "layoutDetailSmallDisabled": true,
+            "layoutListSmallDisabled": true
+        },
+        "skills": {
+            "type": "linkMultiple",
             "isCustom": true
         },
         "experienceYears": {
@@ -292,8 +302,14 @@
         "skillSets": {
             "type": "hasMany",
             "entity": "CTechnology",
-            "foreign": "skillFreelancers",
             "relationName": "cDeliveryResourceSkillSet",
+            "isCustom": true
+        },
+        "skills": {
+            "type": "hasMany",
+            "entity": "CSkill",
+            "foreign": "freelancers",
+            "relationName": "cDeliveryResourceCSkill",
             "isCustom": true
         }
     },
@@ -303,7 +319,7 @@
         "textFilterFields": [
             "name",
             "techList.name",
-            "skillSets.name"
+            "skills.name"
         ]
     },
     "indexes": {

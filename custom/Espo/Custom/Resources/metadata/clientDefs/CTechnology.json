@@ -8,10 +8,7 @@
         "projects": {
             "layout": "listSmall"
         },
-        "skillFreelancers": {
-            "layout": "listSmall"
-        },
-        "skillProjects": {
+        "skills": {
             "layout": "listSmall"
         }
     }
