@@ -7,6 +7,9 @@
         },
         "projects": {
             "layout": "listSmall"
+        },
+        "skillProjects": {
+            "layout": "listSmall"
         }
     }
 }

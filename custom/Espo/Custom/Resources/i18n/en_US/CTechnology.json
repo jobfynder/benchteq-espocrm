@@ -3,11 +3,13 @@
         "name": "Technology",
         "description": "Notes",
         "freelancers": "Freelancers",
-        "projects": "Projects"
+        "projects": "Projects",
+        "skillProjects": "Projects (as skill set)"
     },
     "links": {
         "freelancers": "Freelancers",
-        "projects": "Projects"
+        "projects": "Projects",
+        "skillProjects": "Projects (as skill set)"
     },
     "labels": {
         "Create CTechnology": "Create Technology"

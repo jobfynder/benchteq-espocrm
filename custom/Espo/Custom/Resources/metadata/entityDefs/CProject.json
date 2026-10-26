@@ -70,6 +70,10 @@
             "audited": true,
             "isCustom": true
         },
+        "skillSets": {
+            "type": "linkMultiple",
+            "isCustom": true
+        },
         "consultant": {
             "type": "link",
             "required": true
@@ -222,6 +226,13 @@
             "foreign": "projects",
             "audited": false,
             "isCustom": true
+        },
+        "skillSets": {
+            "type": "hasMany",
+            "entity": "CTechnology",
+            "relationName": "cProjectSkillSet",
+            "isCustom": true,
+            "foreign": "skillProjects"
         }
     },
     "collection": {

@@ -33,6 +33,10 @@
         "projects": {
             "type": "linkMultiple",
             "layoutDetailDisabled": true
+        },
+        "skillProjects": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
         }
     },
     "links": {
@@ -56,6 +60,13 @@
             "entity": "CProject",
             "foreign": "technologyRef",
             "isCustom": true
+        },
+        "skillProjects": {
+            "type": "hasMany",
+            "entity": "CProject",
+            "foreign": "skillSets",
+            "relationName": "cProjectSkillSet",
+            "isCustom": true
         }
     },
     "collection": {
@@ -64,7 +75,10 @@
     },
     "indexes": {
         "name": {
-            "columns": ["name", "deleted"]
+            "columns": [
+                "name",
+                "deleted"
+            ]
         }
     }
 }
