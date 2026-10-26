@@ -121,6 +121,22 @@
             ],
             "storeArrayValues": true,
             "default": [],
+            "isCustom": true,
+            "layoutDetailDisabled": true,
+            "layoutListDisabled": true,
+            "layoutFiltersDisabled": true,
+            "layoutMassUpdateDisabled": true,
+            "layoutDetailSmallDisabled": true,
+            "layoutListSmallDisabled": true
+        },
+        "techList": {
+            "type": "linkMultiple",
+            "isCustom": true
+        },
+        "experienceYears": {
+            "type": "int",
+            "min": 0,
+            "max": 60,
             "isCustom": true
         },
         "screeningResult": {
@@ -260,6 +276,13 @@
             "type": "hasMany",
             "entity": "CInterviewSession",
             "foreign": "freelancer",
+            "isCustom": true
+        },
+        "techList": {
+            "type": "hasMany",
+            "entity": "CTechnology",
+            "foreign": "freelancers",
+            "relationName": "cDeliveryResourceCTechnology",
             "isCustom": true
         }
     },

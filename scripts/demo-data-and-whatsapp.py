@@ -4,6 +4,7 @@
   --show-record   Read only. Show the phone data of one record, like Lead/6ad022706b0544e92.
   --demo          Create one complete demo story (Job Support, Interview Support, BGC,
                   payments, payouts). Every record is named or described "DEMO ...".
+  --migrate-technologies  Move the old Technologies choices into the shared Technology list.
   --link-timesheets  Fill Timesheet.project from the Payment Block (so Projects list them).
   --fix-dashboards  Remove dashboard widgets (every user, plus the default) whose saved filter
                   no longer exists, which causes "No primary filter ... for ...".
@@ -32,6 +33,8 @@ PHONE_FIELD = {'Contact': 'phoneNumber', 'Lead': 'phoneNumber', 'CDeliveryResour
 TAG = 'DEMO'
 NOTE = 'DEMO data for team training. Safe to delete.'
 NEW = '(new)'
+OLD_TECHNOLOGIES = ['Java', '.NET', 'Python', 'JavaScript', 'React', 'Angular', 'Node.js', 'SQL', 'AWS',
+                    'Azure', 'DevOps', 'Data Engineering', 'Salesforce', 'SAP', 'QA Testing', 'Other']
 
 
 class Api:
@@ -125,13 +128,14 @@ def demo_data(api):
     provider = ensure(api, 'CProvider', [eq('name', 'DEMO BGC Provider')], {
         'name': 'DEMO BGC Provider', 'providerType': 'Company', 'servicesSupplied': ['BGC Verification'],
         'phoneNumber': '+919800000002', 'email': 'demo-provider@example.com'})
+    java = ensure(api, 'CTechnology', [eq('name', 'Java')], {'name': 'Java', 'description': 'Shared technology list'})
     trainer = ensure(api, 'CDeliveryResource', [eq('name', 'DEMO Trainer - Meena')], {
-        'name': 'DEMO Trainer - Meena', 'roleType': 'Trainer', 'technologies': ['Java'],
+        'name': 'DEMO Trainer - Meena', 'roleType': 'Trainer', 'techListIds': [java], 'experienceYears': 8,
         'screeningResult': 'Passed', 'rating': 5, 'workStatus': 'On Project',
         'phoneNumber': '+919800000003', 'email': 'demo-meena@example.com',
         'providerId': provider})
     supporter = ensure(api, 'CDeliveryResource', [eq('name', 'DEMO Supporter - Kiran')], {
-        'name': 'DEMO Supporter - Kiran', 'roleType': 'Interview Supporter', 'technologies': ['Java'],
+        'name': 'DEMO Supporter - Kiran', 'roleType': 'Interview Supporter', 'techListIds': [java], 'experienceYears': 8,
         'screeningResult': 'Passed', 'rating': 4, 'workStatus': 'Available',
         'phoneNumber': '+919800000004', 'email': 'demo-kiran@example.com'})
 
@@ -144,8 +148,8 @@ def demo_data(api):
     ravi, acme = convert(api, lead, {
         'Contact': {'firstName': 'DEMO Ravi', 'lastName': 'Kumar', 'phoneNumber': '+919800000011', 'emailAddress': 'demo-ravi@example.com', 'description': NOTE},
         'Account': {'name': 'DEMO Acme Technologies', 'description': NOTE}})
-    project = ensure(api, 'CProject', [eq('consultantId', ravi), eq('technology', 'Java')], {
-        'assignedUserId': me, 'technology': 'Java', 'consultantId': ravi, 'accountId': acme,
+    project = ensure(api, 'CProject', [eq('consultantId', ravi), eq('technologyRefId', java)], {
+        'assignedUserId': me, 'technologyRefId': java, 'consultantId': ravi, 'accountId': acme,
         'freelancerId': trainer, 'freelancerPayType': 'Hourly', 'freelancerRate': 500,
         'customerRate': 900, 'startDate': ts(-7, 0)[:10], 'status': 'Active',
         'scheduleNotes': 'Mon, Wed, Fri 8 pm IST'})
@@ -360,6 +364,51 @@ def migrate_interviews(api):
           f'{no_contact} skipped without a customer; {no_freelancer} of the new ones have no Freelancer')
 
 
+def migrate_technologies(api):
+    """Move the old fixed Technologies lists into the shared Technology list.
+    Adds every old option as a Technology (if missing), then links each Freelancer
+    and Project to the matching Technology. The old values stay in place. Safe to run again."""
+    print('\n== Move technologies to the shared list ==')
+    existing = {t['name'].strip().lower(): t['id']
+                for t in api.call('GET', 'CTechnology', params={'maxSize': 200, 'select': 'id,name'}).get('list', [])}
+
+    def tech_id(name):
+        key = name.strip().lower()
+        if key not in existing:
+            existing[key] = api.create('CTechnology', {'name': name.strip()})['id']
+        return existing[key]
+
+    for name in OLD_TECHNOLOGIES:
+        tech_id(name)
+
+    def pages(entity, select):
+        offset = 0
+        while True:
+            page = api.call('GET', entity, params={'select': select, 'maxSize': 100, 'offset': offset})
+            rows = page.get('list', [])
+            yield from rows
+            offset += len(rows)
+            if not rows or offset >= page.get('total', 0):
+                break
+
+    done = skipped = 0
+    for r in pages('CDeliveryResource', 'id,name,technologies,techListIds'):
+        old = r.get('technologies') or []
+        if not old or r.get('techListIds'):
+            skipped += 1
+            continue
+        api.update('CDeliveryResource', r['id'], {'techListIds': [tech_id(n) for n in old]})
+        done += 1
+    for r in pages('CProject', 'id,name,technology,technologyRefId'):
+        old = r.get('technology')
+        if not old or r.get('technologyRefId'):
+            skipped += 1
+            continue
+        api.update('CProject', r['id'], {'technologyRefId': tech_id(old)})
+        done += 1
+    print(f'Linked {done} record(s), left {skipped} as they were.')
+
+
 def refresh_customers(api):
     """Set the customer status on every Contact and Account from their Projects, Interviews
     and BGC Checks. The CRM keeps it up to date afterwards. Safe to run again."""
@@ -572,13 +621,14 @@ def main():
     p.add_argument('--show-record', help='read only, Entity/id')
     p.add_argument('--inspect', help='read only, comma separated entities, like CSessionLog,CInterviewSession')
     p.add_argument('--migrate-interviews', action='store_true')
+    p.add_argument('--migrate-technologies', action='store_true')
     p.add_argument('--refresh-customers', action='store_true')
     p.add_argument('--refresh-margins', action='store_true')
     p.add_argument('--dry-run', action='store_true')
     a = p.parse_args()
     if not (a.demo or a.remove_demo or a.diagnose_phones or a.link_timesheets
             or a.fix_dashboards or a.probe_project or a.show_record or a.inspect or a.migrate_interviews
-            or a.refresh_customers or a.refresh_margins):
+            or a.refresh_customers or a.refresh_margins or a.migrate_technologies):
         p.error('choose --fix-dashboards, --demo, --remove-demo, --diagnose-phones or --link-timesheets')
     if not a.url or not (a.api_key or (a.user and a.password)):
         p.error('set ESPO_URL and ESPO_USER/ESPO_PASSWORD (or ESPO_API_KEY)')
@@ -592,6 +642,8 @@ def main():
         inspect(api, a.inspect)
     if a.migrate_interviews:
         migrate_interviews(api)
+    if a.migrate_technologies:
+        migrate_technologies(api)
     if a.refresh_customers:
         refresh_customers(api)
     if a.refresh_margins:

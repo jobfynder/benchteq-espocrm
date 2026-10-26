@@ -1,0 +1,15 @@
+{
+    "fields": {
+        "name": "Technology",
+        "description": "Notes",
+        "freelancers": "Freelancers",
+        "projects": "Projects"
+    },
+    "links": {
+        "freelancers": "Freelancers",
+        "projects": "Projects"
+    },
+    "labels": {
+        "Create CTechnology": "Create Technology"
+    }
+}

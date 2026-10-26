@@ -8,7 +8,7 @@
         "width": 22
     },
     {
-        "name": "technologies",
+        "name": "techList",
         "width": 28,
         "notSortable": true
     },

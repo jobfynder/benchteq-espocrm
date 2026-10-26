@@ -1,0 +1,12 @@
+{
+    "controller": "controllers/record",
+    "iconClass": "fas fa-code",
+    "relationshipPanels": {
+        "freelancers": {
+            "layout": "listSmall"
+        },
+        "projects": {
+            "layout": "listSmall"
+        }
+    }
+}

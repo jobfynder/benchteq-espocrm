@@ -11,7 +11,9 @@
         "referrer": "Referrer",
         "sessionLog": "Session Log",
         "primaryDeliveryResource": "Service Packages",
-        "technologies": "Technologies",
+        "technologies": "Technologies (old list)",
+        "techList": "Technologies",
+        "experienceYears": "Experience (years)",
         "screeningResult": "Screening Result",
         "rating": "Rating (1-5)",
         "screeningNotes": "Screening Notes",
@@ -26,6 +28,7 @@
     "links": {
         "provider": "Provider",
         "referrer": "Referrer",
+        "techList": "Technologies",
         "sessionLog": "Session Log",
         "primaryDeliveryResource": "Service Packages",
         "projects": "Projects",

@@ -21,12 +21,14 @@ function check(string $label, $actual, $expected): void {
 }
 
 $contact = $em->createEntity('Contact', ['firstName' => 'Ravi', 'lastName' => 'Kumar']);
-$f1 = $em->createEntity('CDeliveryResource', ['name' => 'Passed Trainer', 'roleType' => 'Trainer', 'screeningResult' => 'Passed', 'technologies' => ['Java']]);
+$f1 = $em->createEntity('CDeliveryResource', ['name' => 'Passed Trainer', 'roleType' => 'Trainer', 'screeningResult' => 'Passed']);
+$java = $em->createEntity('CTechnology', ['name' => 'Java']);
+$em->getRDBRepository('CDeliveryResource')->getRelation($f1, 'techList')->relate($java);
 $f2 = $em->createEntity('CDeliveryResource', ['name' => 'Pending Trainer', 'roleType' => 'Trainer']);
 check('freelancer default screening', $f2->get('screeningResult'), 'Pending');
 
 $project = $em->createEntity('CProject', [
-    'technology' => 'Java', 'consultantId' => $contact->getId(), 'freelancerId' => $f1->getId(),
+    'technologyRefId' => $java->getId(), 'consultantId' => $contact->getId(), 'freelancerId' => $f1->getId(),
     'freelancerPayType' => 'Hourly', 'freelancerRate' => 500, 'customerRate' => 900,
 ]);
 check('project name formula', $project->get('name'), 'Java - Ravi Kumar');

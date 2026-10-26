@@ -1,6 +1,7 @@
 {
     "fields": {
-        "technology": "Technology",
+        "technology": "Technology (old list)",
+        "technologyRef": "Technology",
         "consultant": "Consultant",
         "account": "Account",
         "freelancer": "Freelancer",
@@ -20,6 +21,7 @@
         "margin": "Margin (INR)"
     },
     "links": {
+        "technologyRef": "Technology",
         "consultant": "Consultant",
         "account": "Account",
         "freelancer": "Freelancer",
