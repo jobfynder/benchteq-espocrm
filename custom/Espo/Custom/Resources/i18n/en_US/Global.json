@@ -12,7 +12,8 @@
         "CTimesheet": "Timesheet",
         "CInterviewSession": "Interview",
         "CBgcCheck": "BGC Check",
-        "CTechnology": "Technology"
+        "CTechnology": "Technology",
+        "CSkill": "Skill"
     },
     "scopeNamesPlural": {
         "CDeliveryResource": "Freelancers",
@@ -27,6 +28,7 @@
         "CTimesheet": "Timesheets",
         "CInterviewSession": "Interviews",
         "CBgcCheck": "BGC Checks",
-        "CTechnology": "Technologies"
+        "CTechnology": "Technologies",
+        "CSkill": "Skills"
     }
 }

@@ -1,0 +1,87 @@
+{
+    "fields": {
+        "name": {
+            "type": "varchar",
+            "required": true,
+            "pattern": "$noBadCharacters"
+        },
+        "description": {
+            "type": "text"
+        },
+        "technology": {
+            "type": "link"
+        },
+        "createdAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "modifiedAt": {
+            "type": "datetime",
+            "readOnly": true
+        },
+        "createdBy": {
+            "type": "link",
+            "readOnly": true,
+            "view": "views/fields/user"
+        },
+        "modifiedBy": {
+            "type": "link",
+            "readOnly": true,
+            "view": "views/fields/user"
+        },
+        "freelancers": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        },
+        "projects": {
+            "type": "linkMultiple",
+            "layoutDetailDisabled": true
+        }
+    },
+    "links": {
+        "createdBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "modifiedBy": {
+            "type": "belongsTo",
+            "entity": "User"
+        },
+        "technology": {
+            "type": "belongsTo",
+            "entity": "CTechnology",
+            "foreign": "skills",
+            "isCustom": true
+        },
+        "freelancers": {
+            "type": "hasMany",
+            "entity": "CDeliveryResource",
+            "foreign": "skills",
+            "relationName": "cDeliveryResourceCSkill",
+            "isCustom": true
+        },
+        "projects": {
+            "type": "hasMany",
+            "entity": "CProject",
+            "foreign": "skills",
+            "relationName": "cProjectCSkill",
+            "isCustom": true
+        }
+    },
+    "collection": {
+        "orderBy": "name",
+        "order": "asc",
+        "textFilterFields": [
+            "name",
+            "technology.name"
+        ]
+    },
+    "indexes": {
+        "name": {
+            "columns": [
+                "name",
+                "deleted"
+            ]
+        }
+    }
+}

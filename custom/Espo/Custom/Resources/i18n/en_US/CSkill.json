@@ -1,0 +1,17 @@
+{
+    "fields": {
+        "name": "Skill",
+        "description": "Notes",
+        "technology": "Technology",
+        "freelancers": "Freelancers",
+        "projects": "Projects"
+    },
+    "links": {
+        "technology": "Technology",
+        "freelancers": "Freelancers",
+        "projects": "Projects"
+    },
+    "labels": {
+        "Create CSkill": "Create Skill"
+    }
+}

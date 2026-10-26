@@ -32,7 +32,7 @@ import urllib.request
 
 CUSTOM_ENTITIES = ['CDeliveryResource', 'CProject', 'CPaymentBlock', 'CTimesheet',
                    'CInterviewSession', 'CPayout', 'CReferrer', 'CProvider', 'CBgcCheck',
-                   'CTechnology']
+                   'CTechnology', 'CSkill']
 CORE_ENTITIES = ['Lead', 'Contact', 'Account']
 
 # Retired in v2: nobody sees them, data is kept.
@@ -100,7 +100,7 @@ def build_roles():
             'Lead': WORK, 'Contact': WORK, 'Account': WORK,
             'CInterviewSession': WORK_DEL,
             'CDeliveryResource': READ, 'CProvider': READ, 'CReferrer': READ,
-            'CTechnology': READ,
+            'CTechnology': READ, 'CSkill': READ,
             'CProject': False, 'CPaymentBlock': False, 'CTimesheet': False,
             'CPayout': False, 'CBgcCheck': False,
         },
@@ -122,6 +122,7 @@ def build_roles():
             'CBgcCheck': WORK_DEL,
             'CReferrer': WORK,          # a referral lead needs its Referrer
             'CTechnology': acl('yes', 'all', 'all', 'all'),  # shared list: add, rename, delete
+            'CSkill': acl('yes', 'all', 'all', 'all'),
             'CProvider': READ,
             'CPayout': READ,
         },
@@ -137,7 +138,7 @@ def build_roles():
         'data': {
             'Lead': READ, 'Contact': READ, 'Account': READ,
             'CDeliveryResource': READ, 'CProvider': READ, 'CReferrer': READ,
-            'CTechnology': READ,
+            'CTechnology': READ, 'CSkill': READ,
             'CProject': READ,
             'CPaymentBlock': EDIT_ONLY, 'CTimesheet': EDIT_ONLY,
             'CInterviewSession': EDIT_ONLY, 'CBgcCheck': EDIT_ONLY,
@@ -174,7 +175,7 @@ def group_tab(tab_id, text, icon, items):
 
 TAB_LIST = [
     'Lead', 'Contact', 'Account',
-    'CDeliveryResource', 'CTechnology',
+    'CDeliveryResource', 'CTechnology', 'CSkill',
     'CProject', 'CTimesheet', 'CInterviewSession', 'CBgcCheck', 'Calendar',
     group_tab('bqMoney', 'Money', 'fas fa-rupee-sign', ['CPaymentBlock', 'CPayout']),
     group_tab('bqPartners', 'Partners', 'fas fa-handshake',
@@ -185,7 +186,7 @@ QUICK_CREATE = ['Lead', 'Contact', 'CTimesheet', 'CInterviewSession', 'CBgcCheck
 # Global search looks in every module people use (the default list misses ours).
 GLOBAL_SEARCH = ['Contact', 'Account', 'Lead', 'CDeliveryResource', 'CProject',
                  'CInterviewSession', 'CBgcCheck', 'CTimesheet', 'CPaymentBlock', 'CPayout',
-                 'CReferrer', 'CProvider', 'CTechnology']
+                 'CReferrer', 'CProvider', 'CTechnology', 'CSkill']
 CALENDAR_ENTITIES = ['Meeting', 'Call', 'Task', 'CTimesheet', 'CInterviewSession']
 
 

@@ -2,7 +2,8 @@
     "fields": {
         "technology": "Technology (old list)",
         "technologyRef": "Technology",
-        "skillSets": "Skill sets",
+        "skillSets": "Skill sets (old list)",
+        "skills": "Skill sets",
         "jobTitle": "Job title",
         "consultant": "Consultant",
         "account": "Account",
@@ -23,7 +24,7 @@
         "margin": "Margin (INR)"
     },
     "links": {
-        "skillSets": "Skill sets",
+        "skills": "Skill sets",
         "technologyRef": "Technology",
         "consultant": "Consultant",
         "account": "Account",

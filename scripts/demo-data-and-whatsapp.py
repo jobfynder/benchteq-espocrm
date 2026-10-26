@@ -408,6 +408,28 @@ def migrate_technologies(api):
         done += 1
     print(f'Linked {done} record(s), left {skipped} as they were.')
 
+    # Skill sets used to point at the Technology list; move them to the Skills list.
+    skills = {t['name'].strip().lower(): t['id']
+              for t in api.call('GET', 'CSkill', params={'maxSize': 200, 'select': 'id,name'}).get('list', [])}
+    moved = 0
+    for entity in ('CDeliveryResource', 'CProject'):
+        for r in pages(entity, 'id,name,skillSetsIds,skillSetsNames,skillsIds'):
+            old = r.get('skillSetsIds') or []
+            if not old or r.get('skillsIds'):
+                continue
+            ids = []
+            for tid in old:
+                name = (r.get('skillSetsNames') or {}).get(tid, '').strip()
+                if not name:
+                    continue
+                if name.lower() not in skills:
+                    skills[name.lower()] = api.create('CSkill', {'name': name, 'technologyId': tid})['id']
+                ids.append(skills[name.lower()])
+            if ids:
+                api.update(entity, r['id'], {'skillsIds': ids})
+                moved += 1
+    print(f'Moved the skill sets of {moved} record(s) to the Skills list.')
+
 
 def refresh_customers(api):
     """Set the customer status on every Contact and Account from their Projects, Interviews
