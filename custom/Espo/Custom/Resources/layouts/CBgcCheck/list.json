@@ -16,6 +16,10 @@
         "width": 12
     },
     {
+        "name": "bgcDate",
+        "width": 10
+    },
+    {
         "name": "customerFee",
         "width": 12
     },

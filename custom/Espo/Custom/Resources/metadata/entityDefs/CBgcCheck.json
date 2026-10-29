@@ -68,6 +68,11 @@
             "maxLength": 100,
             "isCustom": true
         },
+        "bgcDate": {
+            "type": "date",
+            "audited": true,
+            "isCustom": true
+        },
         "customerFee": {
             "type": "currency",
             "conversionDisabled": true,

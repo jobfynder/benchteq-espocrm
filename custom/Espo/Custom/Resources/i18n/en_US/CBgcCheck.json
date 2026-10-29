@@ -3,6 +3,7 @@
         "contact": "Customer",
         "bgcType": "BGC Type",
         "bgcStatus": "BGC Status",
+        "bgcDate": "BGC Date",
         "customerFee": "BGC Fee",
         "amountReceived": "Amount Received",
         "provider": "Provider",
